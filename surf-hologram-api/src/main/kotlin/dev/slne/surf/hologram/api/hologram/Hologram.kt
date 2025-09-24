@@ -16,9 +16,11 @@ interface Hologram {
 
     val viewers: ObjectSet<HoloOfflinePlayer>?
 
+    fun retrieveViewers(): ObjectSet<HoloPlayer>
+
     fun show(player: HoloPlayer)
     fun hide(player: HoloPlayer)
 
-    fun teleportHere(player: HoloPlayer)
+    fun teleportHere(player: HoloPlayer): Boolean
     fun teleportTo(newLocation: HologramLocation)
 }

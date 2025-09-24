@@ -8,10 +8,13 @@ import dev.slne.surf.hologram.api.hologram.types.SimpleHologram
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.api.player.HoloPlayer
 import dev.slne.surf.hologram.api.util.forEachBukkitViewer
+import dev.slne.surf.hologram.core.service.hologramPlayerService
 import dev.slne.surf.hologram.paper.PaperPackets
 import dev.slne.surf.hologram.paper.util.toBukkitLocation
+import dev.slne.surf.surfapi.core.api.util.toObjectSet
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
+import org.bukkit.Bukkit
 
 class SimpleHologramImpl(
     override val metaData: HologramMetaData,
@@ -20,6 +23,10 @@ class SimpleHologramImpl(
     override val displayedText: Component,
     override val viewers: ObjectSet<HoloOfflinePlayer>?
 ) : SimpleHologram {
+    override fun retrieveViewers() =
+        viewers?.mapNotNull { it.player }?.toObjectSet() ?: Bukkit.getOnlinePlayers()
+            .mapNotNull { hologramPlayerService.getPlayer(it.uniqueId) }.toObjectSet()
+
     override fun show(player: HoloPlayer) {
         val bukkitPlayer = player.bukkitPlayer ?: return
         val packetPlayer = PacketEvents.getAPI().playerManager.getUser(bukkitPlayer)
@@ -27,6 +34,7 @@ class SimpleHologramImpl(
         packetPlayer.sendPacket(PaperPackets.buildHoloSpawnPacket(this))
         packetPlayer.sendPacket(PaperPackets.buildHoloMetaPacket(this))
         packetPlayer.sendPacket(PaperPackets.buildHoloInteractionSpawnPacket(this))
+        packetPlayer.sendPacket(PaperPackets.buildHoloInteractionMetaPacket(this))
     }
 
     override fun hide(player: HoloPlayer) {
@@ -36,10 +44,8 @@ class SimpleHologramImpl(
         packetPlayer.sendPacket(PaperPackets.buildDestroyPacket(this))
     }
 
-    override fun teleportHere(player: HoloPlayer) {
-        val bukkitPlayer = player.bukkitPlayer ?: return
-        bukkitPlayer.teleport(centerLocation.toBukkitLocation())
-    }
+    override fun teleportHere(player: HoloPlayer) =
+        player.bukkitPlayer?.teleport(centerLocation.toBukkitLocation()) == true
 
     override fun teleportTo(newLocation: HologramLocation) {
         forEachBukkitViewer {
