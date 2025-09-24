@@ -21,4 +21,4 @@ interface SurfHologramApi {
     }
 }
 
-val surfHologramApi = SurfHologramApi.INSTANCE
+val surfHologramApi get() = SurfHologramApi.INSTANCE
