@@ -4,4 +4,5 @@ import java.util.*
 
 interface HoloOfflinePlayer {
     val uuid: UUID
+    val player: HoloPlayer?
 }

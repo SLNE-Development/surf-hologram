@@ -6,6 +6,12 @@ import it.unimi.dsi.fastutil.objects.ObjectSet
 
 interface HologramRegistry {
     fun getHologram(name: String): Hologram?
+    fun getHologram(entityId: Int): Hologram? =
+        holograms().firstOrNull { it.metaData.holoEntityId == entityId }
+
+    fun getHologramByInteractionId(entityId: Int): Hologram? =
+        holograms().firstOrNull { it.metaData.interactionEntityId == entityId }
+
     fun registerHologram(hologram: Hologram)
     fun unregisterHologram(hologram: Hologram)
 
