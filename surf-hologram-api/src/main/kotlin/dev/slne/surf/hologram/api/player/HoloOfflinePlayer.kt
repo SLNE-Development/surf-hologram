@@ -1,7 +1,7 @@
 package dev.slne.surf.hologram.api.player
 
-import java.util.UUID
+import java.util.*
 
-interface OfflineHoloPlayer {
+interface HoloOfflinePlayer {
     val uuid: UUID
 }
