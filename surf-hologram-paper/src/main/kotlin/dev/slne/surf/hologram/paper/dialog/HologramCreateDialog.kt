@@ -2,6 +2,7 @@
 
 package dev.slne.surf.hologram.paper.dialog
 
+import dev.slne.surf.hologram.api.hologram.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.HologramTextAlignment
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.util.show
@@ -133,7 +134,7 @@ fun createHologramCreateDialog() = dialog {
                                 ),
                                 player.location.clone().add(0.0, 1.0, 0.0).toHologramLocation(),
                                 text,
-                                null
+                                HologramCreationReason.Client(player.name)
                             )
 
                             holo.show()

@@ -2,6 +2,7 @@ package dev.slne.surf.hologram.paper.service
 
 import com.google.auto.service.AutoService
 import dev.slne.surf.hologram.api.hologram.Hologram
+import dev.slne.surf.hologram.api.hologram.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
@@ -22,6 +23,7 @@ class HologramServiceImpl : HologramService, Services.Fallback {
         metaData: HologramMetaData,
         centerLocation: HologramLocation,
         displayedText: Component,
+        creationReason: HologramCreationReason,
         viewers: ObjectSet<HoloOfflinePlayer>?
     ): Hologram {
         hologramRegistry.getHologram(metaData.name)?.let {
@@ -34,6 +36,7 @@ class HologramServiceImpl : HologramService, Services.Fallback {
                 type,
                 centerLocation,
                 displayedText,
+                creationReason,
                 viewers
             )
 
@@ -42,6 +45,7 @@ class HologramServiceImpl : HologramService, Services.Fallback {
                 type,
                 centerLocation,
                 displayedText,
+                creationReason,
                 viewers,
                 0,
                 0.25,

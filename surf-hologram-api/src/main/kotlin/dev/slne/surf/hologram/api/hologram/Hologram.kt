@@ -13,6 +13,7 @@ interface Hologram {
     val hologramType: HologramType
     val centerLocation: HologramLocation
     val displayedText: Component
+    val creationReason: HologramCreationReason
 
     val viewers: ObjectSet<HoloOfflinePlayer>?
 

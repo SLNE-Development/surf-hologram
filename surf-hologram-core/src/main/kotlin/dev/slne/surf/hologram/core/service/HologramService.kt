@@ -1,6 +1,7 @@
 package dev.slne.surf.hologram.core.service
 
 import dev.slne.surf.hologram.api.hologram.Hologram
+import dev.slne.surf.hologram.api.hologram.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
@@ -16,6 +17,7 @@ interface HologramService {
         metaData: HologramMetaData,
         centerLocation: HologramLocation,
         displayedText: Component,
+        creationReason: HologramCreationReason,
         viewers: ObjectSet<HoloOfflinePlayer>? = null
     ): Hologram
 

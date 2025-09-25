@@ -6,6 +6,7 @@ import dev.jorel.commandapi.kotlindsl.getValue
 import dev.jorel.commandapi.kotlindsl.locationArgument
 import dev.jorel.commandapi.kotlindsl.playerExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
+import dev.slne.surf.hologram.api.hologram.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.HologramTextAlignment
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.util.show
@@ -66,7 +67,9 @@ fun CommandAPICommand.hologramCreateCommand() = subcommand("create") {
             backgroundColor = NamedTextColor.RED
         )
 
-        val holo = hologramService.createHologram(type, meta, holoLocation, text)
+        val holo = hologramService.createHologram(
+            type, meta, holoLocation, text, HologramCreationReason.Client(player.name)
+        )
         holo.show()
 
         player.sendText {

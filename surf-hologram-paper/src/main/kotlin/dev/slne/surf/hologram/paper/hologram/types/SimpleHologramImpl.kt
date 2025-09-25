@@ -1,6 +1,7 @@
 package dev.slne.surf.hologram.paper.hologram.types
 
 import com.github.retrooper.packetevents.PacketEvents
+import dev.slne.surf.hologram.api.hologram.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
@@ -22,6 +23,7 @@ class SimpleHologramImpl(
     override val hologramType: HologramType,
     override val centerLocation: HologramLocation,
     override val displayedText: Component,
+    override val creationReason: HologramCreationReason,
     override val viewers: ObjectSet<HoloOfflinePlayer>?
 ) : SimpleHologram {
     override fun retrieveViewers() =
