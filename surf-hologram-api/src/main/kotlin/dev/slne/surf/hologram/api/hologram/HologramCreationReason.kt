@@ -48,7 +48,7 @@ sealed class HologramCreationReason {
      * @return The name associated with the hologram creation reason, depending on the specific type.
      */
     fun name() = when (this) {
-        is Client -> name
-        is Plugin -> pluginName
+        is Client -> "$name (Client)"
+        is Plugin -> "$pluginName (Plugin)"
     }
 }
