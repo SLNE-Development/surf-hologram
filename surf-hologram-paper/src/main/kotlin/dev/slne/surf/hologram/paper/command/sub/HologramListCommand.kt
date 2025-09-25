@@ -45,6 +45,7 @@ fun CommandAPICommand.hologramListCommand() = subcommand("list") {
                                 appendSpace()
                                 variableKey("Name")
                                 spacer(":")
+                                appendSpace()
                                 variableValue(row.metaData.name)
                             }
                             appendNewline {
@@ -52,6 +53,7 @@ fun CommandAPICommand.hologramListCommand() = subcommand("list") {
                                 appendSpace()
                                 variableKey("Typ")
                                 spacer(":")
+                                appendSpace()
                                 variableValue(row.hologramType.name)
                             }
                             appendNewline {
@@ -59,6 +61,7 @@ fun CommandAPICommand.hologramListCommand() = subcommand("list") {
                                 appendSpace()
                                 variableKey("Location")
                                 spacer(":")
+                                appendSpace()
                                 variableValue(row.centerLocation.toString())
                             }
                             appendNewline {
@@ -66,6 +69,7 @@ fun CommandAPICommand.hologramListCommand() = subcommand("list") {
                                 appendSpace()
                                 variableKey("View Range")
                                 spacer(":")
+                                appendSpace()
                                 variableValue(row.metaData.viewRange)
                             }
                             appendNewline {
@@ -73,6 +77,7 @@ fun CommandAPICommand.hologramListCommand() = subcommand("list") {
                                 appendSpace()
                                 variableKey("Background Color")
                                 spacer(":")
+                                appendSpace()
                                 variableValue(
                                     row.metaData.backgroundColor?.asHexString() ?: "Durchsichtig"
                                 )
@@ -82,6 +87,7 @@ fun CommandAPICommand.hologramListCommand() = subcommand("list") {
                                 appendSpace()
                                 variableKey("Text Alignment")
                                 spacer(":")
+                                appendSpace()
                                 variableValue(row.metaData.textAlignment.name)
                             }
                         })

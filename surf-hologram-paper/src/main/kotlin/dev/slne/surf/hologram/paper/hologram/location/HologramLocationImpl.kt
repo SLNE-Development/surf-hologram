@@ -10,6 +10,6 @@ class HologramLocationImpl(
     override val world: HologramWorld
 ) : HologramLocation {
     override fun toString(): String {
-        return "World: ${world.worldName}, X: $x, Y: $y, Z: $z"
+        return "World: ${world.worldName}, X: ${x.toInt()}, Y: ${y.toInt()}, Z: ${z.toInt()}"
     }
 }
