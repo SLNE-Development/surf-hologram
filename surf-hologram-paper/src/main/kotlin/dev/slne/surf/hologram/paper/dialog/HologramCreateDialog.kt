@@ -73,7 +73,6 @@ fun createHologramCreateDialog() = dialog {
 
                 text("holo_bg_color") {
                     label { info("Hologramm Hintergrund Farbe") }
-                    width(100)
                     initial("#ffffff")
                 }
 

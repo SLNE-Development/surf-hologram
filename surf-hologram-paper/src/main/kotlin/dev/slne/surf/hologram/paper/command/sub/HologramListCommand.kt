@@ -40,14 +40,12 @@ fun CommandAPICommand.hologramListCommand() = subcommand("list") {
                         variableValue(row.displayedText.plain().take(25))
 
                         hoverEvent(buildText {
-                            appendNewline {
-                                append(CommonComponents.EM_DASH)
-                                appendSpace()
-                                variableKey("Name")
-                                spacer(":")
-                                appendSpace()
-                                variableValue(row.metaData.name)
-                            }
+                            append(CommonComponents.EM_DASH)
+                            appendSpace()
+                            variableKey("Name")
+                            spacer(":")
+                            appendSpace()
+                            variableValue(row.metaData.name)
                             appendNewline {
                                 append(CommonComponents.EM_DASH)
                                 appendSpace()
