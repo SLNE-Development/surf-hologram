@@ -41,7 +41,7 @@ object PaperPackets {
     )
 
     fun buildHoloInteractionMetaPacket(hologram: Hologram) = WrapperPlayServerEntityMetadata(
-        hologram.metaData.holoEntityId,
+        hologram.metaData.interactionEntityId,
         listOf(
             EntityData(8, EntityDataTypes.FLOAT, hologram.metaData.interactionWidth),
             EntityData(9, EntityDataTypes.FLOAT, hologram.metaData.interactionHeight),

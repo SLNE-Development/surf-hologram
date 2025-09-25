@@ -10,6 +10,7 @@ import dev.slne.surf.hologram.api.player.HoloPlayer
 import dev.slne.surf.hologram.api.util.forEachBukkitViewer
 import dev.slne.surf.hologram.core.service.hologramPlayerService
 import dev.slne.surf.hologram.paper.PaperPackets
+import dev.slne.surf.hologram.paper.util.debug
 import dev.slne.surf.hologram.paper.util.toBukkitLocation
 import dev.slne.surf.surfapi.core.api.util.toObjectSet
 import it.unimi.dsi.fastutil.objects.ObjectSet
@@ -30,6 +31,8 @@ class SimpleHologramImpl(
     override fun show(player: HoloPlayer) {
         val bukkitPlayer = player.bukkitPlayer ?: return
         val packetPlayer = PacketEvents.getAPI().playerManager.getUser(bukkitPlayer)
+
+        debug("Showing hologram '${metaData.name}' to player '${bukkitPlayer.name}'")
 
         packetPlayer.sendPacket(PaperPackets.buildHoloSpawnPacket(this))
         packetPlayer.sendPacket(PaperPackets.buildHoloMetaPacket(this))
