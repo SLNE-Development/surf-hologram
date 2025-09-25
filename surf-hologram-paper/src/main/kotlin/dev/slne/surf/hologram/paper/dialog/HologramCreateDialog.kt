@@ -31,7 +31,7 @@ fun createHologramCreateDialog() = dialog {
             input {
                 text("holo_name") {
                     label { info("Hologramm Name") }
-                    initial("HologramID{random.nextInt(1000, 9999)}")
+                    initial("HologramID${random.nextInt(1000, 9999)}")
                 }
                 singleOption("holo_type") {
                     HologramType.entries.sortedByDescending { it.name }.forEach {
