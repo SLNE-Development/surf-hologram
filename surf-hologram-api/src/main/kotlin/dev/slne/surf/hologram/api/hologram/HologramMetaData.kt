@@ -12,4 +12,5 @@ interface HologramMetaData {
     val lineWidth: Int
     val textAlignment: HologramTextAlignment
     val backgroundColor: TextColor?
+    val clickable: Boolean
 }

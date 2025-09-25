@@ -13,5 +13,6 @@ data class HologramMetaDataImpl(
     override val viewRange: Float,
     override val lineWidth: Int,
     override val textAlignment: HologramTextAlignment,
-    override val backgroundColor: TextColor? = null
+    override val backgroundColor: TextColor? = null,
+    override val clickable: Boolean = true
 ) : HologramMetaData
