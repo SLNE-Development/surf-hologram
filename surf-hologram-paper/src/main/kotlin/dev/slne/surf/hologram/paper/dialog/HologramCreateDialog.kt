@@ -31,7 +31,7 @@ fun createHologramCreateDialog() = dialog {
             input {
                 text("holo_name") {
                     label { info("Hologramm Name") }
-                    initial("Hologram#${random.nextInt(1000, 9999)}")
+                    initial("HologramID{random.nextInt(1000, 9999)}")
                 }
                 singleOption("holo_type") {
                     HologramType.entries.sortedByDescending { it.name }.forEach {
@@ -48,6 +48,7 @@ fun createHologramCreateDialog() = dialog {
                 text("holo_text") {
                     label { info("Hologramm Inhalt") }
                     initial("<rainbow>Hello World!")
+                    maxLength(Int.MAX_VALUE)
                 }
 
                 numberRange("holo_view_range", 1..64) {

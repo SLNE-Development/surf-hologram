@@ -8,4 +8,8 @@ class HologramLocationImpl(
     override val y: Double,
     override val z: Double,
     override val world: HologramWorld
-) : HologramLocation
+) : HologramLocation {
+    override fun toString(): String {
+        return "World: ${world.worldName}, X: $x, Y: $y, Z: $z"
+    }
+}
