@@ -9,3 +9,6 @@ fun Hologram.forEachBukkitViewer(action: (Player) -> Unit) =
 
 fun Hologram.forEachViewer(action: (HoloPlayer) -> Unit) =
     retrieveViewers().forEach { action(it) }
+
+fun Hologram.show() = forEachViewer { it.showHologram(this) }
+fun Hologram.hide() = forEachViewer { it.hideHologram(this) }
