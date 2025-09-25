@@ -75,6 +75,10 @@ fun createHologramCreateDialog() = dialog {
                     width(100)
                     initial("#ffffff")
                 }
+
+                simpleBoolean("holo_clickable", true) {
+                    info("Klickbarkeit")
+                }
             }
         }
         type {
