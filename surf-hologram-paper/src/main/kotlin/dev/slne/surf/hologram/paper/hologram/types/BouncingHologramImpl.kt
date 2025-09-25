@@ -33,8 +33,7 @@ class BouncingHologramImpl(
         viewers?.mapNotNull { it.player }?.toObjectSet() ?: Bukkit.getOnlinePlayers()
             .mapNotNull { hologramPlayerService.getPlayer(it.uniqueId) }.toObjectSet()
 
-    override
-    fun show(player: HoloPlayer) {
+    override fun show(player: HoloPlayer) {
         val bukkitPlayer = player.bukkitPlayer ?: return
         val packetPlayer = PacketEvents.getAPI().playerManager.getUser(bukkitPlayer)
 
