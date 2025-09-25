@@ -34,6 +34,18 @@ fun createHologramCreateDialog() = dialog {
                     label { info("Hologramm Name") }
                     initial("HologramID${random.nextInt(1000, 9999)}")
                 }
+
+                text("holo_text") {
+                    label { info("Hologramm Inhalt") }
+                    initial("<rainbow>Hello World!")
+                    maxLength(Int.MAX_VALUE)
+                }
+
+                text("holo_bg_color") {
+                    label { info("Hologramm Hintergrund Farbe") }
+                    initial("#ffffff")
+                }
+
                 singleOption("holo_type") {
                     HologramType.entries.sortedByDescending { it.name }.forEach {
                         option(
@@ -45,17 +57,6 @@ fun createHologramCreateDialog() = dialog {
                             })
                     }
                     label { info("Hologramm Typ") }
-                }
-                text("holo_text") {
-                    label { info("Hologramm Inhalt") }
-                    initial("<rainbow>Hello World!")
-                    maxLength(Int.MAX_VALUE)
-                }
-
-                numberRange("holo_view_range", 1..64) {
-                    label { info("Hologramm Sichtweite") }
-                    step(1f)
-                    initial(32f)
                 }
 
                 singleOption("holo_alignment") {
@@ -71,13 +72,14 @@ fun createHologramCreateDialog() = dialog {
                     }
                 }
 
-                text("holo_bg_color") {
-                    label { info("Hologramm Hintergrund Farbe") }
-                    initial("#ffffff")
+                numberRange("holo_view_range", 1..64) {
+                    label { info("Hologramm Sichtweite") }
+                    step(1f)
+                    initial(32f)
                 }
 
                 simpleBoolean("holo_clickable", true) {
-                    info("Klickbarkeit")
+                    info("Klick-Events")
                 }
             }
         }
