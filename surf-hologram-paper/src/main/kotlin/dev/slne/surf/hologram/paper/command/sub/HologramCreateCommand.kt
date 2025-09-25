@@ -44,7 +44,7 @@ fun CommandAPICommand.hologramCreateCommand() = subcommand("create") {
         val holoLocation = (location ?: player.location).let {
             HologramLocationImpl(
                 it.x,
-                it.y,
+                it.y + 1,
                 it.z,
                 HologramWorldImpl(
                     it.world.name,
