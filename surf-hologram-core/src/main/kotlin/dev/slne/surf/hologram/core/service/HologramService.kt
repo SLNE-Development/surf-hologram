@@ -1,6 +1,7 @@
 package dev.slne.surf.hologram.core.service
 
 import dev.slne.surf.hologram.api.hologram.Hologram
+import dev.slne.surf.hologram.api.hologram.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
@@ -13,6 +14,7 @@ interface HologramService {
     fun createHologram(
         name: String,
         type: HologramType,
+        metaData: HologramMetaData,
         centerLocation: HologramLocation,
         displayedText: Component,
         viewers: ObjectSet<HoloOfflinePlayer>? = null

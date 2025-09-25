@@ -9,13 +9,16 @@ import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerEn
 import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerEntityTeleport
 import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerSpawnEntity
 import dev.slne.surf.hologram.api.hologram.Hologram
+import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
+import dev.slne.surf.hologram.paper.util.buildEntityData
 import dev.slne.surf.hologram.paper.util.toPacketLocation
+import java.util.*
 
 object PaperPackets {
     fun buildHoloSpawnPacket(hologram: Hologram) = WrapperPlayServerSpawnEntity(
         hologram.metaData.holoEntityId,
-        null,
+        UUID.randomUUID(),
         EntityTypes.TEXT_DISPLAY,
         hologram.centerLocation.toPacketLocation(),
         0f,
@@ -25,14 +28,29 @@ object PaperPackets {
 
     fun buildHoloMetaPacket(hologram: Hologram) = WrapperPlayServerEntityMetadata(
         hologram.metaData.holoEntityId,
-        listOf(
-            EntityData(23, EntityDataTypes.ADV_COMPONENT, hologram.displayedText)
-        )
+        buildEntityData {
+            entry(23, EntityDataTypes.ADV_COMPONENT, hologram.displayedText)
+
+            if (hologram.hologramType == HologramType.ROTATING) {
+                entry(15, EntityDataTypes.BYTE, 3.toByte())
+            }
+
+            entry(17, EntityDataTypes.FLOAT, hologram.metaData.viewRange)
+            entry(24, EntityDataTypes.INT, hologram.metaData.lineWidth)
+            entry(27, EntityDataTypes.BYTE, hologram.metaData.textAlignment.bytes)
+
+            if (hologram.metaData.backgroundColor == null) {
+                entry(25, EntityDataTypes.INT, 0)
+            } else {
+                val color = hologram.metaData.backgroundColor ?: return@buildEntityData
+                entry(25, EntityDataTypes.INT, color.red() + color.green() + color.blue())
+            }
+        }
     )
 
     fun buildHoloInteractionSpawnPacket(hologram: Hologram) = WrapperPlayServerSpawnEntity(
         hologram.metaData.interactionEntityId,
-        null,
+        UUID.randomUUID(),
         EntityTypes.INTERACTION,
         hologram.centerLocation.toPacketLocation(),
         0f,

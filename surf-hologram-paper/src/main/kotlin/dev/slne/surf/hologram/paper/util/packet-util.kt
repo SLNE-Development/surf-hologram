@@ -1,5 +1,7 @@
 package dev.slne.surf.hologram.paper.util
 
+import com.github.retrooper.packetevents.protocol.entity.data.EntityData
+import com.github.retrooper.packetevents.protocol.entity.data.EntityDataType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.surfapi.bukkit.api.util.forEachPlayer
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
@@ -16,3 +18,26 @@ fun debug(message: String) = forEachPlayer {
         text(message)
     }
 }
+
+/**
+ * Credits to Copilot
+ */
+
+@DslMarker
+annotation class EntityDataDsl
+
+@EntityDataDsl
+class EntityDataBuilder {
+    private val entries = mutableListOf<EntityData<*>>()
+
+    fun <T> entry(id: Int, type: EntityDataType<T>, value: T) {
+        entries += EntityData(id, type, value)
+    }
+
+    fun build(): MutableList<EntityData<*>> = entries
+}
+
+fun buildEntityData(block: EntityDataBuilder.() -> Unit): List<EntityData<*>> {
+    return EntityDataBuilder().apply(block).build()
+}
+

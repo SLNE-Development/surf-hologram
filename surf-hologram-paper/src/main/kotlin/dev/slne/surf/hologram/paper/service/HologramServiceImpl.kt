@@ -2,16 +2,15 @@ package dev.slne.surf.hologram.paper.service
 
 import com.google.auto.service.AutoService
 import dev.slne.surf.hologram.api.hologram.Hologram
+import dev.slne.surf.hologram.api.hologram.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.api.util.forEachViewer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.core.service.HologramService
-import dev.slne.surf.hologram.paper.hologram.HologramMetaDataImpl
 import dev.slne.surf.hologram.paper.hologram.types.BouncingHologramImpl
 import dev.slne.surf.hologram.paper.hologram.types.SimpleHologramImpl
-import dev.slne.surf.surfapi.core.api.util.random
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.util.Services
@@ -21,6 +20,7 @@ class HologramServiceImpl : HologramService, Services.Fallback {
     override fun createHologram(
         name: String,
         type: HologramType,
+        metaData: HologramMetaData,
         centerLocation: HologramLocation,
         displayedText: Component,
         viewers: ObjectSet<HoloOfflinePlayer>?
@@ -29,16 +29,9 @@ class HologramServiceImpl : HologramService, Services.Fallback {
             return it
         }
 
-        val meta = HologramMetaDataImpl(
-            name,
-            random.nextInt(),
-            random.nextInt(),
-            1f,
-            1f
-        )
         val hologram = when (type) {
             HologramType.FIXED, HologramType.ROTATING -> SimpleHologramImpl(
-                meta,
+                metaData,
                 type,
                 centerLocation,
                 displayedText,
@@ -46,7 +39,7 @@ class HologramServiceImpl : HologramService, Services.Fallback {
             )
 
             HologramType.BOUNCING -> BouncingHologramImpl(
-                meta,
+                metaData,
                 type,
                 centerLocation,
                 displayedText,
@@ -59,7 +52,6 @@ class HologramServiceImpl : HologramService, Services.Fallback {
         }
 
         hologramRegistry.registerHologram(hologram)
-
         return hologram
     }
 

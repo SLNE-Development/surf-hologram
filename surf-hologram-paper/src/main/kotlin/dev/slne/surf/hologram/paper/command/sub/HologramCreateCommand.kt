@@ -6,17 +6,20 @@ import dev.jorel.commandapi.kotlindsl.getValue
 import dev.jorel.commandapi.kotlindsl.locationArgument
 import dev.jorel.commandapi.kotlindsl.playerExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
+import dev.slne.surf.hologram.api.hologram.HologramTextAlignment
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.command.argument.hologramNameArgument
 import dev.slne.surf.hologram.paper.command.argument.hologramTypeArgument
+import dev.slne.surf.hologram.paper.hologram.HologramMetaDataImpl
 import dev.slne.surf.hologram.paper.hologram.location.HologramLocationImpl
 import dev.slne.surf.hologram.paper.hologram.location.HologramWorldImpl
 import dev.slne.surf.hologram.paper.util.HoloPermissionRegistry
 import dev.slne.surf.surfapi.bukkit.api.command.args.miniMessageArgument
 import dev.slne.surf.surfapi.core.api.messages.adventure.clickRunsCommand
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
+import dev.slne.surf.surfapi.core.api.util.random
 import net.kyori.adventure.text.Component
 import org.bukkit.Location
 
@@ -50,7 +53,18 @@ fun CommandAPICommand.hologramCreateCommand() = subcommand("create") {
             )
         }
 
-        val holo = hologramService.createHologram(name, type, holoLocation, text)
+        val meta = HologramMetaDataImpl(
+            name = name,
+            holoEntityId = random.nextInt(),
+            interactionEntityId = random.nextInt(),
+            interactionWidth = 1f,
+            interactionHeight = 1f,
+            viewRange = 10f,
+            lineWidth = 200,
+            HologramTextAlignment.CENTER
+        )
+
+        val holo = hologramService.createHologram(name, type, meta, holoLocation, text)
         holo.show()
 
         player.sendText {

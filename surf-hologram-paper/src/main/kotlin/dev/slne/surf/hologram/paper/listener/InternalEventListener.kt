@@ -8,6 +8,6 @@ import org.bukkit.event.Listener
 object InternalEventListener : Listener {
     @EventHandler
     fun onClick(event: HologramClickEvent) {
-        debug("HologramClickEvent: player=${event.player.uuid}, hologram=${event.hologram.metaData.name}")
+        debug("HologramClickEvent: player=${event.player.name}, hologram=${event.hologram.metaData.name}")
     }
 }
