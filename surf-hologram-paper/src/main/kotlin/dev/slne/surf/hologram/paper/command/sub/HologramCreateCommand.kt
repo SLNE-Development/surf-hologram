@@ -66,7 +66,7 @@ fun CommandAPICommand.hologramCreateCommand() = subcommand("create") {
             backgroundColor = NamedTextColor.RED
         )
 
-        val holo = hologramService.createHologram(name, type, meta, holoLocation, text)
+        val holo = hologramService.createHologram(type, meta, holoLocation, text)
         holo.show()
 
         player.sendText {

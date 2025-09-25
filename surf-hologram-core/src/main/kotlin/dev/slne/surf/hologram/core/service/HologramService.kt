@@ -12,7 +12,6 @@ import net.kyori.adventure.text.Component
 
 interface HologramService {
     fun createHologram(
-        name: String,
         type: HologramType,
         metaData: HologramMetaData,
         centerLocation: HologramLocation,

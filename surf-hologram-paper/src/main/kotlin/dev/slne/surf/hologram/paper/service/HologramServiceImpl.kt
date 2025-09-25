@@ -18,14 +18,13 @@ import net.kyori.adventure.util.Services
 @AutoService(HologramService::class)
 class HologramServiceImpl : HologramService, Services.Fallback {
     override fun createHologram(
-        name: String,
         type: HologramType,
         metaData: HologramMetaData,
         centerLocation: HologramLocation,
         displayedText: Component,
         viewers: ObjectSet<HoloOfflinePlayer>?
     ): Hologram {
-        hologramRegistry.getHologram(name)?.let {
+        hologramRegistry.getHologram(metaData.name)?.let {
             return it
         }
 
