@@ -115,6 +115,7 @@ fun createHologramCreateDialog() = dialog {
                             val bgColor = info.getText("holo_bg_color")?.let {
                                 TextColor.fromHexString(it)
                             } ?: TextColor.color(0)
+                            val clickable = info.getBoolean("holo_clickable") ?: true
 
                             val holo = hologramService.createHologram(
                                 type,
@@ -127,7 +128,8 @@ fun createHologramCreateDialog() = dialog {
                                     viewRange,
                                     200,
                                     alignment,
-                                    bgColor
+                                    bgColor,
+                                    clickable
                                 ),
                                 player.location.clone().add(0.0, 1.0, 0.0).toHologramLocation(),
                                 text,
