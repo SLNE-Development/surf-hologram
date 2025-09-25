@@ -119,6 +119,18 @@ fun createHologramCreateDialog() = dialog {
                         }
                     }
                 }
+
+                no {
+                    label { error("Abbrechen") }
+                    tooltip { error("Klicke um den Vorgang abzubrechen.") }
+                    width(200)
+
+                    action {
+                        customClick { _, player ->
+                            player.closeDialog()
+                        }
+                    }
+                }
             }
         }
     }
