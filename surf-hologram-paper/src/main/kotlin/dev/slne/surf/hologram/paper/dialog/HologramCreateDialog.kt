@@ -4,6 +4,7 @@ package dev.slne.surf.hologram.paper.dialog
 
 import dev.slne.surf.hologram.api.hologram.HologramTextAlignment
 import dev.slne.surf.hologram.api.hologram.HologramType
+import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.hologram.HologramMetaDataImpl
 import dev.slne.surf.hologram.paper.util.toHologramLocation
@@ -29,7 +30,7 @@ fun createHologramCreateDialog() = dialog {
 
             input {
                 text("holo_name") {
-
+                    label { info("Hologramm Name") }
                 }
                 singleOption("holo_type") {
                     HologramType.entries.forEach {
@@ -41,16 +42,21 @@ fun createHologramCreateDialog() = dialog {
                                         .replaceFirstChar { first -> first.uppercase() })
                             })
                     }
+                    label { info("Hologramm Typ") }
                 }
                 text("holo_text") {
+                    label { info("Hologramm Inhalt") }
                     initial("<rainbow>Hello World!")
                 }
 
-                numberRange("holo_view_range", 1..Int.MAX_VALUE) {
+                numberRange("holo_view_range", 1..64) {
+                    label { info("Hologramm Sichtweite") }
+                    step(1f)
                     initial(32f)
                 }
 
                 singleOption("holo_alignment") {
+                    label { info("Hologramm Text Ausrichtung") }
                     HologramTextAlignment.entries.forEach {
                         option(
                             "holo_alignment_${it.name}",
@@ -63,6 +69,7 @@ fun createHologramCreateDialog() = dialog {
                 }
 
                 text("holo_bg_color") {
+                    label { info("Hologramm Hintergrund Farbe") }
                     width(100)
                     initial("#ffffff")
                 }
@@ -81,7 +88,7 @@ fun createHologramCreateDialog() = dialog {
                                 return@customClick
                             }
 
-                            val nameInput = info.getText("holo_name") ?: run {
+                            val nameInput = info.getText("holo_name")?.trim() ?: run {
                                 player.sendText {
                                     error("Es wurde kein Name angegeben.")
                                 }
@@ -103,7 +110,7 @@ fun createHologramCreateDialog() = dialog {
                                 TextColor.fromHexString(it)
                             } ?: TextColor.color(0)
 
-                            hologramService.createHologram(
+                            val holo = hologramService.createHologram(
                                 type, HologramMetaDataImpl(
                                     nameInput,
                                     random.nextInt(),
@@ -116,6 +123,8 @@ fun createHologramCreateDialog() = dialog {
                                     bgColor
                                 ), player.location.toHologramLocation(), text, null
                             )
+
+                            holo.show()
                         }
                     }
                 }
