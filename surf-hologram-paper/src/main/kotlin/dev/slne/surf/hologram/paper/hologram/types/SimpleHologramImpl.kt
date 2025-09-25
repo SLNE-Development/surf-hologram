@@ -32,12 +32,15 @@ class SimpleHologramImpl(
         val bukkitPlayer = player.bukkitPlayer ?: return
         val packetPlayer = PacketEvents.getAPI().playerManager.getUser(bukkitPlayer)
 
-        debug("Showing hologram '${metaData.name}' to player '${bukkitPlayer.name}'")
+        debug("Showing simple hologram '${metaData.name}' to player '${bukkitPlayer.name}'")
 
         packetPlayer.sendPacket(PaperPackets.buildHoloSpawnPacket(this))
         packetPlayer.sendPacket(PaperPackets.buildHoloMetaPacket(this))
-        packetPlayer.sendPacket(PaperPackets.buildHoloInteractionSpawnPacket(this))
-        packetPlayer.sendPacket(PaperPackets.buildHoloInteractionMetaPacket(this))
+
+        if (metaData.clickable) {
+            packetPlayer.sendPacket(PaperPackets.buildHoloInteractionSpawnPacket(this))
+            packetPlayer.sendPacket(PaperPackets.buildHoloInteractionMetaPacket(this))
+        }
     }
 
     override fun hide(player: HoloPlayer) {
