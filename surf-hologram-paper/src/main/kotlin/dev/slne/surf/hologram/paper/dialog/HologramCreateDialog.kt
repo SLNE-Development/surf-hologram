@@ -31,9 +31,10 @@ fun createHologramCreateDialog() = dialog {
             input {
                 text("holo_name") {
                     label { info("Hologramm Name") }
+                    initial("Hologram#${random.nextInt(1000, 9999)}")
                 }
                 singleOption("holo_type") {
-                    HologramType.entries.forEach {
+                    HologramType.entries.sortedByDescending { it.name }.forEach {
                         option(
                             "holo_type_${it.name}",
                             buildText {
@@ -111,7 +112,8 @@ fun createHologramCreateDialog() = dialog {
                             } ?: TextColor.color(0)
 
                             val holo = hologramService.createHologram(
-                                type, HologramMetaDataImpl(
+                                type,
+                                HologramMetaDataImpl(
                                     nameInput,
                                     random.nextInt(),
                                     random.nextInt(),
@@ -121,7 +123,10 @@ fun createHologramCreateDialog() = dialog {
                                     200,
                                     alignment,
                                     bgColor
-                                ), player.location.toHologramLocation(), text, null
+                                ),
+                                player.location.clone().add(0.0, 1.0, 0.0).toHologramLocation(),
+                                text,
+                                null
                             )
 
                             holo.show()
