@@ -52,6 +52,10 @@ class BouncingHologramImpl(
         packetPlayer.sendPacket(PaperPackets.buildDestroyPacket(this))
     }
 
+    override fun refresh() {
+        TODO("Not yet implemented")
+    }
+
     override fun teleportHere(player: HoloPlayer) =
         player.bukkitPlayer?.teleport(centerLocation.toBukkitLocation()) == true
 

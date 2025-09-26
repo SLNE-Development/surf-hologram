@@ -9,6 +9,8 @@ import dev.slne.surf.hologram.api.hologram.types.SimpleHologram
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.api.player.HoloPlayer
 import dev.slne.surf.hologram.api.util.forEachBukkitViewer
+import dev.slne.surf.hologram.api.util.hide
+import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.core.service.hologramPlayerService
 import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.PaperPackets
@@ -51,6 +53,11 @@ class SimpleHologramImpl(
         val packetPlayer = PacketEvents.getAPI().playerManager.getUser(bukkitPlayer)
 
         packetPlayer.sendPacket(PaperPackets.buildDestroyPacket(this))
+    }
+
+    override fun refresh() {
+        hide()
+        show()
     }
 
     override fun teleportHere(player: HoloPlayer) =

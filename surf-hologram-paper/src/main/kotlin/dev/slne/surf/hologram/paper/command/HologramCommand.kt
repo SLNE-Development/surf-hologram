@@ -13,6 +13,8 @@ fun hologramCommand() = commandAPICommand("hologram") {
     hologramCreateCommand()
     hologramDeleteCommand()
     hologramListCommand()
+    hologramInfoCommand()
+    hologramRefreshCommand()
 
     hologramTeleportHereCommand()
     hologramTeleportThereCommand()
