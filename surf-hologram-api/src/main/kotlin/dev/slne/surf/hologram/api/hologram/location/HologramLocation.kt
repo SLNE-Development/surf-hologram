@@ -1,8 +1,10 @@
 package dev.slne.surf.hologram.api.hologram.location
 
 interface HologramLocation {
-    val x: Double
-    val y: Double
-    val z: Double
-    val world: HologramWorld
+    var x: Double
+    var y: Double
+    var z: Double
+    var world: HologramWorld
+
+    fun duplicate(): HologramLocation
 }

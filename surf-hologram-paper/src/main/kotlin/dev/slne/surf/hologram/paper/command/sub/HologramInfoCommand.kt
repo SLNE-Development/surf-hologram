@@ -5,6 +5,7 @@ import dev.jorel.commandapi.kotlindsl.getValue
 import dev.jorel.commandapi.kotlindsl.playerExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
 import dev.slne.surf.hologram.api.hologram.Hologram
+import dev.slne.surf.hologram.api.hologram.types.BouncingHologram
 import dev.slne.surf.hologram.paper.command.argument.hologramArgument
 import dev.slne.surf.hologram.paper.util.HoloPermissionRegistry
 import dev.slne.surf.surfapi.core.api.font.toSmallCaps
@@ -71,6 +72,37 @@ fun CommandAPICommand.hologramInfoCommand() = subcommand("info") {
                 spacer(":")
                 appendSpace()
                 variableValue(hologram.creationReason.name())
+            }
+
+            if (hologram is BouncingHologram) {
+                val bouncingHologram = hologram as BouncingHologram
+                appendNewline {
+                    append(CommonComponents.EM_DASH)
+                    appendSpace()
+                    variableKey("Bounce-Höhe")
+                    spacer(":")
+                    appendSpace()
+                    variableValue(bouncingHologram.bounceHeight)
+                }
+                appendNewline {
+                    append(CommonComponents.EM_DASH)
+                    appendSpace()
+                    variableKey("Bounce-Step")
+                    spacer(":")
+                    appendSpace()
+                    variableValue(bouncingHologram.bounceSpeed.first)
+                }
+                appendNewline {
+                    append(CommonComponents.EM_DASH)
+                    appendSpace()
+                    variableKey("Bounce-Richtung")
+                    spacer(":")
+                    appendSpace()
+                    variableValue(bouncingHologram.bounceDirection.let {
+                        if (it) "Nach oben" else "Nach unten"
+                    })
+                }
+
             }
         }
     }

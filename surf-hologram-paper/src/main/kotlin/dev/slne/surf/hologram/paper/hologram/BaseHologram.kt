@@ -50,10 +50,13 @@ abstract class BaseHologram : Hologram {
     override fun teleportHere(player: HoloPlayer) =
         player.bukkitPlayer?.teleport(centerLocation.toBukkitLocation()) == true
 
-    override fun teleportTo(newLocation: HologramLocation) {
-        hologramService.editHologramSaving(this) {
-            centerLocation = newLocation
+    override fun teleportTo(newLocation: HologramLocation, save: Boolean) {
+        if (save) {
+            hologramService.editHologramSaving(this) {
+                centerLocation = newLocation
+            }
         }
+
         forEachBukkitViewer {
             val packetPlayer = PacketEvents.getAPI().playerManager.getUser(it)
 

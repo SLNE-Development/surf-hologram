@@ -82,6 +82,24 @@ fun createHologramCreateDialog() = dialog {
                 simpleBoolean("holo_clickable", true) {
                     info("Klick-Events")
                 }
+
+                numberRange("holo_bouncing_height", 0.1..64.0) {
+                    label {
+                        info("Hologramm Bouncing Höhe")
+                        appendSpace()
+                        spacer("(Bouncing Typ only)")
+                    }
+                    step(0.1f)
+                }
+
+                numberRange("holo_bouncing_step", 0.1..64.0) {
+                    label {
+                        info("Hologramm Bouncing Schritte")
+                        appendSpace()
+                        spacer("(Bouncing Typ only)")
+                    }
+                    step(0.1f)
+                }
             }
         }
         type {
@@ -120,6 +138,9 @@ fun createHologramCreateDialog() = dialog {
                             } ?: TextColor.color(0)
                             val clickable = info.getBoolean("holo_clickable") ?: true
 
+                            val bouncingHeight = info.getFloat("holo_bouncing_height") ?: 1.0f
+                            val bouncingStep = info.getFloat("holo_bouncing_step") ?: 1.0f
+
                             val holo = hologramService.createHologram(
                                 type,
                                 HologramMetaDataImpl(
@@ -136,7 +157,9 @@ fun createHologramCreateDialog() = dialog {
                                 ),
                                 player.location.clone().add(0.0, 1.0, 0.0).toHologramLocation(),
                                 text,
-                                HologramCreationReason.Client(player.name)
+                                HologramCreationReason.Client(player.name),
+                                bouncingStep = bouncingStep.toDouble(),
+                                bouncingHeight = bouncingHeight.toDouble()
                             )
 
                             holo.show()

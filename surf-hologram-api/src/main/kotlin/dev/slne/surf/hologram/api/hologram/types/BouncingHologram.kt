@@ -16,9 +16,9 @@ typealias BounceSpeed = Pair<Double, Long>
 typealias BounceDirection = Boolean
 
 interface BouncingHologram : Hologram {
-    val bounceState: Int
+    var bounceState: Double
     val bounceHeight: Double
     val bounceSpeed: BounceSpeed
-    val bounceDirection: BounceDirection
+    var bounceDirection: BounceDirection
     fun tick()
 }

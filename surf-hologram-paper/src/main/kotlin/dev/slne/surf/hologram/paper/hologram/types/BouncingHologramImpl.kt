@@ -19,12 +19,30 @@ class BouncingHologramImpl(
     override var displayedText: Component,
     override val creationReason: HologramCreationReason,
     override val viewers: ObjectSet<HoloOfflinePlayer>?,
-    override val bounceState: Int,
+    override var bounceState: Double,
     override val bounceHeight: Double,
     override val bounceSpeed: BounceSpeed,
-    override val bounceDirection: BounceDirection
+    override var bounceDirection: BounceDirection
 ) : BaseHologram(), BouncingHologram {
     override fun tick() {
-        TODO("Not yet implemented")
+        val (speed, _) = bounceSpeed
+
+        if (bounceDirection) {
+            bounceState += speed
+            if (bounceState >= bounceHeight) {
+                bounceState = bounceHeight
+                bounceDirection = false
+            }
+        } else {
+            bounceState -= speed
+            if (bounceState <= 0) {
+                bounceState = 0.0
+                bounceDirection = true
+            }
+        }
+
+        this.teleportTo(centerLocation.duplicate().apply {
+            this.y += bounceState
+        }, false)
     }
 }

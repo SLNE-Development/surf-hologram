@@ -6,25 +6,46 @@ import dev.slne.surf.hologram.api.hologram.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
+import dev.slne.surf.hologram.api.hologram.types.BouncingHologram
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.api.util.forEachViewer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.core.service.HologramService
 import dev.slne.surf.hologram.paper.hologram.types.BouncingHologramImpl
 import dev.slne.surf.hologram.paper.hologram.types.SimpleHologramImpl
+import dev.slne.surf.hologram.paper.plugin
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.util.Services
+import org.bukkit.Bukkit
+import java.util.concurrent.TimeUnit
 
 @AutoService(HologramService::class)
 class HologramServiceImpl : HologramService, Services.Fallback {
+    lateinit var task: ScheduledTask
+
+    override fun startBouncing() {
+        task = Bukkit.getAsyncScheduler().runAtFixedRate(plugin, {
+            hologramRegistry.holograms().forEach { (it as? BouncingHologram)?.tick() }
+        }, 0L, 500L, TimeUnit.MILLISECONDS)
+    }
+
+    override fun stopBouncing() {
+        if (::task.isInitialized && !task.isCancelled) {
+            task.cancel()
+        }
+    }
+
     override fun createHologram(
         type: HologramType,
         metaData: HologramMetaData,
         centerLocation: HologramLocation,
         displayedText: Component,
         creationReason: HologramCreationReason,
-        viewers: ObjectSet<HoloOfflinePlayer>?
+        viewers: ObjectSet<HoloOfflinePlayer>?,
+        bouncingHeight: Double?,
+        bouncingStep: Double?
     ): Hologram {
         hologramRegistry.getHologram(metaData.name)?.let {
             return it
@@ -47,9 +68,9 @@ class HologramServiceImpl : HologramService, Services.Fallback {
                 displayedText,
                 creationReason,
                 viewers,
-                0,
-                0.25,
-                1.0 to 1,
+                0.0,
+                bouncingHeight ?: 0.0,
+                (bouncingStep ?: 0.0) to 1L,
                 true
             )
         }

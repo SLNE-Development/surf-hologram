@@ -12,13 +12,18 @@ import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
 
 interface HologramService {
+    fun startBouncing()
+    fun stopBouncing()
+
     fun createHologram(
         type: HologramType,
         metaData: HologramMetaData,
         centerLocation: HologramLocation,
         displayedText: Component,
         creationReason: HologramCreationReason,
-        viewers: ObjectSet<HoloOfflinePlayer>? = null
+        viewers: ObjectSet<HoloOfflinePlayer>? = null,
+        bouncingHeight: Double? = null,
+        bouncingStep: Double? = null
     ): Hologram
 
     fun deleteHologram(hologram: Hologram)

@@ -2,6 +2,7 @@ package dev.slne.surf.hologram.paper
 
 import com.github.retrooper.packetevents.PacketEvents
 import com.github.shynixn.mccoroutine.folia.SuspendingJavaPlugin
+import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.command.hologramCommand
 import dev.slne.surf.hologram.paper.listener.InternalEventListener
 import dev.slne.surf.hologram.paper.listener.InternalEventPacketListener
@@ -20,9 +21,11 @@ class PaperMain : SuspendingJavaPlugin() {
         PacketEvents.getAPI().eventManager.registerListener(InternalEventPacketListener())
 
         hologramCommand()
+
+        hologramService.startBouncing()
     }
 
     override fun onDisable() {
-        super.onDisable()
+        hologramService.stopBouncing()
     }
 }

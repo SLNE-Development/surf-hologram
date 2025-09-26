@@ -24,5 +24,5 @@ interface Hologram {
     fun refresh()
 
     fun teleportHere(player: HoloPlayer): Boolean
-    fun teleportTo(newLocation: HologramLocation)
+    fun teleportTo(newLocation: HologramLocation, save: Boolean = true)
 }
