@@ -9,6 +9,7 @@ import dev.slne.surf.hologram.paper.util.HoloPermissionRegistry
 import dev.slne.surf.surfapi.core.api.font.toSmallCaps
 import dev.slne.surf.surfapi.core.api.messages.CommonComponents
 import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
+import dev.slne.surf.surfapi.core.api.messages.adventure.clickRunsCommand
 import dev.slne.surf.surfapi.core.api.messages.adventure.plain
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 import dev.slne.surf.surfapi.core.api.messages.pagination.Pagination
@@ -97,6 +98,7 @@ fun CommandAPICommand.hologramListCommand() = subcommand("list") {
                                 variableValue(row.creationReason.name())
                             }
                         })
+                        clickRunsCommand("/hologram teleporto ${row.metaData.name}")
                     }
                 )
             }

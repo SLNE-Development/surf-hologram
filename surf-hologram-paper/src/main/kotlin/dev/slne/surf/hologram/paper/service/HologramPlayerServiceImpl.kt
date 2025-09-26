@@ -10,6 +10,11 @@ import java.util.*
 
 @AutoService(HologramPlayerService::class)
 class HologramPlayerServiceImpl : HologramPlayerService, Services.Fallback {
+    override fun getPlayer(
+        uuid: UUID,
+        name: String
+    ) = HoloPlayerImpl(name, uuid)
+
     override fun getPlayer(uuid: UUID) = Bukkit.getPlayer(uuid)?.let {
         HoloPlayerImpl(it.name, it.uniqueId)
     }

@@ -6,6 +6,7 @@ import dev.slne.surf.surfapi.core.api.util.requiredService
 import java.util.*
 
 interface HologramPlayerService {
+    fun getPlayer(uuid: UUID, name: String): HoloPlayer
     fun getPlayer(uuid: UUID): HoloPlayer?
     fun getPlayer(name: String): HoloPlayer?
     fun getOfflinePlayer(uuid: UUID): HoloOfflinePlayer?
