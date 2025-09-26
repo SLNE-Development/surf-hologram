@@ -4,7 +4,6 @@ package dev.slne.surf.hologram.api.dsl
 
 import dev.slne.surf.hologram.api.event.HologramEvent
 import dev.slne.surf.hologram.api.hologram.Hologram
-import dev.slne.surf.hologram.api.hologram.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.HologramTextAlignment
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
@@ -326,7 +325,6 @@ fun hologram(
         metaData = metaData,
         centerLocation = builder.centerLocation,
         displayedText = SurfComponentBuilder.builder().apply(builder.displayedText).build(),
-        creationReason = HologramCreationReason.Plugin(plugin.name),
         viewers = builder.viewers,
         bouncingHeight = builder.bouncingHeight,
         bouncingStep = builder.bouncingStep

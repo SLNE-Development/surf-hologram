@@ -1,3 +1,6 @@
 include("surf-hologram-api")
 include("surf-hologram-core")
 include("surf-hologram-paper")
+include("surf-hologram-example")
+include("surf-hologram-example-dsl")
+include("surf-hologram-example-java")
