@@ -2,6 +2,7 @@
 
 package dev.slne.surf.hologram.paper.dialog
 
+import com.github.retrooper.packetevents.util.Vector3d
 import dev.slne.surf.hologram.api.hologram.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.HologramTextAlignment
 import dev.slne.surf.hologram.api.hologram.HologramType
@@ -87,6 +88,13 @@ fun createHologramCreateDialog() = dialog {
                     width(BUTTON_WIDTH)
                 }
 
+                numberRange("holo_scale", 1..1024) {
+                    label { info("Hologramm Größe") }
+                    step(1f)
+                    initial(1f)
+                    width(BUTTON_WIDTH)
+                }
+
                 simpleBoolean("holo_clickable", true) {
                     info("Klick-Events")
                 }
@@ -151,6 +159,7 @@ fun createHologramCreateDialog() = dialog {
                             val bouncingHeight =
                                 info.getText("holo_bouncing_height")?.toDouble() ?: 1.0
                             val bouncingStep = info.getText("holo_bouncing_step")?.toDouble() ?: 1.0
+                            val scale = info.getFloat("holo_scale") ?: 1f
 
                             val holo = hologramService.createHologram(
                                 type,
@@ -160,6 +169,7 @@ fun createHologramCreateDialog() = dialog {
                                     random.nextInt(),
                                     1f,
                                     1f,
+                                    Vector3d(scale.toDouble(), scale.toDouble(), scale.toDouble()),
                                     viewRange,
                                     200,
                                     alignment,

@@ -1,5 +1,6 @@
 package dev.slne.surf.hologram.paper.command.sub
 
+import com.github.retrooper.packetevents.util.Vector3d
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.arguments.LocationType
 import dev.jorel.commandapi.kotlindsl.getValue
@@ -63,7 +64,8 @@ fun CommandAPICommand.hologramCreateCommand() = subcommand("create") {
             interactionHeight = 1f,
             viewRange = 10f,
             lineWidth = 200,
-            HologramTextAlignment.CENTER,
+            scale = Vector3d(1.0, 1.0, 1.0),
+            textAlignment = HologramTextAlignment.CENTER,
             backgroundColor = NamedTextColor.RED
         )
 

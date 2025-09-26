@@ -13,6 +13,7 @@ import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.paper.util.buildEntityData
 import dev.slne.surf.hologram.paper.util.toPacketLocation
+import dev.slne.surf.hologram.paper.util.toVector3f
 import java.util.*
 
 object PaperPackets {
@@ -30,6 +31,7 @@ object PaperPackets {
         hologram.metaData.holoEntityId,
         buildEntityData {
             entry(23, EntityDataTypes.ADV_COMPONENT, hologram.displayedText)
+            entry(12, EntityDataTypes.VECTOR3F, hologram.metaData.scale.toVector3f())
 
             if (hologram.hologramType == HologramType.ROTATING) {
                 entry(15, EntityDataTypes.BYTE, 3.toByte())

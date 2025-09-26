@@ -1,5 +1,6 @@
 package dev.slne.surf.hologram.api
 
+import com.github.retrooper.packetevents.util.Vector3d
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.HologramTextAlignment
@@ -38,6 +39,7 @@ interface SurfHologramApi {
         name: String,
         interactionWidth: Float = 1f,
         interactionHeight: Float = 1f,
+        scale: Vector3d = Vector3d(1.0, 1.0, 1.0),
         viewRange: Float = 32f,
         lineWidth: Int = 200,
         textAlignment: HologramTextAlignment = HologramTextAlignment.CENTER,

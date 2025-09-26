@@ -1,5 +1,6 @@
 package dev.slne.surf.hologram.paper.api
 
+import com.github.retrooper.packetevents.util.Vector3d
 import com.google.auto.service.AutoService
 import dev.slne.surf.hologram.api.SurfHologramApi
 import dev.slne.surf.hologram.api.hologram.*
@@ -74,6 +75,7 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
         name: String,
         interactionWidth: Float,
         interactionHeight: Float,
+        scale: Vector3d,
         viewRange: Float,
         lineWidth: Int,
         textAlignment: HologramTextAlignment,
@@ -85,6 +87,7 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
         random.nextInt(),
         interactionWidth,
         interactionHeight,
+        scale,
         viewRange,
         lineWidth,
         textAlignment,

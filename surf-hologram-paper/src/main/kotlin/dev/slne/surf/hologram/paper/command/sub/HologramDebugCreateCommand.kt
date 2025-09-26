@@ -1,5 +1,6 @@
 package dev.slne.surf.hologram.paper.command.sub
 
+import com.github.retrooper.packetevents.util.Vector3d
 import com.github.shynixn.mccoroutine.folia.launch
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.kotlindsl.getValue
@@ -49,6 +50,7 @@ fun CommandAPICommand.hologramCreateDebugCommand() = subcommand("create-debug") 
                             random.nextInt(),
                             1f,
                             1f,
+                            Vector3d(1.0, 1.0, 1.0),
                             32f,
                             200,
                             HologramTextAlignment.CENTER,
