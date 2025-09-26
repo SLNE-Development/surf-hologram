@@ -98,7 +98,7 @@ fun CommandAPICommand.hologramListCommand() = subcommand("list") {
                                 variableValue(row.creationReason.name())
                             }
                         })
-                        clickRunsCommand("/hologram teleporto ${row.metaData.name}")
+                        clickRunsCommand("/hologram teleporthere ${row.metaData.name}")
                     }
                 )
             }
