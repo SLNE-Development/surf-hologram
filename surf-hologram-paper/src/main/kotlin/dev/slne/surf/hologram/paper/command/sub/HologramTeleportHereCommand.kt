@@ -11,7 +11,7 @@ import dev.slne.surf.hologram.paper.util.toHologramLocation
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 
 fun CommandAPICommand.hologramTeleportHereCommand() = subcommand("teleport-here") {
-    withPermission(HoloPermissionRegistry.COMMAND_HOLOGRAM_TELEPORT_THERE)
+    withPermission(HoloPermissionRegistry.COMMAND_HOLOGRAM_TELEPORT_HERE)
     hologramArgument("hologram")
 
     playerExecutor { player, arguments ->

@@ -8,11 +8,11 @@ data class HologramMetaDataImpl(
     override val name: String,
     override val holoEntityId: Int,
     override val interactionEntityId: Int,
-    override val interactionWidth: Float,
-    override val interactionHeight: Float,
-    override val viewRange: Float,
-    override val lineWidth: Int,
-    override val textAlignment: HologramTextAlignment,
-    override val backgroundColor: TextColor? = null,
-    override val clickable: Boolean = true
+    override var interactionWidth: Float,
+    override var interactionHeight: Float,
+    override var viewRange: Float,
+    override var lineWidth: Int,
+    override var textAlignment: HologramTextAlignment,
+    override var backgroundColor: TextColor? = null,
+    override var clickable: Boolean = true
 ) : HologramMetaData

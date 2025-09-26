@@ -21,9 +21,9 @@ import org.bukkit.Bukkit
 
 class SimpleHologramImpl(
     override val metaData: HologramMetaData,
-    override val hologramType: HologramType,
-    override val centerLocation: HologramLocation,
-    override val displayedText: Component,
+    override var hologramType: HologramType,
+    override var centerLocation: HologramLocation,
+    override var displayedText: Component,
     override val creationReason: HologramCreationReason,
     override val viewers: ObjectSet<HoloOfflinePlayer>?
 ) : SimpleHologram {

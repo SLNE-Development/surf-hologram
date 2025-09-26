@@ -32,7 +32,8 @@ fun createHologramCreateDialog() = dialog {
             input {
                 text("holo_name") {
                     label { info("Hologramm Name") }
-                    initial("HologramID${random.nextInt(1000, 9999)}")
+                    maxLength(32)
+                    initial("Hologram-${random.nextInt(1000, 9999)}")
                 }
 
                 text("holo_text") {
