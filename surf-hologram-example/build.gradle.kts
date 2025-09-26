@@ -11,8 +11,9 @@ dependencies {
 surfPaperPluginApi {
     mainClass("dev.slne.surf.hologram.example.BukkitMain")
     authors.add("red")
+    generateLibraryLoader(false)
 
     serverDependencies {
-        registerRequired("surf-hologram-bukkit")
+        registerRequired("surf-hologram-paper")
     }
 }
