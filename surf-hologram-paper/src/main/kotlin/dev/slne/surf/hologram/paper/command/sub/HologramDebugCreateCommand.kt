@@ -31,7 +31,7 @@ fun CommandAPICommand.hologramCreateDebugCommand() = subcommand("create-debug") 
 
         val ms = measureTimeMillis {
             repeat(amount) {
-                val name = "debug-holo-${random.nextInt(1000, 9999)}"
+                val name = "debug-holo-${random.nextInt(1, 999999)}"
                 val offsetX = random.nextDouble(-7.0, 7.0)
                 val offsetZ = random.nextDouble(-7.0, 7.0)
 
