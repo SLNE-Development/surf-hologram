@@ -28,7 +28,7 @@ class HologramServiceImpl : HologramService, Services.Fallback {
     override fun startBouncing() {
         task = Bukkit.getAsyncScheduler().runAtFixedRate(plugin, {
             hologramRegistry.holograms().forEach { (it as? BouncingHologram)?.tick() }
-        }, 0L, 500L, TimeUnit.MILLISECONDS)
+        }, 0L, (1000L / 20L) * 10, TimeUnit.MILLISECONDS)
     }
 
     override fun stopBouncing() {

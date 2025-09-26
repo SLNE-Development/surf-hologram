@@ -21,6 +21,8 @@ import net.kyori.adventure.text.format.TextDecoration
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.entity.Player
 
+private const val BUTTON_WIDTH = 300
+
 fun createHologramCreateDialog() = dialog {
     base {
         title { primary("Hologram erstellen".toSmallCaps(), TextDecoration.BOLD) }
@@ -34,17 +36,20 @@ fun createHologramCreateDialog() = dialog {
                     label { info("Hologramm Name") }
                     maxLength(32)
                     initial("Hologram-${random.nextInt(1000, 9999)}")
+                    width(BUTTON_WIDTH)
                 }
 
                 text("holo_text") {
                     label { info("Hologramm Inhalt") }
                     initial("<rainbow>Hello World!")
                     maxLength(Int.MAX_VALUE)
+                    width(BUTTON_WIDTH)
                 }
 
                 text("holo_bg_color") {
                     label { info("Hologramm Hintergrund Farbe") }
                     initial("#ffffff")
+                    width(BUTTON_WIDTH)
                 }
 
                 singleOption("holo_type") {
@@ -57,11 +62,13 @@ fun createHologramCreateDialog() = dialog {
                                         .replaceFirstChar { first -> first.uppercase() })
                             })
                     }
+                    width = BUTTON_WIDTH
                     label { info("Hologramm Typ") }
                 }
 
                 singleOption("holo_alignment") {
                     label { info("Hologramm Text Ausrichtung") }
+                    width = BUTTON_WIDTH
                     HologramTextAlignment.entries.forEach {
                         option(
                             "holo_alignment_${it.name}",
@@ -77,28 +84,31 @@ fun createHologramCreateDialog() = dialog {
                     label { info("Hologramm Sichtweite") }
                     step(1f)
                     initial(32f)
+                    width(BUTTON_WIDTH)
                 }
 
                 simpleBoolean("holo_clickable", true) {
                     info("Klick-Events")
                 }
 
-                numberRange("holo_bouncing_height", 0.1..64.0) {
-                    label {
-                        info("Hologramm Bouncing Höhe")
-                        appendSpace()
-                        spacer("(Bouncing Typ only)")
-                    }
-                    step(0.1f)
-                }
-
-                numberRange("holo_bouncing_step", 0.1..64.0) {
+                text("holo_bouncing_step") {
                     label {
                         info("Hologramm Bouncing Schritte")
                         appendSpace()
-                        spacer("(Bouncing Typ only)")
+                        spacer("(only with Bouncing Type!)")
                     }
-                    step(0.1f)
+                    initial("0.3")
+                    width(BUTTON_WIDTH)
+                }
+
+                text("holo_bouncing_height") {
+                    label {
+                        info("Hologramm Bouncing Höhe")
+                        appendSpace()
+                        spacer("(only with Bouncing Type!)")
+                    }
+                    initial("1")
+                    width(BUTTON_WIDTH)
                 }
             }
         }
@@ -138,8 +148,9 @@ fun createHologramCreateDialog() = dialog {
                             } ?: TextColor.color(0)
                             val clickable = info.getBoolean("holo_clickable") ?: true
 
-                            val bouncingHeight = info.getFloat("holo_bouncing_height") ?: 1.0f
-                            val bouncingStep = info.getFloat("holo_bouncing_step") ?: 1.0f
+                            val bouncingHeight =
+                                info.getText("holo_bouncing_height")?.toDouble() ?: 1.0
+                            val bouncingStep = info.getText("holo_bouncing_step")?.toDouble() ?: 1.0
 
                             val holo = hologramService.createHologram(
                                 type,
@@ -158,8 +169,8 @@ fun createHologramCreateDialog() = dialog {
                                 player.location.clone().add(0.0, 1.0, 0.0).toHologramLocation(),
                                 text,
                                 HologramCreationReason.Client(player.name),
-                                bouncingStep = bouncingStep.toDouble(),
-                                bouncingHeight = bouncingHeight.toDouble()
+                                bouncingStep = bouncingStep,
+                                bouncingHeight = bouncingHeight
                             )
 
                             holo.show()
