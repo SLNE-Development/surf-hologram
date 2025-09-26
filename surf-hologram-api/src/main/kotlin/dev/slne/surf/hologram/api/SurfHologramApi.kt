@@ -11,10 +11,12 @@ import dev.slne.surf.surfapi.core.api.util.requiredService
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
+import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 
 interface SurfHologramApi {
     fun createHologram(
+        plugin: JavaPlugin,
         type: HologramType,
         metaData: HologramMetaData,
         centerLocation: HologramLocation,

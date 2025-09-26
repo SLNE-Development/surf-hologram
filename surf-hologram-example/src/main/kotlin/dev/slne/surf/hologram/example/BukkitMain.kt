@@ -20,6 +20,7 @@ class BukkitMain : SuspendingJavaPlugin() {
             surfHologramApi.createWorld(it.name, it.uid)
         }
         val holo = surfHologramApi.createHologram(
+            this,
             HologramType.ROTATING,
             meta,
             surfHologramApi.createLocation(world, 0.0, 100.0, 0.0),

@@ -321,6 +321,7 @@ fun hologram(
     )
 
     val hologram = surfHologramApi.createHologram(
+        plugin = plugin,
         type = builder.hologramType,
         metaData = metaData,
         centerLocation = builder.centerLocation,
