@@ -37,6 +37,14 @@ class HologramServiceImpl : HologramService, Services.Fallback {
         }
     }
 
+    override fun refresh(hologram: Hologram?) {
+        if (hologram != null) {
+            hologram.refresh()
+        } else {
+            hologramRegistry.holograms().forEach { it.refresh() }
+        }
+    }
+
     override fun createHologram(
         type: HologramType,
         metaData: HologramMetaData,

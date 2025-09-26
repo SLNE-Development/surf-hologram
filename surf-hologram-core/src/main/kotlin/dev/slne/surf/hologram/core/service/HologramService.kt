@@ -15,6 +15,8 @@ interface HologramService {
     fun startBouncing()
     fun stopBouncing()
 
+    fun refresh(hologram: Hologram?)
+
     fun createHologram(
         type: HologramType,
         metaData: HologramMetaData,

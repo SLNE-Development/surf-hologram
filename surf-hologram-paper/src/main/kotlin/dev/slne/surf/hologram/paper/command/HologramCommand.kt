@@ -19,6 +19,8 @@ fun hologramCommand() = commandAPICommand("hologram") {
     hologramTeleportHereCommand()
     hologramTeleportThereCommand()
 
+    hologramCreateDebugCommand()
+
     playerExecutor { player, _ ->
         player.showDialog(createHologramCreateDialog())
     }
