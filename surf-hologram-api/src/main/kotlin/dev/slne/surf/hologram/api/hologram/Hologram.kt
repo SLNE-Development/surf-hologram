@@ -10,9 +10,9 @@ typealias HologramEventHandler<T> = (T) -> Unit
 
 interface Hologram {
     val metaData: HologramMetaData
-    val hologramType: HologramType
-    val centerLocation: HologramLocation
-    val displayedText: Component
+    var hologramType: HologramType
+    var centerLocation: HologramLocation
+    var displayedText: Component
     val creationReason: HologramCreationReason
 
     val viewers: ObjectSet<HoloOfflinePlayer>?

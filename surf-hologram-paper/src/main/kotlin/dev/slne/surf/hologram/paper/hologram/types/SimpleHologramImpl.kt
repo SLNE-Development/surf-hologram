@@ -10,6 +10,7 @@ import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.api.player.HoloPlayer
 import dev.slne.surf.hologram.api.util.forEachBukkitViewer
 import dev.slne.surf.hologram.core.service.hologramPlayerService
+import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.PaperPackets
 import dev.slne.surf.hologram.paper.util.debug
 import dev.slne.surf.hologram.paper.util.toBukkitLocation
@@ -56,6 +57,9 @@ class SimpleHologramImpl(
         player.bukkitPlayer?.teleport(centerLocation.toBukkitLocation()) == true
 
     override fun teleportTo(newLocation: HologramLocation) {
+        hologramService.editHologramSaving(this) {
+            centerLocation = newLocation
+        }
         forEachBukkitViewer {
             val packetPlayer = PacketEvents.getAPI().playerManager.getUser(it)
 

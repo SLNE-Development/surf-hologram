@@ -6,11 +6,11 @@ interface HologramMetaData {
     val name: String
     val holoEntityId: Int
     val interactionEntityId: Int
-    val interactionWidth: Float
-    val interactionHeight: Float
-    val viewRange: Float
-    val lineWidth: Int
-    val textAlignment: HologramTextAlignment
-    val backgroundColor: TextColor?
-    val clickable: Boolean
+    var interactionWidth: Float
+    var interactionHeight: Float
+    var viewRange: Float
+    var lineWidth: Int
+    var textAlignment: HologramTextAlignment
+    var backgroundColor: TextColor?
+    var clickable: Boolean
 }
