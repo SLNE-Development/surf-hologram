@@ -19,11 +19,18 @@ fun CommandAPICommand.hologramRefreshCommand() = subcommand("refresh") {
 
         hologramService.refresh(hologram)
 
-        player.sendText {
-            appendPrefix()
-            success("Das Hologram ")
-            variableValue(hologram?.metaData?.name ?: "*")
-            success(" wurde erneuert.")
+        if (hologram == null) {
+            player.sendText {
+                appendPrefix()
+                success("Alle Hologramme wurden erneuert.")
+            }
+        } else {
+            player.sendText {
+                appendPrefix()
+                success("Das Hologram ")
+                variableValue(hologram?.metaData?.name ?: "*")
+                success(" wurde erneuert.")
+            }
         }
     }
 }
