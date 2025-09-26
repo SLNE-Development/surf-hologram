@@ -4,6 +4,7 @@ import com.github.retrooper.packetevents.PacketEvents
 import com.github.shynixn.mccoroutine.folia.SuspendingJavaPlugin
 import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.command.hologramCommand
+import dev.slne.surf.hologram.paper.listener.ConnectionListener
 import dev.slne.surf.hologram.paper.listener.InternalEventListener
 import dev.slne.surf.hologram.paper.listener.InternalEventPacketListener
 import dev.slne.surf.surfapi.bukkit.api.event.register
@@ -18,6 +19,7 @@ class PaperMain : SuspendingJavaPlugin() {
 
     override fun onEnable() {
         InternalEventListener.register()
+        ConnectionListener.register()
         PacketEvents.getAPI().eventManager.registerListener(InternalEventPacketListener())
 
         hologramCommand()
