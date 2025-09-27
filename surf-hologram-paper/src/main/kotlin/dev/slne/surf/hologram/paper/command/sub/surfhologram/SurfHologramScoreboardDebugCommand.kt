@@ -8,6 +8,7 @@ import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.surfHologramApi
 import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.core.service.hologramService
+import dev.slne.surf.hologram.paper.hologram.HologramHitboxImpl
 import dev.slne.surf.hologram.paper.hologram.types.ScoreboardHologramImpl
 import dev.slne.surf.hologram.paper.plugin
 import dev.slne.surf.hologram.paper.util.HoloPermissionRegistry
@@ -27,6 +28,7 @@ fun CommandAPICommand.surfHologramScoreboardDebugCommand() = subcommand("scorebo
             player.location.toHologramLocation(),
             buildText { error("Loading data...") },
             HologramCreationReason.Plugin(plugin.name),
+            HologramHitboxImpl.default(),
             null,
             1..10,
             "P"

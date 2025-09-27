@@ -16,6 +16,7 @@ interface Hologram {
     var centerLocation: HologramLocation
     var displayedText: Component
     val creationReason: HologramCreationReason
+    val hitbox: HologramHitbox?
 
     val viewers: ObjectSet<HoloOfflinePlayer>?
     fun retrieveViewers(): ObjectSet<HoloPlayer>

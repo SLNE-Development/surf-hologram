@@ -39,14 +39,11 @@ interface SurfHologramApi {
 
     fun buildMetaData(
         name: String,
-        interactionWidth: Float = 1f,
-        interactionHeight: Float = 1f,
         scale: Vector3d = Vector3d(1.0, 1.0, 1.0),
         viewRange: Float = 32f,
         lineWidth: Int = 200,
         textAlignment: HologramTextAlignment = HologramTextAlignment.CENTER,
-        backgroundColor: TextColor? = null,
-        clickable: Boolean = true
+        backgroundColor: TextColor? = null
     ): HologramMetaData
 
     companion object {

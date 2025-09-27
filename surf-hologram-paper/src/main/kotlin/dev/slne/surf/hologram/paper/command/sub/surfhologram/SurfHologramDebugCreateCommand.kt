@@ -48,14 +48,11 @@ fun CommandAPICommand.surfHologramCreateDebugCommand() = subcommand("creation") 
                             name,
                             random.nextInt(),
                             random.nextInt(),
-                            1f,
-                            1f,
                             Vector3d(1.0, 1.0, 1.0),
                             32f,
                             200,
                             HologramTextAlignment.CENTER,
-                            NamedTextColor.RED,
-                            true
+                            NamedTextColor.RED
                         ),
                         holoLocation,
                         Component.text("Debug #$name"),

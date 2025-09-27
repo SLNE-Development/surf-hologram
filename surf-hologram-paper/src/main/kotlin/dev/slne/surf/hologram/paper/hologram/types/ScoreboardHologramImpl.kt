@@ -1,6 +1,7 @@
 package dev.slne.surf.hologram.paper.hologram.types
 
 import dev.slne.surf.hologram.api.hologram.HologramCreationReason
+import dev.slne.surf.hologram.api.hologram.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
@@ -26,6 +27,7 @@ class ScoreboardHologramImpl(
     override var centerLocation: HologramLocation,
     override var displayedText: Component,
     override val creationReason: HologramCreationReason,
+    override val hitbox: HologramHitbox?,
     override val viewers: ObjectSet<HoloOfflinePlayer>?,
     override val placementRange: IntRange,
     override val scoreUnit: String
@@ -76,6 +78,7 @@ class ScoreboardHologramImpl(
         centerLocation,
         displayedText,
         creationReason,
+        hitbox,
         viewers,
         placementRange,
         scoreUnit

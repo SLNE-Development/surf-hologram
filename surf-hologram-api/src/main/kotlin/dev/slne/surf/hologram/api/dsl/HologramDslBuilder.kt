@@ -311,13 +311,10 @@ fun hologram(
     val builder = HologramDslBuilder(name, type, location).apply(block)
     val metaData = surfHologramApi.buildMetaData(
         name = builder.name,
-        interactionWidth = builder.interactionWidth,
-        interactionHeight = builder.interactionHeight,
         viewRange = builder.viewRange,
         lineWidth = builder.lineWidth,
         textAlignment = builder.textAlignment,
-        backgroundColor = builder.backgroundColor,
-        clickable = builder.clickable
+        backgroundColor = builder.backgroundColor
     )
 
     val hologram = surfHologramApi.createHologram(

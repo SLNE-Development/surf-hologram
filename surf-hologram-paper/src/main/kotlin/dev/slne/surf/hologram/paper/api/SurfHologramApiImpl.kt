@@ -75,25 +75,19 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
     override fun refreshHologram(hologram: Hologram?) = hologramService.refresh(hologram)
     override fun buildMetaData(
         name: String,
-        interactionWidth: Float,
-        interactionHeight: Float,
         scale: Vector3d,
         viewRange: Float,
         lineWidth: Int,
         textAlignment: HologramTextAlignment,
-        backgroundColor: TextColor?,
-        clickable: Boolean
+        backgroundColor: TextColor?
     ) = HologramMetaDataImpl(
         name,
         random.nextInt(),
         random.nextInt(),
-        interactionWidth,
-        interactionHeight,
         scale,
         viewRange,
         lineWidth,
         textAlignment,
-        backgroundColor,
-        clickable
+        backgroundColor
     )
 }

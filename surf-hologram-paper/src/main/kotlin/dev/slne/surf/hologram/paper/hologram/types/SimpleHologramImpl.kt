@@ -1,6 +1,7 @@
 package dev.slne.surf.hologram.paper.hologram.types
 
 import dev.slne.surf.hologram.api.hologram.HologramCreationReason
+import dev.slne.surf.hologram.api.hologram.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
@@ -17,6 +18,7 @@ class SimpleHologramImpl(
     override var centerLocation: HologramLocation,
     override var displayedText: Component,
     override val creationReason: HologramCreationReason,
+    override val hitbox: HologramHitbox?,
     override val viewers: ObjectSet<HoloOfflinePlayer>?
 ) : BaseHologram(), SimpleHologram {
     override fun duplicate(spawnable: Boolean) = SimpleHologramImpl(
@@ -29,6 +31,7 @@ class SimpleHologramImpl(
         centerLocation,
         displayedText,
         creationReason,
+        hitbox,
         viewers
     )
 }

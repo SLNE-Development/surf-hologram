@@ -40,9 +40,9 @@ abstract class BaseHologram : Hologram {
         packetPlayer.sendPacket(PaperPackets.buildHoloSpawnPacket(this))
         packetPlayer.sendPacket(PaperPackets.buildHoloMetaPacket(this))
 
-        if (metaData.clickable) {
+        hitbox?.let {
             packetPlayer.sendPacket(PaperPackets.buildHoloInteractionSpawnPacket(this))
-            packetPlayer.sendPacket(PaperPackets.buildHoloInteractionMetaPacket(this))
+            packetPlayer.sendPacket(PaperPackets.buildHoloInteractionMetaPacket(this, it))
         }
     }
 

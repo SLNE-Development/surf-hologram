@@ -9,6 +9,7 @@ import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerEn
 import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerEntityTeleport
 import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerSpawnEntity
 import dev.slne.surf.hologram.api.hologram.Hologram
+import dev.slne.surf.hologram.api.hologram.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.paper.util.buildEntityData
@@ -58,14 +59,15 @@ object PaperPackets {
         Vector3d.zero()
     )
 
-    fun buildHoloInteractionMetaPacket(hologram: Hologram) = WrapperPlayServerEntityMetadata(
-        hologram.metaData.interactionEntityId,
-        listOf(
-            EntityData(8, EntityDataTypes.FLOAT, hologram.metaData.interactionWidth),
-            EntityData(9, EntityDataTypes.FLOAT, hologram.metaData.interactionHeight),
-            EntityData(10, EntityDataTypes.BOOLEAN, true)
+    fun buildHoloInteractionMetaPacket(hologram: Hologram, hitbox: HologramHitbox) =
+        WrapperPlayServerEntityMetadata(
+            hologram.metaData.interactionEntityId,
+            listOf(
+                EntityData(8, EntityDataTypes.FLOAT, hitbox.width),
+                EntityData(9, EntityDataTypes.FLOAT, hitbox.height),
+                EntityData(10, EntityDataTypes.BOOLEAN, true)
+            )
         )
-    )
 
     fun buildDestroyPacket(hologram: Hologram) = WrapperPlayServerDestroyEntities(
         hologram.metaData.holoEntityId,

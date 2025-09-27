@@ -167,14 +167,11 @@ fun createHologramCreateDialog() = dialog {
                                     nameInput,
                                     random.nextInt(),
                                     random.nextInt(),
-                                    1f,
-                                    1f,
                                     Vector3d(scale.toDouble(), scale.toDouble(), scale.toDouble()),
                                     viewRange,
                                     200,
                                     alignment,
-                                    bgColor,
-                                    clickable
+                                    bgColor
                                 ),
                                 player.location.clone().add(0.0, 1.0, 0.0).toHologramLocation(),
                                 text,
