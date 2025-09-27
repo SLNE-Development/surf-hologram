@@ -23,7 +23,6 @@ import dev.slne.surf.surfapi.core.api.messages.adventure.clickRunsCommand
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 import dev.slne.surf.surfapi.core.api.util.random
 import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Location
 
 fun CommandAPICommand.hologramCreateCommand() = subcommand("create") {
@@ -66,7 +65,7 @@ fun CommandAPICommand.hologramCreateCommand() = subcommand("create") {
             lineWidth = 200,
             scale = Vector3d(1.0, 1.0, 1.0),
             textAlignment = HologramTextAlignment.CENTER,
-            backgroundColor = NamedTextColor.RED
+            backgroundColor = null
         )
 
         val holo = hologramService.createHologram(

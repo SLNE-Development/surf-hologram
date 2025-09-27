@@ -153,7 +153,7 @@ fun createHologramCreateDialog() = dialog {
                             } ?: HologramTextAlignment.CENTER
                             val bgColor = info.getText("holo_bg_color")?.let {
                                 TextColor.fromHexString(it)
-                            } ?: TextColor.color(0)
+                            }
                             val clickable = info.getBoolean("holo_clickable") ?: true
 
                             val bouncingHeight =
