@@ -39,18 +39,12 @@ object PaperPackets {
 
             entry(17, EntityDataTypes.FLOAT, hologram.metaData.viewRange)
             entry(24, EntityDataTypes.INT, hologram.metaData.lineWidth)
-            entry(27, EntityDataTypes.BYTE, hologram.metaData.textAlignment.bytes)
+            entry(27, EntityDataTypes.BYTE, (hologram.metaData.textAlignment.value shl 3).toByte())
 
-            if (hologram.metaData.backgroundColor == null) {
-                entry(25, EntityDataTypes.INT, 0)
-            } else {
+            entry(25, EntityDataTypes.INT, hologram.metaData.backgroundColor?.let {
                 val color = hologram.metaData.backgroundColor ?: return@buildEntityData
-                entry(
-                    25,
-                    EntityDataTypes.INT,
-                    (color.red() shl 16) or (color.green() shl 8) or color.blue()
-                )
-            }
+                (0xFF shl 24) or (color.red() shl 16) or (color.green() shl 8) or color.blue()
+            } ?: 0)
         }
     )
 
