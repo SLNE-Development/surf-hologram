@@ -1,4 +1,4 @@
-package dev.slne.surf.hologram.paper.command.sub
+package dev.slne.surf.hologram.paper.command.sub.hologram
 
 import com.github.retrooper.packetevents.util.Vector3d
 import dev.jorel.commandapi.CommandAPICommand

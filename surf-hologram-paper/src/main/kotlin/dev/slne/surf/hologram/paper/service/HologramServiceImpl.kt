@@ -6,43 +6,28 @@ import dev.slne.surf.hologram.api.hologram.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
-import dev.slne.surf.hologram.api.hologram.types.BouncingHologram
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.api.util.forEachViewer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.core.service.HologramService
 import dev.slne.surf.hologram.paper.hologram.types.BouncingHologramImpl
 import dev.slne.surf.hologram.paper.hologram.types.SimpleHologramImpl
-import dev.slne.surf.hologram.paper.plugin
-import io.papermc.paper.threadedregions.scheduler.ScheduledTask
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.util.Services
-import org.bukkit.Bukkit
-import java.util.concurrent.TimeUnit
 
 @AutoService(HologramService::class)
 class HologramServiceImpl : HologramService, Services.Fallback {
-    lateinit var task: ScheduledTask
-
-    override fun startBouncing() {
-        task = Bukkit.getAsyncScheduler().runAtFixedRate(plugin, {
-            hologramRegistry.holograms().forEach { (it as? BouncingHologram)?.tick() }
-        }, 0L, (1000L / 20L) * 10, TimeUnit.MILLISECONDS)
-    }
-
-    override fun stopBouncing() {
-        if (::task.isInitialized && !task.isCancelled) {
-            task.cancel()
-        }
-    }
-
     override fun refresh(hologram: Hologram?) {
         if (hologram != null) {
             hologram.refresh()
         } else {
             hologramRegistry.holograms().forEach { it.refresh() }
         }
+    }
+
+    override fun refreshClean(hologram: Hologram) {
+        hologram.refreshClean()
     }
 
     override fun createHologram(
@@ -81,6 +66,15 @@ class HologramServiceImpl : HologramService, Services.Fallback {
                 (bouncingStep ?: 0.0) to 1L,
                 true
             )
+        }
+
+        hologramRegistry.registerHologram(hologram)
+        return hologram
+    }
+
+    override fun createHologram(hologram: Hologram): Hologram {
+        hologramRegistry.getHologram(hologram.metaData.name)?.let {
+            return it
         }
 
         hologramRegistry.registerHologram(hologram)

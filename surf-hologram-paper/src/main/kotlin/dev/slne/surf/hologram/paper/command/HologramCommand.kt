@@ -2,7 +2,7 @@ package dev.slne.surf.hologram.paper.command
 
 import dev.jorel.commandapi.kotlindsl.commandAPICommand
 import dev.jorel.commandapi.kotlindsl.playerExecutor
-import dev.slne.surf.hologram.paper.command.sub.*
+import dev.slne.surf.hologram.paper.command.sub.hologram.*
 import dev.slne.surf.hologram.paper.dialog.createHologramCreateDialog
 import dev.slne.surf.hologram.paper.util.HoloPermissionRegistry
 
@@ -18,8 +18,6 @@ fun hologramCommand() = commandAPICommand("hologram") {
 
     hologramTeleportHereCommand()
     hologramTeleportThereCommand()
-
-    hologramCreateDebugCommand()
 
     playerExecutor { player, _ ->
         player.showDialog(createHologramCreateDialog())

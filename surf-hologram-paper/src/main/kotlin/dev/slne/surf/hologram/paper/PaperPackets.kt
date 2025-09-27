@@ -45,7 +45,11 @@ object PaperPackets {
                 entry(25, EntityDataTypes.INT, 0)
             } else {
                 val color = hologram.metaData.backgroundColor ?: return@buildEntityData
-                entry(25, EntityDataTypes.INT, color.red() + color.green() + color.blue())
+                entry(
+                    25,
+                    EntityDataTypes.INT,
+                    (color.red() shl 16) or (color.green() shl 8) or color.blue()
+                )
             }
         }
     )

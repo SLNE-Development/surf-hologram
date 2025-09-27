@@ -27,6 +27,8 @@ interface SurfHologramApi {
         bouncingStep: Double? = null
     ): Hologram
 
+    fun createHologram(hologram: Hologram): Hologram
+
     fun createLocation(world: HologramWorld, x: Double, y: Double, z: Double): HologramLocation
     fun createWorld(worldName: String, worldId: UUID): HologramWorld
 

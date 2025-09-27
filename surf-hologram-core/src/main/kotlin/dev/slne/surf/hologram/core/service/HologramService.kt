@@ -12,10 +12,8 @@ import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
 
 interface HologramService {
-    fun startBouncing()
-    fun stopBouncing()
-
     fun refresh(hologram: Hologram?)
+    fun refreshClean(hologram: Hologram)
 
     fun createHologram(
         type: HologramType,
@@ -27,6 +25,8 @@ interface HologramService {
         bouncingHeight: Double? = null,
         bouncingStep: Double? = null
     ): Hologram
+
+    fun createHologram(hologram: Hologram): Hologram
 
     fun deleteHologram(hologram: Hologram)
     fun deleteHologram(name: String) = hologramRegistry.getHologram(name)?.let {

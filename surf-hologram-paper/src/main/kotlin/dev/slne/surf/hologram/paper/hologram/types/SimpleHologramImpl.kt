@@ -7,6 +7,7 @@ import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.hologram.types.SimpleHologram
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.paper.hologram.BaseHologram
+import dev.slne.surf.surfapi.core.api.util.random
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
 
@@ -17,4 +18,17 @@ class SimpleHologramImpl(
     override var displayedText: Component,
     override val creationReason: HologramCreationReason,
     override val viewers: ObjectSet<HoloOfflinePlayer>?
-) : BaseHologram(), SimpleHologram
+) : BaseHologram(), SimpleHologram {
+    override fun duplicate(spawnable: Boolean) = SimpleHologramImpl(
+        if (spawnable) metaData.duplicate().apply {
+            name = "$name-DUPLICATE-${(1..1000).random()}"
+            holoEntityId = random.nextInt()
+            interactionEntityId = random.nextInt()
+        } else metaData,
+        hologramType,
+        centerLocation,
+        displayedText,
+        creationReason,
+        viewers
+    )
+}

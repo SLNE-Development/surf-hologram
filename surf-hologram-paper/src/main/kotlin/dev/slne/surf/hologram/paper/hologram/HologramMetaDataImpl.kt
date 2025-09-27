@@ -6,9 +6,9 @@ import dev.slne.surf.hologram.api.hologram.HologramTextAlignment
 import net.kyori.adventure.text.format.TextColor
 
 data class HologramMetaDataImpl(
-    override val name: String,
-    override val holoEntityId: Int,
-    override val interactionEntityId: Int,
+    override var name: String,
+    override var holoEntityId: Int,
+    override var interactionEntityId: Int,
     override var interactionWidth: Float,
     override var interactionHeight: Float,
     override var scale: Vector3d,
@@ -17,4 +17,18 @@ data class HologramMetaDataImpl(
     override var textAlignment: HologramTextAlignment,
     override var backgroundColor: TextColor? = null,
     override var clickable: Boolean = true
-) : HologramMetaData
+) : HologramMetaData {
+    override fun duplicate() = HologramMetaDataImpl(
+        name,
+        holoEntityId,
+        interactionEntityId,
+        interactionWidth,
+        interactionHeight,
+        scale,
+        viewRange,
+        lineWidth,
+        textAlignment,
+        backgroundColor,
+        clickable
+    )
+}

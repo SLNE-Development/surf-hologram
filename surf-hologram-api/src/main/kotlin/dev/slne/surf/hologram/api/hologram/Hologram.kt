@@ -24,6 +24,9 @@ interface Hologram {
     fun hide(player: HoloPlayer)
 
     fun refresh()
+    fun refreshClean()
+
+    fun duplicate(spawnable: Boolean = false): Hologram
 
     fun teleportHere(player: HoloPlayer): Boolean
     fun teleportTo(newLocation: HologramLocation, save: Boolean = true)

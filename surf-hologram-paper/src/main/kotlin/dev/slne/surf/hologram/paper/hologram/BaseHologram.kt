@@ -58,6 +58,15 @@ abstract class BaseHologram : Hologram {
         show()
     }
 
+    override fun refreshClean() {
+        val actualHologram = this
+        val fakeHologram = this.duplicate(true)
+
+        fakeHologram.show()
+        actualHologram.refresh()
+        fakeHologram.hide()
+    }
+
     override fun teleportHere(player: HoloPlayer) =
         player.bukkitPlayer?.teleport(centerLocation.toBukkitLocation()) == true
 

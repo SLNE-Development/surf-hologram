@@ -8,9 +8,15 @@ import dev.slne.surf.hologram.api.hologram.types.BounceDirection
 import dev.slne.surf.hologram.api.hologram.types.BounceSpeed
 import dev.slne.surf.hologram.api.hologram.types.BouncingHologram
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
+import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.paper.hologram.BaseHologram
+import dev.slne.surf.hologram.paper.plugin
+import dev.slne.surf.surfapi.core.api.util.random
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
+import org.bukkit.Bukkit
+import java.util.concurrent.TimeUnit
 
 class BouncingHologramImpl(
     override val metaData: HologramMetaData,
@@ -44,5 +50,42 @@ class BouncingHologramImpl(
         this.teleportTo(centerLocation.duplicate().apply {
             this.y += bounceState
         }, false)
+    }
+
+    override fun duplicate(spawnable: Boolean) = BouncingHologramImpl(
+        if (spawnable) metaData.duplicate().apply {
+            name = "$name-DUPLICATE-${(1..1000).random()}"
+            holoEntityId = random.nextInt()
+            interactionEntityId = random.nextInt()
+        } else metaData,
+        hologramType,
+        centerLocation,
+        displayedText,
+        creationReason,
+        viewers,
+        bounceState,
+        bounceHeight,
+        bounceSpeed,
+        bounceDirection
+    )
+
+    companion object {
+        private lateinit var tickTask: ScheduledTask
+
+        fun startTicking() {
+            if (::tickTask.isInitialized && !tickTask.isCancelled) {
+                return
+            }
+
+            tickTask = Bukkit.getAsyncScheduler().runAtFixedRate(plugin, {
+                hologramRegistry.holograms().forEach { (it as? BouncingHologram)?.tick() }
+            }, 0L, (1000L / 20L) * 10, TimeUnit.MILLISECONDS)
+        }
+
+        fun stopTicking() {
+            if (::tickTask.isInitialized && !tickTask.isCancelled) {
+                tickTask.cancel()
+            }
+        }
     }
 }

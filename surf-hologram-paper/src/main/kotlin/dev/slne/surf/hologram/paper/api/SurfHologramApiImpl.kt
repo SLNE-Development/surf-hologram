@@ -42,6 +42,8 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
         bouncingStep
     )
 
+    override fun createHologram(hologram: Hologram) = hologramService.createHologram(hologram)
+
     override fun createLocation(
         world: HologramWorld,
         x: Double,

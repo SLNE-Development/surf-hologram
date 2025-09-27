@@ -1,4 +1,4 @@
-package dev.slne.surf.hologram.paper.command.sub
+package dev.slne.surf.hologram.paper.command.sub.hologram
 
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.kotlindsl.playerExecutor
