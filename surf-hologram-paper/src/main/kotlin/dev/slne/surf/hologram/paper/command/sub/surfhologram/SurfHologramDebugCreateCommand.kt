@@ -1,4 +1,4 @@
-package dev.slne.surf.hologram.paper.command.sub
+package dev.slne.surf.hologram.paper.command.sub.surfhologram
 
 import com.github.retrooper.packetevents.util.Vector3d
 import com.github.shynixn.mccoroutine.folia.launch
@@ -23,8 +23,8 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import kotlin.system.measureTimeMillis
 
-fun CommandAPICommand.hologramCreateDebugCommand() = subcommand("create-debug") {
-    withPermission(HoloPermissionRegistry.COMMAND_HOLOGRAM_DEBUG_CREATE)
+fun CommandAPICommand.surfHologramCreateDebugCommand() = subcommand("creation") {
+    withPermission(HoloPermissionRegistry.COMMAND_SURFHOLOGRAM_DEBUG_CREATE)
     hologramTypeArgument("type")
     integerArgument("amount")
 

@@ -14,5 +14,11 @@ object HoloPermissionRegistry : PermissionRegistry() {
     val COMMAND_HOLOGRAM_TELEPORT_HERE = create("$COMMAND_BASE.hologram.teleport.here")
     val COMMAND_HOLOGRAM_INFO = create("$COMMAND_BASE.hologram.info")
     val COMMAND_HOLOGRAM_REFRESH = create("$COMMAND_BASE.hologram.refresh")
-    val COMMAND_HOLOGRAM_DEBUG_CREATE = create("$COMMAND_BASE.hologram.debug.create")
+
+    val COMMAND_SURFHOLOGRAM = create("$COMMAND_BASE.surfhologram")
+    val COMMAND_SURFHOLOGRAM_RELOAD = create("$COMMAND_BASE.surfhologram.reload")
+    val COMMAND_SURFHOLOGRAM_DEBUG = create("$COMMAND_BASE.surfhologram.debug")
+    val COMMAND_SURFHOLOGRAM_DEBUG_CREATE = create("$COMMAND_BASE.surfhologram.debug.create")
+    val COMMAND_SURFHOLOGRAM_DEBUG_SCOREBOARD =
+        create("$COMMAND_BASE.surfhologram.debug.scoreboard")
 }
