@@ -49,15 +49,20 @@ object PaperPackets {
         }
     )
 
-    fun buildHoloInteractionSpawnPacket(hologram: Hologram) = WrapperPlayServerSpawnEntity(
-        hologram.metaData.interactionEntityId,
-        UUID.randomUUID(),
-        EntityTypes.INTERACTION,
-        hologram.centerLocation.toPacketLocation(),
-        0f,
-        0,
-        Vector3d.zero()
-    )
+    fun buildHoloInteractionSpawnPacket(hologram: Hologram, hitbox: HologramHitbox) =
+        WrapperPlayServerSpawnEntity(
+            hologram.metaData.interactionEntityId,
+            UUID.randomUUID(),
+            EntityTypes.INTERACTION,
+            hologram.centerLocation.duplicate().apply {
+                x += hitbox.hologramCenterOffset.x
+                y += hitbox.hologramCenterOffset.y
+                z += hitbox.hologramCenterOffset.z
+            }.toPacketLocation(),
+            0f,
+            0,
+            Vector3d.zero()
+        )
 
     fun buildHoloInteractionMetaPacket(hologram: Hologram, hitbox: HologramHitbox) =
         WrapperPlayServerEntityMetadata(

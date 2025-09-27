@@ -8,6 +8,7 @@ import dev.slne.surf.hologram.api.hologram.HologramTextAlignment
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.core.service.hologramService
+import dev.slne.surf.hologram.paper.hologram.HologramHitboxImpl
 import dev.slne.surf.hologram.paper.hologram.HologramMetaDataImpl
 import dev.slne.surf.hologram.paper.util.toHologramLocation
 import dev.slne.surf.surfapi.bukkit.api.dialog.base
@@ -163,6 +164,7 @@ fun createHologramCreateDialog() = dialog {
 
                             val holo = hologramService.createHologram(
                                 type,
+                                HologramHitboxImpl.default(),
                                 HologramMetaDataImpl(
                                     nameInput,
                                     random.nextInt(),
@@ -176,8 +178,8 @@ fun createHologramCreateDialog() = dialog {
                                 player.location.clone().add(0.0, 1.0, 0.0).toHologramLocation(),
                                 text,
                                 HologramCreationReason.Client(player.name),
-                                bouncingStep = bouncingStep,
-                                bouncingHeight = bouncingHeight
+                                bouncingHeight = bouncingHeight,
+                                bouncingStep = bouncingStep
                             )
 
                             holo.show()

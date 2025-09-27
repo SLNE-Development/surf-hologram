@@ -23,7 +23,7 @@ fun CommandAPICommand.surfHologramScoreboardDebugCommand() = subcommand("scorebo
     playerExecutor { player, _ ->
 
         val scoreboardHologram = ScoreboardHologramImpl(
-            surfHologramApi.buildMetaData("debug-scoreboard-${random.nextInt(1, 99999)}"),
+            surfHologramApi.createHologramMeta("debug-scoreboard-${random.nextInt(1, 99999)}"),
             HologramType.FIXED,
             player.location.toHologramLocation(),
             buildText { error("Loading data...") },

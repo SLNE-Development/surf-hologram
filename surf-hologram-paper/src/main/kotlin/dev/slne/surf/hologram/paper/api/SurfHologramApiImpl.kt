@@ -9,6 +9,7 @@ import dev.slne.surf.hologram.api.hologram.location.HologramWorld
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.core.service.hologramService
+import dev.slne.surf.hologram.paper.hologram.HologramHitboxImpl
 import dev.slne.surf.hologram.paper.hologram.HologramMetaDataImpl
 import dev.slne.surf.hologram.paper.hologram.location.HologramLocationImpl
 import dev.slne.surf.hologram.paper.hologram.location.HologramWorldImpl
@@ -25,6 +26,7 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
     override fun createHologram(
         plugin: JavaPlugin,
         type: HologramType,
+        hitbox: HologramHitbox?,
         metaData: HologramMetaData,
         centerLocation: HologramLocation,
         displayedText: Component,
@@ -33,6 +35,7 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
         bouncingStep: Double?
     ): Hologram = hologramService.createHologram(
         type,
+        hitbox,
         metaData,
         centerLocation,
         displayedText,
@@ -43,6 +46,15 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
     )
 
     override fun createHologram(hologram: Hologram) = hologramService.createHologram(hologram)
+    override fun createHitbox(
+        width: Float,
+        height: Float,
+        centerLocationOffset: Vector3d
+    ) = HologramHitboxImpl(
+        width,
+        height,
+        centerLocationOffset
+    )
 
     override fun createLocation(
         world: HologramWorld,
@@ -73,7 +85,7 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
     ) = hologramService.editHologramSaving(hologram, block)
 
     override fun refreshHologram(hologram: Hologram?) = hologramService.refresh(hologram)
-    override fun buildMetaData(
+    override fun createHologramMeta(
         name: String,
         scale: Vector3d,
         viewRange: Float,

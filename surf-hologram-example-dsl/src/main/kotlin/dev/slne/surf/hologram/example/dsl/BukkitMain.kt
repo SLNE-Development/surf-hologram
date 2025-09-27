@@ -1,5 +1,6 @@
 package dev.slne.surf.hologram.example.dsl
 
+import com.github.retrooper.packetevents.util.Vector3d
 import com.github.shynixn.mccoroutine.folia.SuspendingJavaPlugin
 import dev.slne.surf.hologram.api.dsl.hologram
 import dev.slne.surf.hologram.api.event.impl.HologramClickEvent
@@ -29,8 +30,12 @@ class BukkitMain : SuspendingJavaPlugin() {
             //        viewers(listOf(player3, player4))
             //    } - or add multiple viewers in a block
 
-            clickable =
-                true // You can set clickable to false if you don't want to handle click events
+
+            hitbox {
+                width = 1.0f
+                height = 1.0f
+                hologramCenterOffset = Vector3d.zero()
+            }
 
             withEventHandler<HologramClickEvent> {
                 val bukkitPlayer = it.player.bukkitPlayer ?: return@withEventHandler

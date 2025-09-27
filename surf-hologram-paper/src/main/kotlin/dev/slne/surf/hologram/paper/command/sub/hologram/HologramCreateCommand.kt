@@ -14,6 +14,7 @@ import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.command.argument.hologramNameArgument
 import dev.slne.surf.hologram.paper.command.argument.hologramTypeArgument
+import dev.slne.surf.hologram.paper.hologram.HologramHitboxImpl
 import dev.slne.surf.hologram.paper.hologram.HologramMetaDataImpl
 import dev.slne.surf.hologram.paper.hologram.location.HologramLocationImpl
 import dev.slne.surf.hologram.paper.hologram.location.HologramWorldImpl
@@ -67,7 +68,12 @@ fun CommandAPICommand.hologramCreateCommand() = subcommand("create") {
         )
 
         val holo = hologramService.createHologram(
-            type, meta, holoLocation, text, HologramCreationReason.Client(player.name)
+            type,
+            HologramHitboxImpl.default(),
+            meta,
+            holoLocation,
+            text,
+            HologramCreationReason.Client(player.name)
         )
         holo.show()
 

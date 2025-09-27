@@ -2,8 +2,10 @@
 
 package dev.slne.surf.hologram.api.dsl
 
+import com.github.retrooper.packetevents.util.Vector3d
 import dev.slne.surf.hologram.api.event.HologramEvent
 import dev.slne.surf.hologram.api.hologram.Hologram
+import dev.slne.surf.hologram.api.hologram.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.HologramTextAlignment
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
@@ -56,6 +58,16 @@ class HologramDslBuilder(
     var viewers: ObjectSet<HoloOfflinePlayer>? = null
 
     /**
+     * Represents the hitbox configuration for a hologram.
+     *
+     * This variable allows specifying the dimensions and the offset of the hitbox
+     * for the hologram. The hitbox can be used for interaction detection and spatial logic.
+     *
+     * A value of `null` indicates that the hologram currently does not have an associated hitbox and click events are not processed.
+     */
+    var hitbox: HologramHitbox? = null
+
+    /**
      * Specifies the height at which a hologram of type [HologramType.BOUNCING] will oscillate.
      *
      * This property defines the vertical displacement range for the bouncing animation of the hologram.
@@ -82,27 +94,6 @@ class HologramDslBuilder(
      * or aesthetic effects.
      */
     var bouncingStep: Double? = 0.1
-
-    /**
-     * Defines the interaction width of the hologram.
-     *
-     * This property specifies the horizontal range within which interactions
-     * with the hologram can occur. It influences the distance at which
-     * users can interact with the hologram in the virtual space.
-     * The default value is `1f`.
-     */
-    var interactionWidth: Float = 1f
-
-    /**
-     * Specifies the height of the interaction area for the hologram.
-     *
-     * This variable determines the vertical range in which player interactions
-     * with the hologram (e.g., clicks) will be detected. A higher value expands
-     * the interaction zone upwards, while a lower value reduces it.
-     *
-     * The default value is `1f`, which represents a height of one block in-game.
-     */
-    var interactionHeight: Float = 1f
 
     /**
      * Defines the maximum distance, in blocks, from which the hologram will be visible.
@@ -146,18 +137,6 @@ class HologramDslBuilder(
      * can be used to enhance visual clarity or match a specific design requirement.
      */
     var backgroundColor: TextColor? = null
-
-    /**
-     * Determines whether the hologram is clickable, enabling interaction handling.
-     *
-     * When set to `true`, the hologram can handle click-related events, allowing developers to define
-     * event handlers using methods such as `withEventHandler` to process user interactions.
-     * If set to `false`, the hologram will not respond to click interactions.
-     *
-     * This property is typically used when configuring the hologram through a DSL or builder
-     * to customize its behavior according to specific requirements.
-     */
-    var clickable: Boolean = false
 
     /**
      * A mutable map used to store associations between hologram event classes and their respective handlers.
@@ -284,6 +263,94 @@ class HologramDslBuilder(
             viewerSet.addAll(vList)
         }
     }
+
+    /**
+     * A DSL class for configuring the hitbox of a hologram.
+     *
+     * This class provides properties and methods to define the dimensions and center offset
+     * of a hologram's hitbox. It is used in conjunction with a hologram configuration to
+     * precisely set its interactive area.
+     */
+    class HitboxDsl {
+        /**
+         *
+         */
+        var width: Float = 1.0f
+
+        /**
+         * Represents the height of a hologram hitbox in the context of a hologram system.
+         * This property defines the vertical dimension of the hitbox.
+         *
+         * The value is of type `Float` and is initialized to `1.0f` by default.
+         * It can be adjusted as needed to modify the hologram hitbox's vertical scale.
+         */
+        var height: Float = 1.0f
+
+        /**
+         * Represents the offset of the hologram's center in 3D space.
+         *
+         * This property defines a positional adjustment to the default center of the hologram,
+         * allowing it to be shifted along the X, Y, and Z axes.
+         * It is useful for fine-tuning the visual or functional alignment of the hologram
+         * within its defined hitbox or environment.
+         *
+         * The default value is a zero vector, meaning no offset is applied initially.
+         */
+        var hologramCenterOffset: Vector3d = Vector3d(0.0, 0.0, 0.0)
+
+        /**
+         * Builds and returns an instance of [HologramHitbox] with the configured properties
+         * defined within the current [HitboxDsl] context.
+         *
+         * @return A new [HologramHitbox] instance with the specified width, height, and hologram center offset.
+         */
+        fun build(): HologramHitbox {
+            return object : HologramHitbox {
+                /**
+                 * Represents the width of the hologram's hitbox.
+                 *
+                 * This value is derived from the `width` property of the enclosing `HitboxDsl` class
+                 * and is used to define the horizontal size of the hologram's interactive area.
+                 */
+                override val width = this@HitboxDsl.width
+
+                /**
+                 * Represents the height of the hologram hitbox in the associated [HologramHitbox].
+                 * This property is initialized using the height value defined in the [HitboxDsl] context.
+                 *
+                 * It is part of the hologram's hitbox dimensions, used to determine the vertical size
+                 * and boundaries for interactions or visual representation in the hologram system.
+                 *
+                 * @see dev.slne.surf.hologram.api.hologram.HologramHitbox
+                 * @see HitboxDsl
+                 */
+                override val height = this@HitboxDsl.height
+
+                /**
+                 * Represents the offset of the hologram's center from a base position in 3D space.
+                 *
+                 * This property defines a `Vector3d` value that determines how far the center of the
+                 * hologram is displaced along the X, Y, and Z axes relative to a reference point.
+                 */
+                override val hologramCenterOffset = this@HitboxDsl.hologramCenterOffset
+            }
+        }
+    }
+
+    /**
+     * Configures the hitbox of the hologram using the provided DSL block.
+     *
+     * This function allows setting the dimensions and the center offset of the hitbox
+     * by utilizing the [HitboxDsl] class. The hitbox defined in the DSL block will
+     * be applied to the hologram.
+     *
+     * @param block A lambda with a [HitboxDsl] receiver used to define the hitbox properties,
+     * such as width, height, and the center offset.
+     */
+    fun hitbox(block: HitboxDsl.() -> Unit) {
+        val dsl = HitboxDsl().apply(block)
+        hitbox = dsl.build()
+    }
 }
 
 /**
@@ -309,7 +376,7 @@ fun hologram(
     block: HologramDslBuilder.() -> Unit
 ): Hologram {
     val builder = HologramDslBuilder(name, type, location).apply(block)
-    val metaData = surfHologramApi.buildMetaData(
+    val metaData = surfHologramApi.createHologramMeta(
         name = builder.name,
         viewRange = builder.viewRange,
         lineWidth = builder.lineWidth,
@@ -320,6 +387,7 @@ fun hologram(
     val hologram = surfHologramApi.createHologram(
         plugin = plugin,
         type = builder.hologramType,
+        hitbox = builder.hitbox,
         metaData = metaData,
         centerLocation = builder.centerLocation,
         displayedText = SurfComponentBuilder.builder().apply(builder.displayedText).build(),

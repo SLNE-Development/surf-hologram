@@ -2,6 +2,7 @@ package dev.slne.surf.hologram.core.service
 
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.HologramCreationReason
+import dev.slne.surf.hologram.api.hologram.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
@@ -17,6 +18,7 @@ interface HologramService {
 
     fun createHologram(
         type: HologramType,
+        hitbox: HologramHitbox?,
         metaData: HologramMetaData,
         centerLocation: HologramLocation,
         displayedText: Component,

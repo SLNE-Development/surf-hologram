@@ -1,5 +1,6 @@
 package dev.slne.surf.hologram.example
 
+import com.github.retrooper.packetevents.util.Vector3d
 import com.github.shynixn.mccoroutine.folia.SuspendingJavaPlugin
 import dev.slne.surf.hologram.api.event.impl.HologramClickEvent
 import dev.slne.surf.hologram.api.hologram.HologramType
@@ -13,15 +14,18 @@ import org.bukkit.Bukkit
 
 class BukkitMain : SuspendingJavaPlugin() {
     override fun onEnable() {
-        val meta = surfHologramApi.buildMetaData(
+        val meta = surfHologramApi.createHologramMeta(
             "example_hologram"
         )
         val world = Bukkit.getWorlds().first().let {
             surfHologramApi.createWorld(it.name, it.uid)
         }
+        val hitbox = surfHologramApi.createHitbox(1.0f, 1.0f, Vector3d.zero())
+
         val holo = surfHologramApi.createHologram(
             this,
             HologramType.ROTATING,
+            hitbox,
             meta,
             surfHologramApi.createLocation(world, 0.0, 100.0, 0.0),
             buildText {

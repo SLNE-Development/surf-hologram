@@ -1,16 +1,12 @@
 package dev.slne.surf.hologram.paper.service
 
 import com.google.auto.service.AutoService
-import dev.slne.surf.hologram.api.hologram.Hologram
-import dev.slne.surf.hologram.api.hologram.HologramCreationReason
-import dev.slne.surf.hologram.api.hologram.HologramMetaData
-import dev.slne.surf.hologram.api.hologram.HologramType
+import dev.slne.surf.hologram.api.hologram.*
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.api.util.forEachViewer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.core.service.HologramService
-import dev.slne.surf.hologram.paper.hologram.HologramHitboxImpl
 import dev.slne.surf.hologram.paper.hologram.types.BouncingHologramImpl
 import dev.slne.surf.hologram.paper.hologram.types.SimpleHologramImpl
 import it.unimi.dsi.fastutil.objects.ObjectSet
@@ -33,6 +29,7 @@ class HologramServiceImpl : HologramService, Services.Fallback {
 
     override fun createHologram(
         type: HologramType,
+        hitbox: HologramHitbox?,
         metaData: HologramMetaData,
         centerLocation: HologramLocation,
         displayedText: Component,
@@ -52,7 +49,7 @@ class HologramServiceImpl : HologramService, Services.Fallback {
                 centerLocation,
                 displayedText,
                 creationReason,
-                HologramHitboxImpl.default(),
+                hitbox,
                 viewers
             )
 
@@ -62,7 +59,7 @@ class HologramServiceImpl : HologramService, Services.Fallback {
                 centerLocation,
                 displayedText,
                 creationReason,
-                HologramHitboxImpl.default(),
+                hitbox,
                 viewers,
                 0.0,
                 bouncingHeight ?: 0.0,
