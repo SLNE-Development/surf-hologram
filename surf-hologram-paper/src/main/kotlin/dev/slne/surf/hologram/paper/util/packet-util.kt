@@ -21,10 +21,6 @@ fun debug(message: String) = forEachPlayer {
     }
 }
 
-/**
- * Credits to Copilot
- */
-
 @DslMarker
 annotation class EntityDataDsl
 
