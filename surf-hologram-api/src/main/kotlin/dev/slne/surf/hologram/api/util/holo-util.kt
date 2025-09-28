@@ -1,5 +1,7 @@
 package dev.slne.surf.hologram.api.util
 
+import com.github.retrooper.packetevents.PacketEvents
+import com.github.retrooper.packetevents.protocol.player.User
 import dev.slne.surf.hologram.api.event.HologramEvent
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.HologramEventHandler
@@ -8,6 +10,10 @@ import org.bukkit.entity.Player
 
 fun Hologram.forEachBukkitViewer(action: (Player) -> Unit) =
     retrieveViewers().mapNotNull { it.bukkitPlayer }.forEach { action(it) }
+
+fun Hologram.forEachPacketViewer(action: (User) -> Unit) =
+    retrieveViewers().mapNotNull { it.bukkitPlayer }
+        .mapNotNull { PacketEvents.getAPI().playerManager.getUser(it) }.forEach { action(it) }
 
 fun Hologram.forEachViewer(action: (HoloPlayer) -> Unit) =
     retrieveViewers().forEach { action(it) }

@@ -8,7 +8,7 @@ import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.HologramEventHandler
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.player.HoloPlayer
-import dev.slne.surf.hologram.api.util.forEachBukkitViewer
+import dev.slne.surf.hologram.api.util.forEachPacketViewer
 import dev.slne.surf.hologram.api.util.hide
 import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.core.service.hologramPlayerService
@@ -77,10 +77,8 @@ abstract class BaseHologram : Hologram {
             }
         }
 
-        forEachBukkitViewer {
-            val packetPlayer = PacketEvents.getAPI().playerManager.getUser(it)
-
-            packetPlayer.sendPacket(PaperPackets.buildTeleportPacket(this, newLocation))
+        forEachPacketViewer {
+            it.sendPacket(PaperPackets.buildTeleportPacket(this, newLocation))
         }
     }
 
