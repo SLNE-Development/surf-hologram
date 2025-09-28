@@ -155,7 +155,6 @@ fun createHologramCreateDialog() = dialog {
                             val bgColor = info.getText("holo_bg_color")?.let {
                                 TextColor.fromHexString(it)
                             }
-                            val clickable = info.getBoolean("holo_clickable") ?: true
 
                             val bouncingHeight =
                                 info.getText("holo_bouncing_height")?.toDouble() ?: 1.0
