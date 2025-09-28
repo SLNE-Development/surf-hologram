@@ -35,6 +35,8 @@ class BukkitMain : SuspendingJavaPlugin() {
                 info("This is an example hologram.")
             }
 
+            options {}
+
             //withViewer(player1) - You can add a specific viewer if you want
             //    withViewers {
             //        viewer(player2)
@@ -57,6 +59,8 @@ class BukkitMain : SuspendingJavaPlugin() {
                 }
             }
         }
+
+        println("Created example hologram with ID: ${holo.metaData.name}")
 
         holo.show()
     }

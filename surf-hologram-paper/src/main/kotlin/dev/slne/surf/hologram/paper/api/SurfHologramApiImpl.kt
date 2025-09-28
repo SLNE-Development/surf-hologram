@@ -80,6 +80,8 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
     )
 
     override fun getHologram(name: String) = hologramRegistry.getHologram(name)
+    override fun registerHologram(hologram: Hologram) = hologramRegistry.registerHologram(hologram)
+
     override fun deleteHologram(hologram: Hologram) = hologramService.deleteHologram(hologram)
 
     override fun editHologramSaving(

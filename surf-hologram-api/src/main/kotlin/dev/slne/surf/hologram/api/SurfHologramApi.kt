@@ -36,6 +36,7 @@ interface SurfHologramApi {
     fun createWorld(worldName: String, worldId: UUID): HologramWorld
 
     fun getHologram(name: String): Hologram?
+    fun registerHologram(hologram: Hologram)
     fun deleteHologram(hologram: Hologram)
     fun editHologramSaving(hologram: Hologram, block: Hologram.() -> Unit): Hologram
     fun refreshHologram(hologram: Hologram?)

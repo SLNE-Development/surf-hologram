@@ -151,6 +151,8 @@ fun <H : Hologram, O : Any> hologram(
         options
     )
 
+    surfHologramApi.registerHologram(hologram)
+
     builder.eventHandlers.forEach { (eventClass, handlersList) ->
         handlersList.forEach { handler ->
             hologram.addEventHandler(eventClass as KClass<HologramEvent>) { ev -> handler(ev) }
