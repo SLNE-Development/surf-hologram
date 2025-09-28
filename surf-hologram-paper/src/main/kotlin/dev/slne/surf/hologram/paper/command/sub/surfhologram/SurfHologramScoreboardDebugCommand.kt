@@ -5,7 +5,7 @@ import dev.jorel.commandapi.kotlindsl.playerExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
 import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
-import dev.slne.surf.hologram.api.surfHologramApi
+import dev.slne.surf.hologram.api.hologramConversationUtil
 import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.hologram.ScoreboardHologramImpl
@@ -23,7 +23,14 @@ fun CommandAPICommand.surfHologramScoreboardDebugCommand() = subcommand("scorebo
     playerExecutor { player, _ ->
 
         val scoreboardHologram = ScoreboardHologramImpl(
-            surfHologramApi.createHologramMeta("debug-scoreboard-${random.nextInt(1, 99999)}"),
+            hologramConversationUtil.createHologramMeta(
+                "debug-scoreboard-${
+                    random.nextInt(
+                        1,
+                        99999
+                    )
+                }"
+            ),
             HologramOrientationType.FIXED,
             player.location.toHologramLocation(),
             buildText { error("Loading data...") },

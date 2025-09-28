@@ -11,6 +11,7 @@ import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.hologram.util.HologramTextAlignment
+import dev.slne.surf.hologram.api.hologramConversationUtil
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.api.surfHologramApi
 import dev.slne.surf.surfapi.core.api.messages.builder.SurfComponentBuilder
@@ -131,7 +132,7 @@ fun <H : Hologram, O : Any> hologram(
 ): H {
     val builder =
         HologramDslBuilder(name, orientationType, location, type.optionsClazz).apply(block)
-    val metaData = surfHologramApi.createHologramMeta(
+    val metaData = hologramConversationUtil.createHologramMeta(
         name = builder.name,
         viewRange = builder.viewRange,
         lineWidth = builder.lineWidth,

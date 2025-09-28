@@ -7,6 +7,8 @@ import dev.slne.surf.hologram.api.event.impl.HologramClickEvent
 import dev.slne.surf.hologram.api.hologram.SimpleHologram
 import dev.slne.surf.hologram.api.hologram.type.SimpleHologramOptions
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
+import dev.slne.surf.hologram.api.hologramConversationUtil
+import dev.slne.surf.hologram.api.hologramWorld
 import dev.slne.surf.hologram.api.surfHologramApi
 import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.surfapi.core.api.messages.adventure.appendNewline
@@ -15,10 +17,8 @@ import org.bukkit.Bukkit
 
 class BukkitMain : SuspendingJavaPlugin() {
     override fun onEnable() {
-        val world = Bukkit.getWorlds().first().let {
-            surfHologramApi.createWorld(it.name, it.uid)
-        }
-        val location = surfHologramApi.createLocation(world, 0.0, 100.0, 0.0)
+        val world = Bukkit.getWorlds().first().hologramWorld
+        val location = hologramConversationUtil.createLocation(world, 0.0, 100.0, 0.0)
         val type = surfHologramApi.getHologramType<SimpleHologram, SimpleHologramOptions>(
             SimpleHologram::class.java
         ) ?: error("SimpleHologram type not found")
