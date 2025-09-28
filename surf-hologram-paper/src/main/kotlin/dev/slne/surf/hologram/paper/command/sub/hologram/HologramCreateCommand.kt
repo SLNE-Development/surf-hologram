@@ -87,7 +87,7 @@ fun CommandAPICommand.hologramCreateCommand() = subcommand("create") {
                 spacer("[")
                 info("Teleportieren")
                 spacer("]")
-                clickRunsCommand("/hologram teleporto $name")
+                clickRunsCommand("/hologram teleport-there $name")
             }
             appendSpace()
             append {
