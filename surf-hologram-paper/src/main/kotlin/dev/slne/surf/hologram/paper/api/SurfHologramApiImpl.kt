@@ -6,14 +6,16 @@ import dev.slne.surf.hologram.api.SurfHologramApi
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.hologram.location.HologramWorld
+import dev.slne.surf.hologram.api.hologram.type.HologramType
 import dev.slne.surf.hologram.api.hologram.util.*
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
+import dev.slne.surf.hologram.core.registry.hologramTypeRegistry
 import dev.slne.surf.hologram.core.service.hologramService
-import dev.slne.surf.hologram.paper.hologram.HologramHitboxImpl
-import dev.slne.surf.hologram.paper.hologram.HologramMetaDataImpl
-import dev.slne.surf.hologram.paper.hologram.location.HologramLocationImpl
-import dev.slne.surf.hologram.paper.hologram.location.HologramWorldImpl
+import dev.slne.surf.hologram.paper.hologram.util.HologramHitboxImpl
+import dev.slne.surf.hologram.paper.hologram.util.HologramMetaDataImpl
+import dev.slne.surf.hologram.paper.hologram.util.location.HologramLocationImpl
+import dev.slne.surf.hologram.paper.hologram.util.location.HologramWorldImpl
 import dev.slne.surf.surfapi.core.api.util.random
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
@@ -103,4 +105,12 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
         textAlignment,
         backgroundColor
     )
+
+    override fun <H : Hologram, O : Any> registerHologramType(
+        type: HologramType<H, O>
+    ) = hologramTypeRegistry.register(type)
+
+    override fun <H : Hologram, O : Any> getHologramType(
+        hologramClazz: Class<H>
+    ) = hologramTypeRegistry.getHologramType<H, O>(hologramClazz)
 }

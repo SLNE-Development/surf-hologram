@@ -1,15 +1,14 @@
-package dev.slne.surf.hologram.paper.hologram.types
+package dev.slne.surf.hologram.paper.hologram
 
+import dev.slne.surf.hologram.api.hologram.ScoreboardHologram
+import dev.slne.surf.hologram.api.hologram.ScoreboardHologramEntry
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
-import dev.slne.surf.hologram.api.hologram.types.ScoreboardHologram
-import dev.slne.surf.hologram.api.hologram.types.ScoreboardHologramEntry
 import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
-import dev.slne.surf.hologram.paper.hologram.BaseHologram
 import dev.slne.surf.hologram.paper.plugin
 import dev.slne.surf.surfapi.core.api.messages.CommonComponents
 import dev.slne.surf.surfapi.core.api.messages.adventure.buildText

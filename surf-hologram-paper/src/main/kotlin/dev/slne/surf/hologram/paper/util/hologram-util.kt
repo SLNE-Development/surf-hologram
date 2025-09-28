@@ -2,8 +2,8 @@ package dev.slne.surf.hologram.paper.util
 
 
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
-import dev.slne.surf.hologram.paper.hologram.location.HologramLocationImpl
-import dev.slne.surf.hologram.paper.hologram.location.HologramWorldImpl
+import dev.slne.surf.hologram.paper.hologram.util.location.HologramLocationImpl
+import dev.slne.surf.hologram.paper.hologram.util.location.HologramWorldImpl
 import org.bukkit.Location as BukkitLocation
 
 fun HologramLocation.toBukkitLocation() =

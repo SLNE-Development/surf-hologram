@@ -1,4 +1,4 @@
-package dev.slne.surf.hologram.paper.hologram.location
+package dev.slne.surf.hologram.paper.hologram.util.location
 
 import dev.slne.surf.hologram.api.hologram.location.HologramWorld
 import org.bukkit.Bukkit

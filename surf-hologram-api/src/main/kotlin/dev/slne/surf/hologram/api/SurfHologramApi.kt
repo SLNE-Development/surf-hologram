@@ -4,6 +4,7 @@ import com.github.retrooper.packetevents.util.Vector3d
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.hologram.location.HologramWorld
+import dev.slne.surf.hologram.api.hologram.type.HologramType
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
@@ -47,6 +48,9 @@ interface SurfHologramApi {
         textAlignment: HologramTextAlignment = HologramTextAlignment.CENTER,
         backgroundColor: TextColor? = null
     ): HologramMetaData
+
+    fun <H : Hologram, O : Any> registerHologramType(type: HologramType<H, O>)
+    fun <H : Hologram, O : Any> getHologramType(hologramClazz: Class<H>): HologramType<H, O>?
 
     companion object {
         val INSTANCE = requiredService<SurfHologramApi>()

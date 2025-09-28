@@ -1,13 +1,12 @@
-package dev.slne.surf.hologram.paper.hologram.types
+package dev.slne.surf.hologram.paper.hologram
 
+import dev.slne.surf.hologram.api.hologram.SimpleHologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
-import dev.slne.surf.hologram.api.hologram.types.SimpleHologram
 import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
-import dev.slne.surf.hologram.paper.hologram.BaseHologram
 import dev.slne.surf.surfapi.core.api.util.random
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component

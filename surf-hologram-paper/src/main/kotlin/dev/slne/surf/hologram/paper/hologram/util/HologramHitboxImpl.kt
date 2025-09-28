@@ -1,4 +1,4 @@
-package dev.slne.surf.hologram.paper.hologram
+package dev.slne.surf.hologram.paper.hologram.util
 
 import com.github.retrooper.packetevents.util.Vector3d
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox

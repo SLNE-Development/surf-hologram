@@ -8,8 +8,8 @@ import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.surfHologramApi
 import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.core.service.hologramService
-import dev.slne.surf.hologram.paper.hologram.HologramHitboxImpl
-import dev.slne.surf.hologram.paper.hologram.types.ScoreboardHologramImpl
+import dev.slne.surf.hologram.paper.hologram.ScoreboardHologramImpl
+import dev.slne.surf.hologram.paper.hologram.util.HologramHitboxImpl
 import dev.slne.surf.hologram.paper.plugin
 import dev.slne.surf.hologram.paper.util.HoloPermissionRegistry
 import dev.slne.surf.hologram.paper.util.toHologramLocation

@@ -11,8 +11,8 @@ import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.api.util.forEachViewer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.core.service.HologramService
-import dev.slne.surf.hologram.paper.hologram.types.BouncingHologramImpl
-import dev.slne.surf.hologram.paper.hologram.types.SimpleHologramImpl
+import dev.slne.surf.hologram.paper.hologram.BouncingHologramImpl
+import dev.slne.surf.hologram.paper.hologram.SimpleHologramImpl
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.util.Services

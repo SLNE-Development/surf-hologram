@@ -1,16 +1,15 @@
-package dev.slne.surf.hologram.paper.hologram.types
+package dev.slne.surf.hologram.paper.hologram
 
+import dev.slne.surf.hologram.api.hologram.BounceDirection
+import dev.slne.surf.hologram.api.hologram.BounceSpeed
+import dev.slne.surf.hologram.api.hologram.BouncingHologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
-import dev.slne.surf.hologram.api.hologram.types.BounceDirection
-import dev.slne.surf.hologram.api.hologram.types.BounceSpeed
-import dev.slne.surf.hologram.api.hologram.types.BouncingHologram
 import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
-import dev.slne.surf.hologram.paper.hologram.BaseHologram
 import dev.slne.surf.hologram.paper.plugin
 import dev.slne.surf.surfapi.core.api.util.random
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask

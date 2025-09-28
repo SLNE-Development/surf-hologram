@@ -1,6 +1,5 @@
-package dev.slne.surf.hologram.api.hologram.types
+package dev.slne.surf.hologram.api.hologram
 
-import dev.slne.surf.hologram.api.hologram.Hologram
 import net.kyori.adventure.text.Component
 
 /**

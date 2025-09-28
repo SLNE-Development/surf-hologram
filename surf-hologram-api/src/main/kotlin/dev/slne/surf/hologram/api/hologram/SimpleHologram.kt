@@ -1,6 +1,4 @@
-package dev.slne.surf.hologram.api.hologram.types
-
-import dev.slne.surf.hologram.api.hologram.Hologram
+package dev.slne.surf.hologram.api.hologram
 
 /**
  * Represents a simple hologram with a static appearance and behavior.
