@@ -16,7 +16,6 @@ import java.util.*
 
 @AutoService(HologramConversationUtil::class)
 class PaperHologramConversationUtil : HologramConversationUtil, Services.Fallback {
-
     override fun createHitbox(
         width: Float,
         height: Float,
