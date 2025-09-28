@@ -60,8 +60,6 @@ class BukkitMain : SuspendingJavaPlugin() {
             }
         }
 
-        println("Created example hologram with ID: ${holo.metaData.name}")
-
         holo.show()
     }
 }
