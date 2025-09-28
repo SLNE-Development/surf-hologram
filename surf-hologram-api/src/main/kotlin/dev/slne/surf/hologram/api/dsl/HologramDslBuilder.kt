@@ -6,7 +6,6 @@ import com.github.retrooper.packetevents.util.Vector3d
 import dev.slne.surf.hologram.api.event.HologramEvent
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
-import dev.slne.surf.hologram.api.hologram.type.HologramType
 import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
@@ -125,11 +124,13 @@ class HologramDslBuilder<O : Any>(
 fun <H : Hologram, O : Any> hologram(
     plugin: JavaPlugin,
     name: String,
-    type: HologramType<H, O>,
+    hologramClazz: Class<H>,
     orientationType: HologramOrientationType,
     location: HologramLocation,
     block: HologramDslBuilder<O>.() -> Unit
 ): H {
+    val type = surfHologramApi.getHologramType<H, O>(hologramClazz)
+        ?: error("Hologram type for class ${hologramClazz.name} is not registered!")
     val builder =
         HologramDslBuilder(name, orientationType, location, type.optionsClazz).apply(block)
     val metaData = hologramConversationUtil.createHologramMeta(

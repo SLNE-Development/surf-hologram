@@ -9,7 +9,6 @@ import dev.slne.surf.hologram.api.hologram.type.SimpleHologramOptions
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.hologramConversationUtil
 import dev.slne.surf.hologram.api.hologramWorld
-import dev.slne.surf.hologram.api.surfHologramApi
 import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.surfapi.core.api.messages.adventure.appendNewline
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
@@ -19,13 +18,10 @@ class BukkitMain : SuspendingJavaPlugin() {
     override fun onEnable() {
         val world = Bukkit.getWorlds().first().hologramWorld
         val location = hologramConversationUtil.createLocation(world, 0.0, 100.0, 0.0)
-        val type = surfHologramApi.getHologramType<SimpleHologram, SimpleHologramOptions>(
-            SimpleHologram::class.java
-        ) ?: error("SimpleHologram type not found")
-        val holo = hologram(
+        val holo = hologram<SimpleHologram, SimpleHologramOptions>(
             this,
             "example_dsl_hologram",
-            type,
+            SimpleHologram::class.java,
             HologramOrientationType.ROTATING,
             location
         ) {
