@@ -7,10 +7,12 @@ import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
+import dev.slne.surf.hologram.api.player.HoloPlayer
 import dev.slne.surf.surfapi.core.api.util.requiredService
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
 import org.bukkit.plugin.java.JavaPlugin
+import java.util.*
 
 interface SurfHologramApi {
     fun <H : Hologram, O : Any> createHologram(
@@ -31,6 +33,11 @@ interface SurfHologramApi {
 
     fun registerHologram(hologram: Hologram)
     fun getHologram(name: String): Hologram?
+
+    fun getPlayer(uuid: UUID, name: String): HoloPlayer
+    fun getPlayer(uuid: UUID): HoloPlayer?
+    fun getPlayer(name: String): HoloPlayer?
+    fun getOfflinePlayer(uuid: UUID): HoloOfflinePlayer?
 
     fun <H : Hologram, O : Any> registerHologramType(type: HologramType<H, O>)
     fun <H : Hologram, O : Any> getHologramType(hologramClazz: Class<H>): HologramType<H, O>?

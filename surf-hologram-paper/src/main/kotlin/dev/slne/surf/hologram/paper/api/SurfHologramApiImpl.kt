@@ -12,11 +12,13 @@ import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.core.registry.hologramTypeRegistry
+import dev.slne.surf.hologram.core.service.hologramPlayerService
 import dev.slne.surf.hologram.core.service.hologramService
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.util.Services
 import org.bukkit.plugin.java.JavaPlugin
+import java.util.*
 
 @AutoService(SurfHologramApi::class)
 class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
@@ -53,8 +55,13 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
     ) = hologramService.editHologramSaving(hologram, block)
 
     override fun refreshHologram(hologram: Hologram?) = hologramService.refresh(hologram)
-
     override fun getHologram(name: String) = hologramRegistry.getHologram(name)
+
+    override fun getPlayer(uuid: UUID, name: String) = hologramPlayerService.getPlayer(uuid, name)
+    override fun getPlayer(uuid: UUID) = hologramPlayerService.getPlayer(uuid)
+    override fun getPlayer(name: String) = hologramPlayerService.getPlayer(name)
+    override fun getOfflinePlayer(uuid: UUID) = hologramPlayerService.getOfflinePlayer(uuid)
+
     override fun registerHologram(hologram: Hologram) = hologramRegistry.registerHologram(hologram)
 
     override fun <H : Hologram, O : Any> registerHologramType(
