@@ -16,8 +16,12 @@ import org.bukkit.Bukkit
 
 class BukkitMain : SuspendingJavaPlugin() {
     override fun onEnable() {
-        val world = Bukkit.getWorlds().first().hologramWorld
-        val location = hologramConversationUtil.createLocation(world, 0.0, 100.0, 0.0)
+        val location = hologramConversationUtil.createLocation(
+            Bukkit.getWorlds().first().hologramWorld,
+            0.0,
+            100.0,
+            0.0
+        )
         val holo = hologram<BouncingHologram, BouncingHologramOptions>(
             this,
             "example_dsl_hologram",
