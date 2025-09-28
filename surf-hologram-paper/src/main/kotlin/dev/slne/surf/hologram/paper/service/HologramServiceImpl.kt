@@ -63,7 +63,7 @@ class HologramServiceImpl : HologramService, Services.Fallback {
                 viewers,
                 0.0,
                 bouncingHeight ?: 0.0,
-                (bouncingStep ?: 0.0) to 1L,
+                bouncingStep ?: 0.0,
                 true
             )
         }

@@ -33,16 +33,14 @@ class BouncingHologramImpl(
     override var bounceDirection: BounceDirection
 ) : BaseHologram(), BouncingHologram {
     override fun tick() {
-        val (speed, _) = bounceSpeed
-
         if (bounceDirection) {
-            bounceState += speed
+            bounceState += bounceSpeed
             if (bounceState >= bounceHeight) {
                 bounceState = bounceHeight
                 bounceDirection = false
             }
         } else {
-            bounceState -= speed
+            bounceState -= bounceSpeed
             if (bounceState <= 0) {
                 bounceState = 0.0
                 bounceDirection = true

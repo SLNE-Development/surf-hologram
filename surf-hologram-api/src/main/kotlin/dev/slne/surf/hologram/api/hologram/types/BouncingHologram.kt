@@ -7,7 +7,7 @@ import dev.slne.surf.hologram.api.hologram.Hologram
  * Represents the speed of a bouncing hologram.
  * The first value is the height the hologram will move in the time given by the second value.
  */
-typealias BounceSpeed = Pair<Double, Long>
+typealias BounceSpeed = Double
 
 /**
  * Represents the direction of a bouncing hologram.

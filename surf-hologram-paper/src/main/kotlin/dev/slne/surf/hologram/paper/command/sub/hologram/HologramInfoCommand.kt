@@ -90,7 +90,7 @@ fun CommandAPICommand.hologramInfoCommand() = subcommand("info") {
                     variableKey("Bounce-Step")
                     spacer(":")
                     appendSpace()
-                    variableValue(bouncingHologram.bounceSpeed.first)
+                    variableValue(bouncingHologram.bounceSpeed)
                 }
                 appendNewline {
                     append(CommonComponents.EM_DASH)
