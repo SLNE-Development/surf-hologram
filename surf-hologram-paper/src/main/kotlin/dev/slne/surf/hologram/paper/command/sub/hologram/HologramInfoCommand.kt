@@ -29,7 +29,7 @@ fun CommandAPICommand.hologramInfoCommand() = subcommand("info") {
                 variableKey("Typ")
                 spacer(":")
                 appendSpace()
-                variableValue(hologram.hologramType.name)
+                variableValue(hologram.hologramOrientationType.name)
             }
             appendNewline {
                 append(CommonComponents.EM_DASH)

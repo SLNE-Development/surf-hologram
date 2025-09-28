@@ -5,15 +5,15 @@ import dev.jorel.commandapi.arguments.Argument
 import dev.jorel.commandapi.arguments.ArgumentSuggestions
 import dev.jorel.commandapi.arguments.CustomArgument
 import dev.jorel.commandapi.arguments.StringArgument
-import dev.slne.surf.hologram.api.hologram.HologramType
+import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 
 class HologramTypeArgument(nodeName: String) :
-    CustomArgument<HologramType, String>(StringArgument(nodeName), { info ->
-        HologramType.valueOf(info.input.uppercase())
+    CustomArgument<HologramOrientationType, String>(StringArgument(nodeName), { info ->
+        HologramOrientationType.valueOf(info.input.uppercase())
     }) {
     init {
         replaceSuggestions(ArgumentSuggestions.stringCollection {
-            HologramType.entries.map { it.name.lowercase() }
+            HologramOrientationType.entries.map { it.name.lowercase() }
         })
     }
 }

@@ -1,13 +1,13 @@
 package dev.slne.surf.hologram.paper.hologram.types
 
-import dev.slne.surf.hologram.api.hologram.HologramCreationReason
-import dev.slne.surf.hologram.api.hologram.HologramHitbox
-import dev.slne.surf.hologram.api.hologram.HologramMetaData
-import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.hologram.types.BounceDirection
 import dev.slne.surf.hologram.api.hologram.types.BounceSpeed
 import dev.slne.surf.hologram.api.hologram.types.BouncingHologram
+import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
+import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
+import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
+import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.paper.hologram.BaseHologram
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit
 
 class BouncingHologramImpl(
     override val metaData: HologramMetaData,
-    override var hologramType: HologramType,
+    override var hologramOrientationType: HologramOrientationType,
     override var centerLocation: HologramLocation,
     override var displayedText: Component,
     override val creationReason: HologramCreationReason,
@@ -58,7 +58,7 @@ class BouncingHologramImpl(
             holoEntityId = random.nextInt()
             interactionEntityId = random.nextInt()
         } else metaData,
-        hologramType,
+        hologramOrientationType,
         centerLocation,
         displayedText,
         creationReason,

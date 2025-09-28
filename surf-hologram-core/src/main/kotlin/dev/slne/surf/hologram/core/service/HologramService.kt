@@ -1,11 +1,11 @@
 package dev.slne.surf.hologram.core.service
 
 import dev.slne.surf.hologram.api.hologram.Hologram
-import dev.slne.surf.hologram.api.hologram.HologramCreationReason
-import dev.slne.surf.hologram.api.hologram.HologramHitbox
-import dev.slne.surf.hologram.api.hologram.HologramMetaData
-import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
+import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
+import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
+import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
+import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.surfapi.core.api.util.requiredService
@@ -17,7 +17,7 @@ interface HologramService {
     fun refreshClean(hologram: Hologram)
 
     fun createHologram(
-        type: HologramType,
+        type: HologramOrientationType,
         hitbox: HologramHitbox?,
         metaData: HologramMetaData,
         centerLocation: HologramLocation,

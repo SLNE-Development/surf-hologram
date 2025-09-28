@@ -3,9 +3,10 @@ package dev.slne.surf.hologram.paper.api
 import com.github.retrooper.packetevents.util.Vector3d
 import com.google.auto.service.AutoService
 import dev.slne.surf.hologram.api.SurfHologramApi
-import dev.slne.surf.hologram.api.hologram.*
+import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.hologram.location.HologramWorld
+import dev.slne.surf.hologram.api.hologram.util.*
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.core.service.hologramService
@@ -25,7 +26,7 @@ import java.util.*
 class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
     override fun createHologram(
         plugin: JavaPlugin,
-        type: HologramType,
+        type: HologramOrientationType,
         hitbox: HologramHitbox?,
         metaData: HologramMetaData,
         centerLocation: HologramLocation,

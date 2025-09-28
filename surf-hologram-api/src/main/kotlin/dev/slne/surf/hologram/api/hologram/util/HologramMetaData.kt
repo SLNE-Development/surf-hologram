@@ -1,4 +1,4 @@
-package dev.slne.surf.hologram.api.hologram
+package dev.slne.surf.hologram.api.hologram.util
 
 import com.github.retrooper.packetevents.util.Vector3d
 import net.kyori.adventure.text.format.TextColor

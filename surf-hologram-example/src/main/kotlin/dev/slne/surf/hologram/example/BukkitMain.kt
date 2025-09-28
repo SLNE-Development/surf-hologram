@@ -3,7 +3,7 @@ package dev.slne.surf.hologram.example
 import com.github.retrooper.packetevents.util.Vector3d
 import com.github.shynixn.mccoroutine.folia.SuspendingJavaPlugin
 import dev.slne.surf.hologram.api.event.impl.HologramClickEvent
-import dev.slne.surf.hologram.api.hologram.HologramType
+import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.surfHologramApi
 import dev.slne.surf.hologram.api.util.addEventHandler
 import dev.slne.surf.hologram.api.util.show
@@ -24,7 +24,7 @@ class BukkitMain : SuspendingJavaPlugin() {
 
         val holo = surfHologramApi.createHologram(
             this,
-            HologramType.ROTATING,
+            HologramOrientationType.ROTATING,
             hitbox,
             meta,
             surfHologramApi.createLocation(world, 0.0, 100.0, 0.0),

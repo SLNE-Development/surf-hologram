@@ -7,9 +7,9 @@ import dev.jorel.commandapi.kotlindsl.getValue
 import dev.jorel.commandapi.kotlindsl.integerArgument
 import dev.jorel.commandapi.kotlindsl.playerExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
-import dev.slne.surf.hologram.api.hologram.HologramCreationReason
-import dev.slne.surf.hologram.api.hologram.HologramTextAlignment
-import dev.slne.surf.hologram.api.hologram.HologramType
+import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
+import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
+import dev.slne.surf.hologram.api.hologram.util.HologramTextAlignment
 import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.command.argument.hologramTypeArgument
@@ -30,7 +30,7 @@ fun CommandAPICommand.surfHologramCreateDebugCommand() = subcommand("creation") 
     integerArgument("amount")
 
     playerExecutor { player, arguments ->
-        val type: HologramType by arguments
+        val type: HologramOrientationType by arguments
         val amount: Int by arguments
 
         plugin.launch {

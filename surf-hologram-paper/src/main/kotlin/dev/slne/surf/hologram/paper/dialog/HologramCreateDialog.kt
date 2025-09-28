@@ -3,9 +3,9 @@
 package dev.slne.surf.hologram.paper.dialog
 
 import com.github.retrooper.packetevents.util.Vector3d
-import dev.slne.surf.hologram.api.hologram.HologramCreationReason
-import dev.slne.surf.hologram.api.hologram.HologramTextAlignment
-import dev.slne.surf.hologram.api.hologram.HologramType
+import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
+import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
+import dev.slne.surf.hologram.api.hologram.util.HologramTextAlignment
 import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.hologram.HologramHitboxImpl
@@ -55,7 +55,7 @@ fun createHologramCreateDialog() = dialog {
                 }
 
                 singleOption("holo_type") {
-                    HologramType.entries.sortedByDescending { it.name }.forEach {
+                    HologramOrientationType.entries.sortedByDescending { it.name }.forEach {
                         option(
                             "holo_type_${it.name}",
                             buildText {
@@ -142,8 +142,8 @@ fun createHologramCreateDialog() = dialog {
                             }
                             val type = info.getText("holo_type")?.let {
                                 val typeName = it.removePrefix("holo_type_")
-                                HologramType.entries.firstOrNull { type -> type.name == typeName }
-                            } ?: HologramType.ROTATING
+                                HologramOrientationType.entries.firstOrNull { type -> type.name == typeName }
+                            } ?: HologramOrientationType.ROTATING
 
                             val text = MiniMessage.miniMessage()
                                 .deserialize(info.getText("holo_text") ?: "<red> Kein Inhalt")

@@ -5,10 +5,10 @@ package dev.slne.surf.hologram.api.dsl
 import com.github.retrooper.packetevents.util.Vector3d
 import dev.slne.surf.hologram.api.event.HologramEvent
 import dev.slne.surf.hologram.api.hologram.Hologram
-import dev.slne.surf.hologram.api.hologram.HologramHitbox
-import dev.slne.surf.hologram.api.hologram.HologramTextAlignment
-import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
+import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
+import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
+import dev.slne.surf.hologram.api.hologram.util.HologramTextAlignment
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.api.surfHologramApi
 import dev.slne.surf.surfapi.core.api.messages.builder.SurfComponentBuilder
@@ -28,12 +28,12 @@ import kotlin.reflect.KClass
  * types and customizations, allowing for detailed and dynamic hologram creation.
  *
  * @param name The name of the hologram.
- * @param hologramType The type of the hologram, determined by [HologramType].
+ * @param hologramOrientationType The type of the hologram, determined by [HologramOrientationType].
  * @param centerLocation The central location of the hologram in the world, represented by [HologramLocation].
  */
 class HologramDslBuilder(
     val name: String,
-    val hologramType: HologramType,
+    val hologramOrientationType: HologramOrientationType,
     val centerLocation: HologramLocation
 ) {
     /**
@@ -68,11 +68,11 @@ class HologramDslBuilder(
     var hitbox: HologramHitbox? = null
 
     /**
-     * Specifies the height at which a hologram of type [HologramType.BOUNCING] will oscillate.
+     * Specifies the height at which a hologram of type [HologramOrientationType.BOUNCING] will oscillate.
      *
      * This property defines the vertical displacement range for the bouncing animation of the hologram.
      * A value of `null` or `0.0` disables the bouncing effect, effectively making the hologram stationary vertically.
-     * This property is only applicable to holograms configured with [HologramType.BOUNCING].
+     * This property is only applicable to holograms configured with [HologramOrientationType.BOUNCING].
      *
      * Its value can be customized during the creation of a hologram using the DSL block or modified afterwards.
      *
@@ -321,7 +321,7 @@ class HologramDslBuilder(
                  * It is part of the hologram's hitbox dimensions, used to determine the vertical size
                  * and boundaries for interactions or visual representation in the hologram system.
                  *
-                 * @see dev.slne.surf.hologram.api.hologram.HologramHitbox
+                 * @see HologramHitbox
                  * @see HitboxDsl
                  */
                 override val height = this@HitboxDsl.height
@@ -371,7 +371,7 @@ class HologramDslBuilder(
 fun hologram(
     plugin: JavaPlugin,
     name: String,
-    type: HologramType,
+    type: HologramOrientationType,
     location: HologramLocation,
     block: HologramDslBuilder.() -> Unit
 ): Hologram {
@@ -386,7 +386,7 @@ fun hologram(
 
     val hologram = surfHologramApi.createHologram(
         plugin = plugin,
-        type = builder.hologramType,
+        type = builder.hologramOrientationType,
         hitbox = builder.hitbox,
         metaData = metaData,
         centerLocation = builder.centerLocation,

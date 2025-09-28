@@ -1,9 +1,13 @@
 package dev.slne.surf.hologram.api
 
 import com.github.retrooper.packetevents.util.Vector3d
-import dev.slne.surf.hologram.api.hologram.*
+import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.hologram.location.HologramWorld
+import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
+import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
+import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
+import dev.slne.surf.hologram.api.hologram.util.HologramTextAlignment
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.surfapi.core.api.util.requiredService
 import it.unimi.dsi.fastutil.objects.ObjectSet
@@ -15,7 +19,7 @@ import java.util.*
 interface SurfHologramApi {
     fun createHologram(
         plugin: JavaPlugin,
-        type: HologramType,
+        type: HologramOrientationType,
         hitbox: HologramHitbox?,
         metaData: HologramMetaData,
         centerLocation: HologramLocation,

@@ -1,4 +1,4 @@
-package dev.slne.surf.hologram.api.hologram
+package dev.slne.surf.hologram.api.hologram.util
 
 enum class HologramTextAlignment(val value: Int) {
     CENTER(0),

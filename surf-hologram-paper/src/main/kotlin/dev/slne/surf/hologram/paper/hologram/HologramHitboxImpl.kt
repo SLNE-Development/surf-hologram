@@ -1,7 +1,7 @@
 package dev.slne.surf.hologram.paper.hologram
 
 import com.github.retrooper.packetevents.util.Vector3d
-import dev.slne.surf.hologram.api.hologram.HologramHitbox
+import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 
 data class HologramHitboxImpl(
     override val width: Float,

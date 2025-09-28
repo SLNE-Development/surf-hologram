@@ -53,7 +53,7 @@ fun CommandAPICommand.hologramListCommand() = subcommand("list") {
                                 variableKey("Typ")
                                 spacer(":")
                                 appendSpace()
-                                variableValue(row.hologramType.name)
+                                variableValue(row.hologramOrientationType.name)
                             }
                             appendNewline {
                                 append(CommonComponents.EM_DASH)

@@ -1,8 +1,12 @@
 package dev.slne.surf.hologram.paper.service
 
 import com.google.auto.service.AutoService
-import dev.slne.surf.hologram.api.hologram.*
+import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
+import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
+import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
+import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
+import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.api.util.forEachViewer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
@@ -28,7 +32,7 @@ class HologramServiceImpl : HologramService, Services.Fallback {
     }
 
     override fun createHologram(
-        type: HologramType,
+        type: HologramOrientationType,
         hitbox: HologramHitbox?,
         metaData: HologramMetaData,
         centerLocation: HologramLocation,
@@ -43,7 +47,7 @@ class HologramServiceImpl : HologramService, Services.Fallback {
         }
 
         val hologram = when (type) {
-            HologramType.FIXED, HologramType.ROTATING -> SimpleHologramImpl(
+            HologramOrientationType.FIXED, HologramOrientationType.ROTATING -> SimpleHologramImpl(
                 metaData,
                 type,
                 centerLocation,
@@ -53,7 +57,7 @@ class HologramServiceImpl : HologramService, Services.Fallback {
                 viewers
             )
 
-            HologramType.BOUNCING -> BouncingHologramImpl(
+            HologramOrientationType.BOUNCING -> BouncingHologramImpl(
                 metaData,
                 type,
                 centerLocation,

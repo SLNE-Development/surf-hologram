@@ -9,9 +9,9 @@ import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerEn
 import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerEntityTeleport
 import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerSpawnEntity
 import dev.slne.surf.hologram.api.hologram.Hologram
-import dev.slne.surf.hologram.api.hologram.HologramHitbox
-import dev.slne.surf.hologram.api.hologram.HologramType
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
+import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
+import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.paper.util.buildEntityData
 import dev.slne.surf.hologram.paper.util.toPacketLocation
 import dev.slne.surf.hologram.paper.util.toVector3f
@@ -34,7 +34,7 @@ object PaperPackets {
             entry(23, EntityDataTypes.ADV_COMPONENT, hologram.displayedText)
             entry(12, EntityDataTypes.VECTOR3F, hologram.metaData.scale.toVector3f())
 
-            if (hologram.hologramType == HologramType.ROTATING) {
+            if (hologram.hologramOrientationType == HologramOrientationType.ROTATING) {
                 entry(15, EntityDataTypes.BYTE, 3.toByte())
             }
 

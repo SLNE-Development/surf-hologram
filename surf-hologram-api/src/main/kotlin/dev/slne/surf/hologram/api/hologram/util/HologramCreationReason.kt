@@ -1,4 +1,4 @@
-package dev.slne.surf.hologram.api.hologram
+package dev.slne.surf.hologram.api.hologram.util
 
 /**
  * Represents the reason for the creation of a hologram. This can either be initiated by a client or through a plugin.

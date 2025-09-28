@@ -7,9 +7,9 @@ import dev.jorel.commandapi.kotlindsl.getValue
 import dev.jorel.commandapi.kotlindsl.locationArgument
 import dev.jorel.commandapi.kotlindsl.playerExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
-import dev.slne.surf.hologram.api.hologram.HologramCreationReason
-import dev.slne.surf.hologram.api.hologram.HologramTextAlignment
-import dev.slne.surf.hologram.api.hologram.HologramType
+import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
+import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
+import dev.slne.surf.hologram.api.hologram.util.HologramTextAlignment
 import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.command.argument.hologramNameArgument
@@ -41,7 +41,7 @@ fun CommandAPICommand.hologramCreateCommand() = subcommand("create") {
 
     playerExecutor { player, args ->
         val name: String by args
-        val type: HologramType by args
+        val type: HologramOrientationType by args
         val location: Location? by args
         val text: Component by args
         val holoLocation = (location ?: player.location).let {
