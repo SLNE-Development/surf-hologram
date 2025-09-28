@@ -5,14 +5,14 @@ import dev.slne.surf.hologram.api.hologram.BounceSpeed
 interface HologramOptions
 
 data class BouncingHologramOptions(
-    val bounceHeight: Double,
-    val bounceSpeed: BounceSpeed
+    var bounceHeight: Double,
+    var bounceSpeed: BounceSpeed
 ) : HologramOptions
 
 class SimpleHologramOptions : HologramOptions
 
 data class ScoreboardHologramOptions(
-    val placementRange: IntRange,
-    val scoreUnit: String
+    var placementRange: IntRange,
+    var scoreUnit: String
 ) : HologramOptions
 

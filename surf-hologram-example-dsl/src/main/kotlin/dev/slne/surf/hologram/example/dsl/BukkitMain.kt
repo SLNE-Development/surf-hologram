@@ -4,8 +4,8 @@ import com.github.retrooper.packetevents.util.Vector3d
 import com.github.shynixn.mccoroutine.folia.SuspendingJavaPlugin
 import dev.slne.surf.hologram.api.dsl.hologram
 import dev.slne.surf.hologram.api.event.impl.HologramClickEvent
-import dev.slne.surf.hologram.api.hologram.SimpleHologram
-import dev.slne.surf.hologram.api.hologram.type.SimpleHologramOptions
+import dev.slne.surf.hologram.api.hologram.BouncingHologram
+import dev.slne.surf.hologram.api.hologram.type.BouncingHologramOptions
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.hologramConversationUtil
 import dev.slne.surf.hologram.api.hologramWorld
@@ -18,10 +18,10 @@ class BukkitMain : SuspendingJavaPlugin() {
     override fun onEnable() {
         val world = Bukkit.getWorlds().first().hologramWorld
         val location = hologramConversationUtil.createLocation(world, 0.0, 100.0, 0.0)
-        val holo = hologram<SimpleHologram, SimpleHologramOptions>(
+        val holo = hologram<BouncingHologram, BouncingHologramOptions>(
             this,
             "example_dsl_hologram",
-            SimpleHologram::class.java,
+            BouncingHologram::class.java,
             HologramOrientationType.ROTATING,
             location
         ) {
@@ -31,7 +31,10 @@ class BukkitMain : SuspendingJavaPlugin() {
                 info("This is an example hologram.")
             }
 
-            options {}
+            options {
+                bounceHeight = 1.0
+                bounceSpeed = 0.1
+            }
 
             //withViewer(player1) - You can add a specific viewer if you want
             //    withViewers {
