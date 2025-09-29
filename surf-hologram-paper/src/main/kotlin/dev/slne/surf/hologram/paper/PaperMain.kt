@@ -15,11 +15,14 @@ import dev.slne.surf.hologram.paper.listener.InternalEventListener
 import dev.slne.surf.hologram.paper.listener.InternalEventPacketListener
 import dev.slne.surf.hologram.paper.service.versionService
 import dev.slne.surf.surfapi.bukkit.api.event.register
+import dev.slne.surf.surfapi.bukkit.api.metrics.Metrics
 import org.bukkit.plugin.java.JavaPlugin
 
 val plugin get() = JavaPlugin.getPlugin(PaperMain::class.java)
 
 class PaperMain : SuspendingJavaPlugin() {
+    private lateinit var metrics: Metrics
+
     override fun onLoad() {
         super.onLoad()
     }
@@ -33,6 +36,8 @@ class PaperMain : SuspendingJavaPlugin() {
         surfHologramCommand()
         BouncingHologramImpl.startTicking()
 
+        metrics = Metrics(this, 27409)
+
         hologramTypeRegistry.register(SimpleHologramType())
         hologramTypeRegistry.register(BouncingHologramType())
         hologramTypeRegistry.register(ScoreboardHologramType())
@@ -43,6 +48,10 @@ class PaperMain : SuspendingJavaPlugin() {
     }
 
     override fun onDisable() {
+        if (::metrics.isInitialized) {
+            metrics.shutdown()
+        }
+        
         BouncingHologramImpl.stopTicking()
     }
 }
