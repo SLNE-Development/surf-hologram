@@ -23,7 +23,6 @@ class BukkitMain : SuspendingJavaPlugin() {
             0.0
         )
         val holo = hologram<BouncingHologram, BouncingHologramOptions>(
-            this,
             "example_dsl_hologram",
             BouncingHologram::class.java,
             HologramOrientationType.ROTATING,

@@ -25,7 +25,6 @@ class BukkitMain : SuspendingJavaPlugin() {
         val hitbox = hologramConversationUtil.createHitbox(1.0f, 1.0f, Vector3d.zero())
 
         val holo = surfHologramApi.createHologram(
-            this,
             meta,
             HologramOrientationType.ROTATING,
             hologramConversationUtil.createLocation(world, 0.0, 100.0, 0.0),

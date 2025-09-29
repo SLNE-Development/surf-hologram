@@ -3,6 +3,7 @@ package dev.slne.surf.hologram.paper.service
 import com.google.auto.service.AutoService
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
+import dev.slne.surf.hologram.api.hologram.type.HologramOptions
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
@@ -17,7 +18,7 @@ import net.kyori.adventure.util.Services
 
 @AutoService(HologramService::class)
 class HologramServiceImpl : HologramService, Services.Fallback {
-    override fun <H : Hologram, O : Any> createHologram(
+    override fun <H : Hologram, O : HologramOptions> createHologram(
         metaData: HologramMetaData,
         hologramOrientationType: HologramOrientationType,
         centerLocation: HologramLocation,

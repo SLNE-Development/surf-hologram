@@ -2,6 +2,7 @@ package dev.slne.surf.hologram.api
 
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
+import dev.slne.surf.hologram.api.hologram.type.HologramOptions
 import dev.slne.surf.hologram.api.hologram.type.HologramType
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
@@ -11,12 +12,10 @@ import dev.slne.surf.hologram.api.player.HoloPlayer
 import dev.slne.surf.surfapi.core.api.util.requiredService
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
-import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 
 interface SurfHologramApi {
-    fun <H : Hologram, O : Any> createHologram(
-        plugin: JavaPlugin,
+    fun <H : Hologram, O : HologramOptions> createHologram(
         metaData: HologramMetaData,
         hologramOrientationType: HologramOrientationType,
         centerLocation: HologramLocation,
@@ -39,8 +38,8 @@ interface SurfHologramApi {
     fun getPlayer(name: String): HoloPlayer?
     fun getOfflinePlayer(uuid: UUID): HoloOfflinePlayer?
 
-    fun <H : Hologram, O : Any> registerHologramType(type: HologramType<H, O>)
-    fun <H : Hologram, O : Any> getHologramType(hologramClazz: Class<H>): HologramType<H, O>?
+    fun <H : Hologram, O : HologramOptions> registerHologramType(type: HologramType<H, O>)
+    fun <H : Hologram, O : HologramOptions> getHologramType(hologramClazz: Class<H>): HologramType<H, O>?
 
     companion object {
         val INSTANCE = requiredService<SurfHologramApi>()

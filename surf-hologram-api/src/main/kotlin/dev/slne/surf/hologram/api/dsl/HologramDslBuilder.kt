@@ -6,6 +6,7 @@ import com.github.retrooper.packetevents.util.Vector3d
 import dev.slne.surf.hologram.api.event.HologramEvent
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
+import dev.slne.surf.hologram.api.hologram.type.HologramOptions
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.hologram.util.HologramTextAlignment
@@ -18,7 +19,6 @@ import dev.slne.surf.surfapi.core.api.util.mutableObjectSetOf
 import it.unimi.dsi.fastutil.objects.ObjectList
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.format.TextColor
-import org.bukkit.plugin.java.JavaPlugin
 import kotlin.reflect.KClass
 
 /**
@@ -32,7 +32,7 @@ import kotlin.reflect.KClass
  * @param hologramOrientationType The type of the hologram, determined by [HologramOrientationType].
  * @param centerLocation The central location of the hologram in the world, represented by [HologramLocation].
  */
-class HologramDslBuilder<O : Any>(
+class HologramDslBuilder<O : HologramOptions>(
     val name: String,
     val hologramOrientationType: HologramOrientationType,
     val centerLocation: HologramLocation,
@@ -120,8 +120,7 @@ class HologramDslBuilder<O : Any>(
     }
 }
 
-fun <H : Hologram, O : Any> hologram(
-    plugin: JavaPlugin,
+fun <H : Hologram, O : HologramOptions> hologram(
     name: String,
     hologramClazz: Class<H>,
     orientationType: HologramOrientationType,

@@ -2,6 +2,7 @@ package dev.slne.surf.hologram.paper.registry
 
 import com.google.auto.service.AutoService
 import dev.slne.surf.hologram.api.hologram.Hologram
+import dev.slne.surf.hologram.api.hologram.type.HologramOptions
 import dev.slne.surf.hologram.api.hologram.type.HologramType
 import dev.slne.surf.hologram.core.registry.HologramTypeRegistry
 import dev.slne.surf.surfapi.core.api.util.freeze
@@ -13,21 +14,21 @@ import net.kyori.adventure.util.Services
 class HologramTypeRegistryImpl : HologramTypeRegistry, Services.Fallback {
     private val _types = mutableObject2ObjectMapOf<Class<out Hologram>, HologramType<*, *>>()
 
-    override fun <H : Hologram, O : Any> register(type: HologramType<H, O>) {
+    override fun <H : Hologram, O : HologramOptions> register(type: HologramType<H, O>) {
         _types[type.hologramClazz] = type
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun <H : Hologram, O : Any> getHologramType(
+    override fun <H : Hologram, O : HologramOptions> getHologramType(
         hologramClazz: Class<H>
     ) = _types[hologramClazz] as? HologramType<H, O>
 
     @Suppress("UNCHECKED_CAST")
-    override fun <H : Hologram, O : Any> getHologramType(
+    override fun <H : Hologram, O : HologramOptions> getHologramType(
         name: String
     ) = _types.values.firstOrNull { it.id == name } as? HologramType<H, O>
 
     @Suppress("UNCHECKED_CAST")
-    override fun <H : Hologram, O : Any> getTypes() =
+    override fun <H : Hologram, O : HologramOptions> getTypes() =
         _types.map { it as HologramType<H, O> }.toObjectSet().freeze()
 }

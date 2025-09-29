@@ -4,6 +4,7 @@ import com.google.auto.service.AutoService
 import dev.slne.surf.hologram.api.SurfHologramApi
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
+import dev.slne.surf.hologram.api.hologram.type.HologramOptions
 import dev.slne.surf.hologram.api.hologram.type.HologramType
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
@@ -16,13 +17,11 @@ import dev.slne.surf.hologram.core.service.hologramService
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.util.Services
-import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 
 @AutoService(SurfHologramApi::class)
 class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
-    override fun <H : Hologram, O : Any> createHologram(
-        plugin: JavaPlugin,
+    override fun <H : Hologram, O : HologramOptions> createHologram(
         metaData: HologramMetaData,
         hologramOrientationType: HologramOrientationType,
         centerLocation: HologramLocation,
@@ -58,11 +57,11 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
 
     override fun registerHologram(hologram: Hologram) = hologramRegistry.registerHologram(hologram)
 
-    override fun <H : Hologram, O : Any> registerHologramType(
+    override fun <H : Hologram, O : HologramOptions> registerHologramType(
         type: HologramType<H, O>
     ) = hologramTypeRegistry.register(type)
 
-    override fun <H : Hologram, O : Any> getHologramType(
+    override fun <H : Hologram, O : HologramOptions> getHologramType(
         hologramClazz: Class<H>
     ) = hologramTypeRegistry.getHologramType<H, O>(hologramClazz)
 }

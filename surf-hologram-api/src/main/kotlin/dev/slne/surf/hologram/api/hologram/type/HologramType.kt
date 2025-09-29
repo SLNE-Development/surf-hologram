@@ -9,7 +9,7 @@ import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
 
-interface HologramType<H : Hologram, O : Any> {
+interface HologramType<H : Hologram, O : HologramOptions> {
     val id: String
     val hologramClazz: Class<H>
     val optionsClazz: Class<O>
