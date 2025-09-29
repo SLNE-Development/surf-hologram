@@ -3,14 +3,12 @@ package dev.slne.surf.hologram.paper.command.sub.surfhologram
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.kotlindsl.playerExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
-import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.hologramConversationUtil
 import dev.slne.surf.hologram.api.util.show
-import dev.slne.surf.hologram.core.service.hologramService
+import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.paper.hologram.ScoreboardHologramImpl
 import dev.slne.surf.hologram.paper.hologram.util.HologramHitboxImpl
-import dev.slne.surf.hologram.paper.plugin
 import dev.slne.surf.hologram.paper.util.HoloPermissionRegistry
 import dev.slne.surf.hologram.paper.util.toHologramLocation
 import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
@@ -34,7 +32,6 @@ fun CommandAPICommand.surfHologramScoreboardDebugCommand() = subcommand("scorebo
             HologramOrientationType.FIXED,
             player.location.toHologramLocation(),
             buildText { error("Loading data...") },
-            HologramCreationReason.Plugin(plugin.name),
             HologramHitboxImpl.default(),
             null,
             1..10,
@@ -92,8 +89,8 @@ fun CommandAPICommand.surfHologramScoreboardDebugCommand() = subcommand("scorebo
             currentPlacement++
         }
 
-        val holo = hologramService.createHologram(scoreboardHologram)
-        holo.show()
+        hologramRegistry.registerHologram(scoreboardHologram)
+        scoreboardHologram.show()
 
         player.sendText {
             appendPrefix()

@@ -89,14 +89,6 @@ fun CommandAPICommand.hologramListCommand() = subcommand("list") {
                                 appendSpace()
                                 variableValue(row.metaData.textAlignment.name)
                             }
-                            appendNewline {
-                                append(CommonComponents.EM_DASH)
-                                appendSpace()
-                                variableKey("Ersteller")
-                                spacer(":")
-                                appendSpace()
-                                variableValue(row.creationReason.name())
-                            }
                         })
                         clickRunsCommand("/hologram teleport-there ${row.metaData.name}")
                     }

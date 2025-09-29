@@ -7,13 +7,14 @@ import dev.jorel.commandapi.kotlindsl.getValue
 import dev.jorel.commandapi.kotlindsl.locationArgument
 import dev.jorel.commandapi.kotlindsl.playerExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
-import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
+import dev.slne.surf.hologram.api.hologram.SimpleHologram
+import dev.slne.surf.hologram.api.hologram.type.SimpleHologramOptions
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.hologram.util.HologramTextAlignment
 import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.command.argument.hologramNameArgument
-import dev.slne.surf.hologram.paper.command.argument.hologramTypeArgument
+import dev.slne.surf.hologram.paper.command.argument.hologramOrientationTypeArgument
 import dev.slne.surf.hologram.paper.hologram.util.HologramHitboxImpl
 import dev.slne.surf.hologram.paper.hologram.util.HologramMetaDataImpl
 import dev.slne.surf.hologram.paper.hologram.util.location.HologramLocationImpl
@@ -30,7 +31,7 @@ fun CommandAPICommand.hologramCreateCommand() = subcommand("create") {
     withPermission(HoloPermissionRegistry.COMMAND_HOLOGRAM_CREATE)
 
     hologramNameArgument("name")
-    hologramTypeArgument("type")
+    hologramOrientationTypeArgument("type")
     miniMessageArgument("text")
     locationArgument(
         "location",
@@ -68,12 +69,14 @@ fun CommandAPICommand.hologramCreateCommand() = subcommand("create") {
         )
 
         val holo = hologramService.createHologram(
-            type,
-            HologramHitboxImpl.default(),
             meta,
+            HologramOrientationType.ROTATING,
             holoLocation,
             text,
-            HologramCreationReason.Client(player.name)
+            HologramHitboxImpl.default(),
+            null,
+            SimpleHologram::class.java,
+            SimpleHologramOptions()
         )
         holo.show()
 

@@ -3,7 +3,8 @@
 package dev.slne.surf.hologram.paper.dialog
 
 import com.github.retrooper.packetevents.util.Vector3d
-import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
+import dev.slne.surf.hologram.api.hologram.SimpleHologram
+import dev.slne.surf.hologram.api.hologram.type.SimpleHologramOptions
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.hologram.util.HologramTextAlignment
 import dev.slne.surf.hologram.api.util.show
@@ -162,8 +163,6 @@ fun createHologramCreateDialog() = dialog {
                             val scale = info.getFloat("holo_scale") ?: 1f
 
                             val holo = hologramService.createHologram(
-                                type,
-                                HologramHitboxImpl.default(),
                                 HologramMetaDataImpl(
                                     nameInput,
                                     random.nextInt(),
@@ -174,11 +173,13 @@ fun createHologramCreateDialog() = dialog {
                                     alignment,
                                     bgColor
                                 ),
+                                type,
                                 player.location.clone().add(0.0, 1.0, 0.0).toHologramLocation(),
                                 text,
-                                HologramCreationReason.Client(player.name),
-                                bouncingHeight = bouncingHeight,
-                                bouncingStep = bouncingStep
+                                HologramHitboxImpl.default(),
+                                null,
+                                SimpleHologram::class.java,
+                                SimpleHologramOptions()
                             )
 
                             holo.show()

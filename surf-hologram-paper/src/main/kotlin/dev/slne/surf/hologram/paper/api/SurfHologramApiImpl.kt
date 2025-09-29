@@ -5,7 +5,6 @@ import dev.slne.surf.hologram.api.SurfHologramApi
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.hologram.type.HologramType
-import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
@@ -32,21 +31,16 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
         viewers: ObjectSet<HoloOfflinePlayer>?,
         hologramClazz: Class<H>,
         options: O
-    ): H {
-        val type = hologramTypeRegistry.getHologramType<H, O>(hologramClazz)
-            ?: error("Hologram type for class ${hologramClazz.name} is not registered!")
-
-        return type.create(
-            metaData,
-            hologramOrientationType,
-            centerLocation,
-            displayedText,
-            HologramCreationReason.Plugin(plugin.name),
-            hitbox,
-            viewers,
-            options
-        )
-    }
+    ) = hologramService.createHologram(
+        metaData,
+        hologramOrientationType,
+        centerLocation,
+        displayedText,
+        hitbox,
+        viewers,
+        hologramClazz,
+        options
+    )
 
     override fun deleteHologram(hologram: Hologram) = hologramService.deleteHologram(hologram)
     override fun editHologramSaving(

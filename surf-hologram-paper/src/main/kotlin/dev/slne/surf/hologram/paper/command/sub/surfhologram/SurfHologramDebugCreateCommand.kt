@@ -7,12 +7,13 @@ import dev.jorel.commandapi.kotlindsl.getValue
 import dev.jorel.commandapi.kotlindsl.integerArgument
 import dev.jorel.commandapi.kotlindsl.playerExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
-import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
+import dev.slne.surf.hologram.api.hologram.SimpleHologram
+import dev.slne.surf.hologram.api.hologram.type.SimpleHologramOptions
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.hologram.util.HologramTextAlignment
 import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.core.service.hologramService
-import dev.slne.surf.hologram.paper.command.argument.hologramTypeArgument
+import dev.slne.surf.hologram.paper.command.argument.hologramOrientationTypeArgument
 import dev.slne.surf.hologram.paper.hologram.util.HologramHitboxImpl
 import dev.slne.surf.hologram.paper.hologram.util.HologramMetaDataImpl
 import dev.slne.surf.hologram.paper.plugin
@@ -26,7 +27,7 @@ import kotlin.system.measureTimeMillis
 
 fun CommandAPICommand.surfHologramCreateDebugCommand() = subcommand("creation") {
     withPermission(HoloPermissionRegistry.COMMAND_SURFHOLOGRAM_DEBUG_CREATE)
-    hologramTypeArgument("type")
+    hologramOrientationTypeArgument("type")
     integerArgument("amount")
 
     playerExecutor { player, arguments ->
@@ -44,8 +45,6 @@ fun CommandAPICommand.surfHologramCreateDebugCommand() = subcommand("creation") 
                         player.location.clone().add(offsetX, 1.0, offsetZ).toHologramLocation()
 
                     val holo = hologramService.createHologram(
-                        type,
-                        HologramHitboxImpl.default(),
                         HologramMetaDataImpl(
                             name,
                             random.nextInt(),
@@ -56,11 +55,13 @@ fun CommandAPICommand.surfHologramCreateDebugCommand() = subcommand("creation") 
                             HologramTextAlignment.CENTER,
                             NamedTextColor.RED
                         ),
+                        HologramOrientationType.ROTATING,
                         holoLocation,
                         Component.text("Debug #$name"),
-                        HologramCreationReason.Client(player.name),
-                        bouncingHeight = 1.0,
-                        bouncingStep = 0.1
+                        HologramHitboxImpl.default(),
+                        null,
+                        SimpleHologram::class.java,
+                        SimpleHologramOptions()
                     )
 
                     holo.show()

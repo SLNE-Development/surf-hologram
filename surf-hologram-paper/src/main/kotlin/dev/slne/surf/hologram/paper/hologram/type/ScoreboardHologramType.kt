@@ -4,7 +4,6 @@ import dev.slne.surf.hologram.api.hologram.ScoreboardHologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.hologram.type.HologramType
 import dev.slne.surf.hologram.api.hologram.type.ScoreboardHologramOptions
-import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
@@ -24,7 +23,6 @@ class ScoreboardHologramType : HologramType<ScoreboardHologram, ScoreboardHologr
         hologramOrientationType: HologramOrientationType,
         centerLocation: HologramLocation,
         displayedText: Component,
-        creationReason: HologramCreationReason,
         hitbox: HologramHitbox?,
         viewers: ObjectSet<HoloOfflinePlayer>?,
         options: ScoreboardHologramOptions
@@ -33,7 +31,6 @@ class ScoreboardHologramType : HologramType<ScoreboardHologram, ScoreboardHologr
         hologramOrientationType,
         centerLocation,
         displayedText,
-        creationReason,
         hitbox,
         viewers,
         options.placementRange,

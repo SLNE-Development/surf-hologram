@@ -4,7 +4,6 @@ import dev.slne.surf.hologram.api.hologram.BouncingHologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.hologram.type.BouncingHologramOptions
 import dev.slne.surf.hologram.api.hologram.type.HologramType
-import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
@@ -22,7 +21,6 @@ class BouncingHologramType : HologramType<BouncingHologram, BouncingHologramOpti
         hologramOrientationType: HologramOrientationType,
         centerLocation: HologramLocation,
         displayedText: Component,
-        creationReason: HologramCreationReason,
         hitbox: HologramHitbox?,
         viewers: ObjectSet<HoloOfflinePlayer>?,
         options: BouncingHologramOptions
@@ -31,7 +29,6 @@ class BouncingHologramType : HologramType<BouncingHologram, BouncingHologramOpti
         hologramOrientationType,
         centerLocation,
         displayedText,
-        creationReason,
         hitbox,
         viewers,
         0.0,

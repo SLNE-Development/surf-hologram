@@ -7,7 +7,7 @@ import dev.jorel.commandapi.arguments.CustomArgument
 import dev.jorel.commandapi.arguments.StringArgument
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 
-class HologramTypeArgument(nodeName: String) :
+class HologramOrientationTypeArgument(nodeName: String) :
     CustomArgument<HologramOrientationType, String>(StringArgument(nodeName), { info ->
         HologramOrientationType.valueOf(info.input.uppercase())
     }) {
@@ -18,9 +18,9 @@ class HologramTypeArgument(nodeName: String) :
     }
 }
 
-inline fun CommandAPICommand.hologramTypeArgument(
+inline fun CommandAPICommand.hologramOrientationTypeArgument(
     nodeName: String,
     optional: Boolean = false,
     block: Argument<*>.() -> Unit = {}
 ): CommandAPICommand =
-    withArguments(HologramTypeArgument(nodeName).setOptional(optional).apply(block))
+    withArguments(HologramOrientationTypeArgument(nodeName).setOptional(optional).apply(block))

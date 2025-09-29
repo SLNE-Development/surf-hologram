@@ -4,7 +4,6 @@ import dev.slne.surf.hologram.api.hologram.BounceDirection
 import dev.slne.surf.hologram.api.hologram.BounceSpeed
 import dev.slne.surf.hologram.api.hologram.BouncingHologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
-import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
@@ -23,7 +22,6 @@ class BouncingHologramImpl(
     override var hologramOrientationType: HologramOrientationType,
     override var centerLocation: HologramLocation,
     override var displayedText: Component,
-    override val creationReason: HologramCreationReason,
     override val hitbox: HologramHitbox?,
     override val viewers: ObjectSet<HoloOfflinePlayer>?,
     override var bounceState: Double,
@@ -60,7 +58,6 @@ class BouncingHologramImpl(
         hologramOrientationType,
         centerLocation,
         displayedText,
-        creationReason,
         hitbox,
         viewers,
         bounceState,

@@ -6,7 +6,6 @@ import com.github.retrooper.packetevents.util.Vector3d
 import dev.slne.surf.hologram.api.event.HologramEvent
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
-import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.hologram.util.HologramTextAlignment
@@ -147,7 +146,6 @@ fun <H : Hologram, O : Any> hologram(
         orientationType,
         builder.centerLocation,
         SurfComponentBuilder.builder().apply(builder.displayedText).build(),
-        HologramCreationReason.Plugin(plugin.name),
         builder.hitbox,
         builder.viewers,
         options

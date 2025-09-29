@@ -2,7 +2,6 @@ package dev.slne.surf.hologram.api.hologram.type
 
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
-import dev.slne.surf.hologram.api.hologram.util.HologramCreationReason
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramMetaData
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
@@ -20,7 +19,6 @@ interface HologramType<H : Hologram, O : Any> {
         hologramOrientationType: HologramOrientationType,
         centerLocation: HologramLocation,
         displayedText: Component,
-        creationReason: HologramCreationReason,
         hitbox: HologramHitbox?,
         viewers: ObjectSet<HoloOfflinePlayer>?,
         options: O

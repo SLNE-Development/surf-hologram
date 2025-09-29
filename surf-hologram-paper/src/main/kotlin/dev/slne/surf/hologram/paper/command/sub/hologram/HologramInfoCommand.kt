@@ -65,14 +65,6 @@ fun CommandAPICommand.hologramInfoCommand() = subcommand("info") {
                 appendSpace()
                 variableValue(hologram.metaData.textAlignment.name)
             }
-            appendNewline {
-                append(CommonComponents.EM_DASH)
-                appendSpace()
-                variableKey("Ersteller")
-                spacer(":")
-                appendSpace()
-                variableValue(hologram.creationReason.name())
-            }
 
             if (hologram is BouncingHologram) {
                 val bouncingHologram = hologram as BouncingHologram
