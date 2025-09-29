@@ -85,6 +85,7 @@ class ScoreboardHologramImpl(
     companion object {
         private lateinit var updateTask: ScheduledTask
 
+        @Deprecated("Only for testing purposes")
         fun startUpdating() {
             if (::updateTask.isInitialized && !updateTask.isCancelled) {
                 return
@@ -95,6 +96,7 @@ class ScoreboardHologramImpl(
             }, 0L, 10L, TimeUnit.SECONDS)
         }
 
+        @Deprecated("Only for testing purposes")
         fun stopUpdating() {
             if (::updateTask.isInitialized && !updateTask.isCancelled) {
                 updateTask.cancel()

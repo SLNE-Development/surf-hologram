@@ -6,7 +6,6 @@ import dev.slne.surf.hologram.core.registry.hologramTypeRegistry
 import dev.slne.surf.hologram.paper.command.hologramCommand
 import dev.slne.surf.hologram.paper.command.surfHologramCommand
 import dev.slne.surf.hologram.paper.hologram.BouncingHologramImpl
-import dev.slne.surf.hologram.paper.hologram.ScoreboardHologramImpl
 import dev.slne.surf.hologram.paper.hologram.type.BouncingHologramType
 import dev.slne.surf.hologram.paper.hologram.type.ScoreboardHologramType
 import dev.slne.surf.hologram.paper.hologram.type.SimpleHologramType
@@ -30,8 +29,6 @@ class PaperMain : SuspendingJavaPlugin() {
 
         hologramCommand()
         surfHologramCommand()
-
-        ScoreboardHologramImpl.startUpdating()
         BouncingHologramImpl.startTicking()
 
         hologramTypeRegistry.register(SimpleHologramType())
@@ -40,7 +37,6 @@ class PaperMain : SuspendingJavaPlugin() {
     }
 
     override fun onDisable() {
-        ScoreboardHologramImpl.stopUpdating()
         BouncingHologramImpl.stopTicking()
     }
 }
