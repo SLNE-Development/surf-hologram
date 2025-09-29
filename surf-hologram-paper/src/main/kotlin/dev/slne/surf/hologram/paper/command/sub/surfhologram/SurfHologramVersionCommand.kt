@@ -1,0 +1,52 @@
+package dev.slne.surf.hologram.paper.command.sub.surfhologram
+
+import com.github.shynixn.mccoroutine.folia.launch
+import dev.jorel.commandapi.CommandAPICommand
+import dev.jorel.commandapi.kotlindsl.anyExecutor
+import dev.jorel.commandapi.kotlindsl.subcommand
+import dev.slne.surf.hologram.paper.plugin
+import dev.slne.surf.hologram.paper.service.versionService
+import dev.slne.surf.hologram.paper.util.HoloPermissionRegistry
+import dev.slne.surf.surfapi.core.api.messages.adventure.clickOpensUrl
+import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
+
+fun CommandAPICommand.surfHologramVersionCommand() = subcommand("version") {
+    withPermission(HoloPermissionRegistry.COMMAND_SURFHOLOGRAM_VERSION)
+    anyExecutor { executor, _ ->
+        plugin.launch {
+            executor.sendText {
+                appendNewline()
+                appendPrefix()
+                if (versionService.isUpToDate()) info("Das Plugin ist up-to-date.") else variableKey(
+                    "Es gibt eine neuere Version."
+                )
+
+                versionService.currentVersion.let {
+                    appendNewline {
+                        appendPrefix()
+                        variableKey("Aktuelle Version: ")
+                        variableValue(it.toString())
+                    }
+                }
+
+                versionService.latestVersion.let {
+                    appendNewline {
+                        appendPrefix()
+                        variableKey("Neueste Version: ")
+                        variableValue(it.toString())
+                    }
+                }
+
+                appendNewline {
+                    appendPrefix()
+                    success("Neuste Version herunterladen: ")
+                    variableValue("[DOWNLOAD]")
+                    clickOpensUrl(
+                        versionService.link
+                            ?: "http://github.com/SLNE-Development/surf-hologram/releases/latest"
+                    )
+                }
+            }
+        }
+    }
+}
