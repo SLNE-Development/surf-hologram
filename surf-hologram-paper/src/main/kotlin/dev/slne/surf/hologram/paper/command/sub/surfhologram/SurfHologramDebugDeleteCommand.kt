@@ -29,10 +29,13 @@ fun CommandAPICommand.surfHologramDebugDeleteCommand() = subcommand("delete") {
             info("Möchtest du wirklich ")
             variableValue(debugHolograms.size)
             info(" Debug-Hologramm(e) löschen? ")
+            spacer("[")
+            success("Bestätigen")
+            spacer("]")
             hoverEvent(buildText {
                 info("Klicke um alle Debug-Hologramme zu löschen.")
             })
-            
+
             clickEvent(ClickEvent.callback {
                 debugHolograms.forEach {
                     hologramService.deleteHologram(it)

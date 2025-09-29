@@ -12,6 +12,7 @@ import dev.slne.surf.hologram.api.hologram.type.SimpleHologramOptions
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.hologram.util.HologramTextAlignment
 import dev.slne.surf.hologram.api.util.show
+import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.command.argument.hologramOrientationTypeArgument
 import dev.slne.surf.hologram.paper.hologram.util.HologramHitboxImpl
@@ -63,6 +64,8 @@ fun CommandAPICommand.surfHologramCreateDebugCommand() = subcommand("creation") 
                         SimpleHologram::class.java,
                         SimpleHologramOptions()
                     )
+
+                    hologramRegistry.registerHologram(holo)
 
                     holo.show()
                 }
