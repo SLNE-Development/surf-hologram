@@ -50,8 +50,8 @@ class ScoreboardHologramImpl(
 
     private fun buildLine(placement: Int) = buildText {
         _placements.firstOrNull { it.placement == placement }?.let {
-            variableValue(placement)
-            spacer(".")
+            spacer("#")
+            info(placement)
             appendSpace()
             append(it.name)
             appendSpace()
