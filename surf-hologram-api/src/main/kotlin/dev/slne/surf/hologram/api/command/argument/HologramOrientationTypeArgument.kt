@@ -1,4 +1,4 @@
-package dev.slne.surf.hologram.paper.command.argument
+package dev.slne.surf.hologram.api.command.argument
 
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.arguments.Argument

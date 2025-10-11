@@ -10,14 +10,14 @@ import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.util.HoloPermissionRegistry
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 
-fun CommandAPICommand.hologramRefreshCommand() = subcommand("refresh") {
-    withPermission(HoloPermissionRegistry.COMMAND_HOLOGRAM_REFRESH)
+fun CommandAPICommand.hologramRefreshContentCommand() = subcommand("refreshContent") {
+    withPermission(HoloPermissionRegistry.COMMAND_HOLOGRAM_REFRESH_CONTENT)
     hologramArgument("hologram", true)
 
     playerExecutor { player, arguments ->
         val hologram: Hologram? by arguments
 
-        hologramService.refresh(hologram)
+        hologramService.refreshContent(hologram)
 
         if (hologram == null) {
             player.sendText {

@@ -9,7 +9,6 @@ import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.paper.plugin
-import dev.slne.surf.surfapi.core.api.messages.CommonComponents
 import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
 import dev.slne.surf.surfapi.core.api.util.mutableObjectSetOf
 import dev.slne.surf.surfapi.core.api.util.random
@@ -38,7 +37,7 @@ class ScoreboardHologramImpl(
                 appendNewline()
             }
         }
-        refreshClean()
+        refreshContent()
     }
 
     override fun addEntry(placement: Int, name: Component, score: Int) = _placements.add(
@@ -50,12 +49,14 @@ class ScoreboardHologramImpl(
 
     private fun buildLine(placement: Int) = buildText {
         _placements.firstOrNull { it.placement == placement }?.let {
-            spacer("#")
+            info("#")
             info(placement)
+            appendSpace()
+            spacer("-")
             appendSpace()
             append(it.name)
             appendSpace()
-            append(CommonComponents.EM_DASH)
+            spacer("-")
             appendSpace()
             variableValue("${it.score}$scoreUnit")
         } ?: {
@@ -92,7 +93,8 @@ class ScoreboardHologramImpl(
             }
 
             updateTask = Bukkit.getAsyncScheduler().runAtFixedRate(plugin, {
-                hologramRegistry.holograms().forEach { (it as? ScoreboardHologram)?.update() }
+                hologramRegistry.holograms()
+                    .forEach { (it as? ScoreboardHologram)?.update() }
             }, 0L, 10L, TimeUnit.SECONDS)
         }
 

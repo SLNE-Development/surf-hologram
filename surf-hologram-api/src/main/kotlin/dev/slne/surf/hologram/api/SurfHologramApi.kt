@@ -67,6 +67,16 @@ interface SurfHologramApi {
      */
     fun refreshHologram(hologram: Hologram?)
 
+
+    /**
+     * Refreshes the content of the specified hologram. This method can be used to update the
+     * hologram's displayed information or visuals dynamically.
+     *
+     * @param hologram The hologram whose content needs to be refreshed.
+     * If null, every hologram's content will be refreshed.
+     */
+    fun refreshContent(hologram: Hologram?)
+
     /**
      * Registers a hologram in the system. This method adds the specified hologram
      * to the internal registry, enabling its management and interaction through the API.
@@ -144,6 +154,14 @@ interface SurfHologramApi {
      * @return The matching HologramType for the provided hologram class, or null if no such type is registered.
      */
     fun <H : Hologram, O : HologramOptions> getHologramType(hologramClazz: Class<H>): HologramType<H, O>?
+
+
+    /**
+     * Retrieves a set of all registered holograms in the system.
+     *
+     * @return An ObjectSet containing all holograms currently registered.
+     */
+    fun all(): ObjectSet<Hologram>
 
     /**
      * Provides a singleton instance of the SurfHologramApi service.

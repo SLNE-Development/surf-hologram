@@ -26,6 +26,7 @@ interface HologramService {
 
     fun refresh(hologram: Hologram?)
     fun refreshClean(hologram: Hologram)
+    fun refreshContent(hologram: Hologram?)
 
     fun deleteHologram(hologram: Hologram)
     fun deleteHologram(name: String) = hologramRegistry.getHologram(name)?.let {
