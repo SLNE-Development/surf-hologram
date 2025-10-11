@@ -16,7 +16,7 @@ fun CommandAPICommand.hologramTeleportHereCommand() = subcommand("teleport-here"
 
     playerExecutor { player, arguments ->
         val hologram: Hologram by arguments
-        hologram.teleportTo(player.location.toHologramLocation())
+        hologram.teleportTo(player.location.clone().add(0.4, 0.0, 0.0).toHologramLocation())
 
         player.sendText {
             appendPrefix()

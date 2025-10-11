@@ -30,7 +30,7 @@ fun CommandAPICommand.surfHologramScoreboardDebugCommand() = subcommand("scorebo
                 }"
             ),
             HologramOrientationType.FIXED,
-            player.location.toHologramLocation(),
+            player.location.clone().add(0.4, 0.0, 0.0).toHologramLocation(),
             buildText { error("Loading data...") },
             HologramHitboxImpl.default(),
             null,

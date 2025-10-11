@@ -13,9 +13,10 @@ object MiniPlaceholdersHook {
         if (!this.isEnabled()) {
             return input
         }
-        
+
         val miniMessage = MiniMessage.miniMessage().serialize(input)
         val resolver = MiniPlaceholders.audienceGlobalPlaceholders()
-        return MiniMessage.miniMessage().deserialize(miniMessage, player, resolver)
+        return MiniMessage.miniMessage()
+            .deserialize(miniMessage.replace("\\", ""), player, resolver)
     }
 }
