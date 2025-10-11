@@ -7,9 +7,11 @@ import dev.slne.surf.hologram.core.registry.hologramTypeRegistry
 import dev.slne.surf.hologram.paper.command.hologramCommand
 import dev.slne.surf.hologram.paper.command.surfHologramCommand
 import dev.slne.surf.hologram.paper.hologram.BouncingHologramImpl
+import dev.slne.surf.hologram.paper.hologram.UpdatingHologramImpl
 import dev.slne.surf.hologram.paper.hologram.type.BouncingHologramType
 import dev.slne.surf.hologram.paper.hologram.type.ScoreboardHologramType
 import dev.slne.surf.hologram.paper.hologram.type.SimpleHologramType
+import dev.slne.surf.hologram.paper.hologram.type.UpdatingHologramType
 import dev.slne.surf.hologram.paper.listener.ConnectionListener
 import dev.slne.surf.hologram.paper.listener.InternalEventListener
 import dev.slne.surf.hologram.paper.listener.InternalEventPacketListener
@@ -35,12 +37,14 @@ class PaperMain : SuspendingJavaPlugin() {
         hologramCommand()
         surfHologramCommand()
         BouncingHologramImpl.startTicking()
+        UpdatingHologramImpl.startUpdating()
 
         metrics = Metrics(this, 27409)
 
         hologramTypeRegistry.register(SimpleHologramType())
         hologramTypeRegistry.register(BouncingHologramType())
         hologramTypeRegistry.register(ScoreboardHologramType())
+        hologramTypeRegistry.register(UpdatingHologramType())
 
         launch {
             versionService.fetchGithubVersion()
@@ -51,7 +55,8 @@ class PaperMain : SuspendingJavaPlugin() {
         if (::metrics.isInitialized) {
             metrics.shutdown()
         }
-        
+
         BouncingHologramImpl.stopTicking()
+        UpdatingHologramImpl.stopUpdating()
     }
 }
