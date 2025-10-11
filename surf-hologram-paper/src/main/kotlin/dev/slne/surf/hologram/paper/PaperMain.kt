@@ -7,6 +7,7 @@ import dev.slne.surf.hologram.core.registry.hologramTypeRegistry
 import dev.slne.surf.hologram.paper.command.hologramCommand
 import dev.slne.surf.hologram.paper.command.surfHologramCommand
 import dev.slne.surf.hologram.paper.hologram.BouncingHologramImpl
+import dev.slne.surf.hologram.paper.hologram.ScoreboardHologramImpl
 import dev.slne.surf.hologram.paper.hologram.UpdatingHologramImpl
 import dev.slne.surf.hologram.paper.hologram.type.BouncingHologramType
 import dev.slne.surf.hologram.paper.hologram.type.ScoreboardHologramType
@@ -38,6 +39,7 @@ class PaperMain : SuspendingJavaPlugin() {
         surfHologramCommand()
         BouncingHologramImpl.startTicking()
         UpdatingHologramImpl.startUpdating()
+        ScoreboardHologramImpl.startUpdating()
 
         metrics = Metrics(this, 27409)
 
@@ -58,5 +60,6 @@ class PaperMain : SuspendingJavaPlugin() {
 
         BouncingHologramImpl.stopTicking()
         UpdatingHologramImpl.stopUpdating()
+        ScoreboardHologramImpl.stopUpdating()
     }
 }
