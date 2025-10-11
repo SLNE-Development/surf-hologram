@@ -40,34 +40,34 @@ fun CommandAPICommand.surfHologramScoreboardDebugCommand() = subcommand("scorebo
 
         val names = objectListOf(
             buildText {
-                info("TheBjoRedCraft")
+                text("TheBjoRedCraft")
             },
             buildText {
-                info("NotAmmo")
+                text("NotAmmo")
             },
             buildText {
-                info("Keviro")
+                text("Keviro")
             },
             buildText {
-                info("Twisti_Twixi")
+                text("Twisti_Twixi")
             },
             buildText {
-                info("Timonso")
+                text("Timonso")
             },
             buildText {
-                info("Koljav")
+                text("Koljav")
             },
             buildText {
-                info("Floweryalina")
+                text("Floweryalina")
             },
             buildText {
-                info("_Danilo")
+                text("_Danilo")
             },
             buildText {
-                info("Dorlino_")
+                text("Dorlino_")
             },
             buildText {
-                info("PEKK29")
+                text("PEKK29")
             }
         )
 

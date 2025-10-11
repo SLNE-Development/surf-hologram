@@ -12,9 +12,11 @@ import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
+import dev.slne.surf.hologram.paper.hook.MiniPlaceholdersHook
 import dev.slne.surf.hologram.paper.util.buildEntityData
 import dev.slne.surf.hologram.paper.util.toPacketLocation
 import dev.slne.surf.hologram.paper.util.toVector3f
+import org.bukkit.entity.Player
 import java.util.*
 
 object PaperPackets {
@@ -28,10 +30,14 @@ object PaperPackets {
         Vector3d.zero()
     )
 
-    fun buildHoloMetaPacket(hologram: Hologram) = WrapperPlayServerEntityMetadata(
+    fun buildHoloMetaPacket(hologram: Hologram, viewer: Player) = WrapperPlayServerEntityMetadata(
         hologram.metaData.holoEntityId,
         buildEntityData {
-            entry(23, EntityDataTypes.ADV_COMPONENT, hologram.displayedText)
+            entry(
+                23,
+                EntityDataTypes.ADV_COMPONENT,
+                MiniPlaceholdersHook.parse(viewer, hologram.displayedText)
+            )
             entry(12, EntityDataTypes.VECTOR3F, hologram.metaData.scale.toVector3f())
 
             if (hologram.hologramOrientationType == HologramOrientationType.ROTATING) {
@@ -74,12 +80,17 @@ object PaperPackets {
             )
         )
 
-    fun buildHoloUpdateContentPacket(hologram: Hologram) = WrapperPlayServerEntityMetadata(
-        hologram.metaData.holoEntityId,
-        listOf(
-            EntityData(23, EntityDataTypes.ADV_COMPONENT, hologram.displayedText)
+    fun buildHoloUpdateContentPacket(hologram: Hologram, viewer: Player) =
+        WrapperPlayServerEntityMetadata(
+            hologram.metaData.holoEntityId,
+            listOf(
+                EntityData(
+                    23,
+                    EntityDataTypes.ADV_COMPONENT,
+                    MiniPlaceholdersHook.parse(viewer, hologram.displayedText)
+                )
+            )
         )
-    )
 
     fun buildDestroyPacket(hologram: Hologram) = WrapperPlayServerDestroyEntities(
         hologram.metaData.holoEntityId,

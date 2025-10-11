@@ -15,6 +15,7 @@ import dev.slne.surf.hologram.core.service.hologramPlayerService
 import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.PaperPackets
 import dev.slne.surf.hologram.paper.util.debug
+import dev.slne.surf.hologram.paper.util.player
 import dev.slne.surf.hologram.paper.util.toBukkitLocation
 import dev.slne.surf.surfapi.core.api.util.mutableObject2ObjectMapOf
 import dev.slne.surf.surfapi.core.api.util.mutableObjectListOf
@@ -38,7 +39,7 @@ abstract class BaseHologram : Hologram {
         debug("Showing hologram '${metaData.name}' to player '${bukkitPlayer.name}'")
 
         packetPlayer.sendPacket(PaperPackets.buildHoloSpawnPacket(this))
-        packetPlayer.sendPacket(PaperPackets.buildHoloMetaPacket(this))
+        packetPlayer.sendPacket(PaperPackets.buildHoloMetaPacket(this, bukkitPlayer))
 
         hitbox?.let {
             packetPlayer.sendPacket(PaperPackets.buildHoloInteractionSpawnPacket(this, it))
@@ -71,7 +72,7 @@ abstract class BaseHologram : Hologram {
         forEachPacketViewer {
             debug("Refreshing content of hologram '${metaData.name}' for player '${it.name}'")
 
-            it.sendPacket(PaperPackets.buildHoloUpdateContentPacket(this))
+            it.sendPacket(PaperPackets.buildHoloUpdateContentPacket(this, it.player))
         }
     }
 
