@@ -152,6 +152,19 @@ interface Hologram {
     fun refresh()
 
     /**
+     * Updates the content of the hologram to reflect changes.
+     *
+     * This method ensures that the hologram's displayed content, such as text or relevant
+     * metadata, is up-to-date and synchronized with any recent modifications. It is typically
+     * used when the internal state of the hologram has changed and those updates need
+     * to be visually or interactively applied for the viewers.
+     *
+     * Unlike a complete refresh or reinitialization, `refreshContent` focuses specifically on
+     * updating the hologram's content rather than recalibrating its entire state or properties.
+     */
+    fun refreshContent()
+
+    /**
      * Performs a clean refresh of the hologram's state.
      *
      * This method resets and reinitializes the hologram while ensuring its data

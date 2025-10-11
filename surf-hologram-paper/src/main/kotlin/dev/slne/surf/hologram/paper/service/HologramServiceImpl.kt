@@ -77,7 +77,12 @@ class HologramServiceImpl : HologramService, Services.Fallback {
         }
     }
 
-    override fun refreshClean(hologram: Hologram) {
-        hologram.refreshClean()
+    override fun refreshClean(hologram: Hologram) = hologram.refreshClean()
+    override fun refreshContent(hologram: Hologram?) {
+        if (hologram != null) {
+            hologram.refreshContent()
+        } else {
+            hologramRegistry.holograms().forEach { it.refreshContent() }
+        }
     }
 }

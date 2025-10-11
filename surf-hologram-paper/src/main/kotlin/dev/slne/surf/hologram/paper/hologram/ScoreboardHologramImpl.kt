@@ -38,7 +38,7 @@ class ScoreboardHologramImpl(
                 appendNewline()
             }
         }
-        refreshClean()
+        refreshContent()
     }
 
     override fun addEntry(placement: Int, name: Component, score: Int) = _placements.add(
@@ -92,7 +92,8 @@ class ScoreboardHologramImpl(
             }
 
             updateTask = Bukkit.getAsyncScheduler().runAtFixedRate(plugin, {
-                hologramRegistry.holograms().forEach { (it as? ScoreboardHologram)?.update() }
+                hologramRegistry.holograms()
+                    .forEach { (it as? ScoreboardHologram)?.update() }
             }, 0L, 10L, TimeUnit.SECONDS)
         }
 

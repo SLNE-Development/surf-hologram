@@ -74,6 +74,13 @@ object PaperPackets {
             )
         )
 
+    fun buildHoloUpdateContentPacket(hologram: Hologram) = WrapperPlayServerEntityMetadata(
+        hologram.metaData.holoEntityId,
+        listOf(
+            EntityData(23, EntityDataTypes.ADV_COMPONENT, hologram.displayedText)
+        )
+    )
+
     fun buildDestroyPacket(hologram: Hologram) = WrapperPlayServerDestroyEntities(
         hologram.metaData.holoEntityId,
         hologram.metaData.interactionEntityId

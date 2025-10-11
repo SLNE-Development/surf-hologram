@@ -63,3 +63,17 @@ data class ScoreboardHologramOptions(
     var scoreUnit: String = "P."
 ) : HologramOptions
 
+/**
+ * Represents configuration options for a hologram that supports periodic updating.
+ *
+ * This class allows the customization of the update interval for holograms that require
+ * scheduled updates. It specifies how frequently the hologram's state or visual representation
+ * should be refreshed.
+ *
+ * @property updateInterval The interval, in ticks, at which the hologram is updated.
+ * The default value is 20 ticks, equivalent to 1 second in a 20-ticks-per-second system.
+ */
+data class UpdatingHologramOptions(
+    var updateInterval: Long = 20L
+) : HologramOptions
+

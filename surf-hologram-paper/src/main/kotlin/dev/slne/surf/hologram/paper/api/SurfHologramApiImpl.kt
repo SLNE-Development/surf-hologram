@@ -48,6 +48,8 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
     ) = hologramService.editHologramSaving(hologram, block)
 
     override fun refreshHologram(hologram: Hologram?) = hologramService.refresh(hologram)
+    override fun refreshContent(hologram: Hologram?) = hologramService.refreshContent(hologram)
+
     override fun getHologram(name: String) = hologramRegistry.getHologram(name)
 
     override fun getPlayer(uuid: UUID, name: String) = hologramPlayerService.getPlayer(uuid, name)

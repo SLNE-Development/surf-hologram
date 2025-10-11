@@ -67,6 +67,12 @@ abstract class BaseHologram : Hologram {
         fakeHologram.hide()
     }
 
+    override fun refreshContent() {
+        forEachPacketViewer {
+            it.sendPacket(PaperPackets.buildHoloUpdateContentPacket(this))
+        }
+    }
+
     override fun teleportHere(player: HoloPlayer) =
         player.bukkitPlayer?.teleport(centerLocation.toBukkitLocation()) == true
 

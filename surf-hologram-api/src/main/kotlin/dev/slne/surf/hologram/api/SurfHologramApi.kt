@@ -67,6 +67,16 @@ interface SurfHologramApi {
      */
     fun refreshHologram(hologram: Hologram?)
 
+
+    /**
+     * Refreshes the content of the specified hologram. This method can be used to update the
+     * hologram's displayed information or visuals dynamically.
+     *
+     * @param hologram The hologram whose content needs to be refreshed.
+     * If null, every hologram's content will be refreshed.
+     */
+    fun refreshContent(hologram: Hologram?)
+
     /**
      * Registers a hologram in the system. This method adds the specified hologram
      * to the internal registry, enabling its management and interaction through the API.
