@@ -66,4 +66,6 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
     override fun <H : Hologram, O : HologramOptions> getHologramType(
         hologramClazz: Class<H>
     ) = hologramTypeRegistry.getHologramType<H, O>(hologramClazz)
+
+    override fun all() = hologramRegistry.holograms()
 }

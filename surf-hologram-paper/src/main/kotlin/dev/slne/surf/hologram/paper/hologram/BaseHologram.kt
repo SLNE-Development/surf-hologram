@@ -69,6 +69,8 @@ abstract class BaseHologram : Hologram {
 
     override fun refreshContent() {
         forEachPacketViewer {
+            debug("Refreshing content of hologram '${metaData.name}' for player '${it.name}'")
+
             it.sendPacket(PaperPackets.buildHoloUpdateContentPacket(this))
         }
     }

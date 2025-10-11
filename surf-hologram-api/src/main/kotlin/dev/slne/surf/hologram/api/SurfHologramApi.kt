@@ -155,6 +155,14 @@ interface SurfHologramApi {
      */
     fun <H : Hologram, O : HologramOptions> getHologramType(hologramClazz: Class<H>): HologramType<H, O>?
 
+
+    /**
+     * Retrieves a set of all registered holograms in the system.
+     *
+     * @return An ObjectSet containing all holograms currently registered.
+     */
+    fun all(): ObjectSet<Hologram>
+
     /**
      * Provides a singleton instance of the SurfHologramApi service.
      * The object is used for accessing and managing holograms and their metadata,

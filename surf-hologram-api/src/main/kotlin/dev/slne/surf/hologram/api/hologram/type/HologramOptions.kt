@@ -1,6 +1,7 @@
 package dev.slne.surf.hologram.api.hologram.type
 
 import dev.slne.surf.hologram.api.hologram.BounceSpeed
+import org.jetbrains.annotations.Range
 
 /**
  * Represents a set of configurable options for holograms.
@@ -70,10 +71,11 @@ data class ScoreboardHologramOptions(
  * scheduled updates. It specifies how frequently the hologram's state or visual representation
  * should be refreshed.
  *
- * @property updateInterval The interval, in ticks, at which the hologram is updated.
- * The default value is 20 ticks, equivalent to 1 second in a 20-ticks-per-second system.
+ * @property updateInterval The interval, in milliseconds, at which the hologram updates.
+ * Must be at least 50 milliseconds.
+ * Defaults to 60,000 milliseconds (1 minute).
  */
 data class UpdatingHologramOptions(
-    var updateInterval: Long = 20L
+    var updateInterval: @Range(from = 50, to = Long.MAX_VALUE) Long = 60_000L
 ) : HologramOptions
 
