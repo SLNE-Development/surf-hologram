@@ -43,5 +43,5 @@ fun buildEntityData(block: EntityDataBuilder.() -> Unit): List<EntityData<*>> {
 
 fun Vector3d.toVector3f() = Vector3f(this.x.toFloat(), this.y.toFloat(), this.z.toFloat())
 
-val User.player get() = Bukkit.getPlayer(this.uuid) ?: error("Packet User is not online!")
+val User.player get() = Bukkit.getPlayer(this.uuid) ?: error("Player with UUID ${this.uuid} is not online")
 
