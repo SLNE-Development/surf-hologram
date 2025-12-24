@@ -46,6 +46,32 @@ interface HologramLocation {
     var z: Double
 
     /**
+     * Represents the yaw (rotation around the vertical axis) of the hologram in degrees.
+     *
+     * This property determines the horizontal rotation of the hologram's orientation
+     * within the Minecraft world. A yaw value of 0 typically corresponds to facing
+     * directly north (positive Z direction), with increasing values rotating
+     * clockwise. The value can range from -180 to 180 degrees.
+     *
+     * Modifying this property allows for dynamic changes to the hologram's facing direction,
+     * which can be used to adjust its appearance relative to the player or environment.
+     */
+    var yaw: Float
+
+    /**
+     * Represents the pitch (vertical rotation) of the hologram's orientation.
+     *
+     * The pitch is measured in degrees, where positive values indicate a downward tilt
+     * and negative values indicate an upward tilt. It is used to define the vertical
+     * viewing angle of the hologram in the 3D space.
+     *
+     * This property is commonly used in scenarios such as modifying the hologram's
+     * orientation or calculating its directional vector in relation to other entities
+     * or locations within the associated world.
+     */
+    var pitch: Float
+
+    /**
      * Represents the world component of a HologramLocation.
      *
      * Defines the specific HologramWorld instance associated with the hologram's location.

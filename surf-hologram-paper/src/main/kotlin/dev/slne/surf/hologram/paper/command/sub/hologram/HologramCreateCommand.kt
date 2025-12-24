@@ -53,7 +53,9 @@ fun CommandAPICommand.hologramCreateCommand() = subcommand("create") {
                 HologramWorldImpl(
                     it.world.name,
                     it.world.uid
-                )
+                ),
+                it.yaw,
+                it.pitch
             )
         }
 
@@ -70,7 +72,7 @@ fun CommandAPICommand.hologramCreateCommand() = subcommand("create") {
 
         val holo = hologramService.createHologram(
             meta,
-            HologramOrientationType.ROTATING,
+            type,
             holoLocation,
             text,
             HologramHitboxImpl.default(),

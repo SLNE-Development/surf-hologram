@@ -25,7 +25,7 @@ object PaperPackets {
         UUID.randomUUID(),
         EntityTypes.TEXT_DISPLAY,
         hologram.centerLocation.toPacketLocation(),
-        0f,
+        hologram.centerLocation.yaw,
         0,
         Vector3d.zero()
     )

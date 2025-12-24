@@ -30,12 +30,16 @@ class PaperHologramConversationUtil : HologramConversationUtil, Services.Fallbac
         world: HologramWorld,
         x: Double,
         y: Double,
-        z: Double
+        z: Double,
+        yaw: Float,
+        pitch: Float,
     ) = HologramLocationImpl(
         x,
         y,
         z,
-        world
+        world,
+        yaw,
+        pitch
     )
 
     override fun createWorld(

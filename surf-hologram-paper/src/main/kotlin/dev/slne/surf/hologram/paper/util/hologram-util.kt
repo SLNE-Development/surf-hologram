@@ -7,7 +7,7 @@ import dev.slne.surf.hologram.paper.hologram.util.location.HologramWorldImpl
 import org.bukkit.Location as BukkitLocation
 
 fun HologramLocation.toBukkitLocation() =
-    BukkitLocation(this.world.bukkitWorld, this.x, this.y, this.z)
+    BukkitLocation(this.world.bukkitWorld, this.x, this.y, this.z, this.yaw, this.pitch)
 
 fun BukkitLocation.toHologramLocation() = HologramLocationImpl(
     this.x,
@@ -16,5 +16,7 @@ fun BukkitLocation.toHologramLocation() = HologramLocationImpl(
     HologramWorldImpl(
         this.world.name,
         this.world.uid
-    )
+    ),
+    this.yaw,
+    this.pitch
 )

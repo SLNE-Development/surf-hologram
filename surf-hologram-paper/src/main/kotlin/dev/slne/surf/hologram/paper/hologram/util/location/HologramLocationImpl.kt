@@ -7,9 +7,11 @@ class HologramLocationImpl(
     override var x: Double,
     override var y: Double,
     override var z: Double,
-    override var world: HologramWorld
+    override var world: HologramWorld,
+    override var yaw: Float,
+    override var pitch: Float
 ) : HologramLocation {
-    override fun duplicate() = HologramLocationImpl(x, y, z, world)
+    override fun duplicate() = HologramLocationImpl(x, y, z, world, yaw, pitch)
     override fun toString(): String {
         return "World: ${world.worldName}, X: ${x.toInt()}, Y: ${y.toInt()}, Z: ${z.toInt()}"
     }

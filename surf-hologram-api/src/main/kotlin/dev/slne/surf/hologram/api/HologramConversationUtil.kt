@@ -43,9 +43,18 @@ interface HologramConversationUtil {
      * @param x The X-coordinate of the location.
      * @param y The Y-coordinate of the location.
      * @param z The Z-coordinate of the location.
+     * @param yaw The yaw (horizontal rotation) of the location. Default is 0f.
+     * @param pitch The pitch (vertical rotation) of the location. Default is 0
      * @return A new HologramLocation instance representing the specified coordinates in the given world.
      */
-    fun createLocation(world: HologramWorld, x: Double, y: Double, z: Double): HologramLocation
+    fun createLocation(
+        world: HologramWorld,
+        x: Double,
+        y: Double,
+        z: Double,
+        yaw: Float = 0f,
+        pitch: Float = 0f
+    ): HologramLocation
 
     /**
      * Creates a new instance of `HologramWorld` with the specified name and unique identifier.
