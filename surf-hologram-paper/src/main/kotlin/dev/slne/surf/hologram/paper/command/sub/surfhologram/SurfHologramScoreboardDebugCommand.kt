@@ -93,7 +93,7 @@ fun CommandAPICommand.surfHologramScoreboardDebugCommand() = subcommand("scorebo
         scoreboardHologram.show()
 
         player.sendText {
-            appendPrefix()
+            appendSuccessPrefix()
             success("Es wurde ein Scoreboard-Hologramm erstellt.")
         }
     }

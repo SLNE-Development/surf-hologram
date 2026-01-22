@@ -19,7 +19,7 @@ fun exampleHologramSetContentCommand() = commandAPICommand("examplehologramsetco
         hologram.displayedText = MiniMessage.miniMessage().deserialize(content)
 
         player.sendText {
-            appendPrefix()
+            appendSuccessPrefix()
             success("Das Hologram ")
             variableValue(hologram.metaData.name)
             success(" wurde aktualisiert.")
