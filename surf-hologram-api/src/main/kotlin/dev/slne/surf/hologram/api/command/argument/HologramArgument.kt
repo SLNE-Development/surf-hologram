@@ -14,7 +14,7 @@ class HologramArgument(nodeName: String) :
         surfHologramApi.getHologram(info.input)
             ?: throw CustomArgumentException.fromAdventureComponent(
                 buildText {
-                    appendPrefix()
+                    appendErrorPrefix()
                     error("Das Hologram wurde nicht gefunden.")
                 })
     }) {

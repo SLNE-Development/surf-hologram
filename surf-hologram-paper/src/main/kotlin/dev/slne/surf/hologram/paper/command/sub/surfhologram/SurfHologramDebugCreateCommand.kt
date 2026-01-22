@@ -73,7 +73,7 @@ fun CommandAPICommand.surfHologramCreateDebugCommand() = subcommand("creation") 
 
 
             player.sendText {
-                appendPrefix()
+                appendSuccessPrefix()
                 success("Es wurden ")
                 variableValue(amount)
                 success(" Hologramme des Typs ")

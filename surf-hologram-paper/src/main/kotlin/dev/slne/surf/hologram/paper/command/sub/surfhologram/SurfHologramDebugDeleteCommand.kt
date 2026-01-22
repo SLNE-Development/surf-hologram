@@ -18,14 +18,14 @@ fun CommandAPICommand.surfHologramDebugDeleteCommand() = subcommand("delete") {
 
         if (debugHolograms.isEmpty()) {
             player.sendText {
-                appendPrefix()
+                appendErrorPrefix()
                 error("Es wurden keine Debug-Hologramme gefunden.")
             }
             return@playerExecutor
         }
 
         player.sendText {
-            appendPrefix()
+            appendInfoPrefix()
             info("Möchtest du wirklich ")
             variableValue(debugHolograms.size)
             info(" Debug-Hologramm(e) löschen? ")
@@ -42,7 +42,7 @@ fun CommandAPICommand.surfHologramDebugDeleteCommand() = subcommand("delete") {
                 }
 
                 player.sendText {
-                    appendPrefix()
+                    appendSuccessPrefix()
                     success("Es wurde erfolgreich ")
                     variableValue(debugHolograms.size)
                     success(" Debug-Hologramm(e) gelöscht.")

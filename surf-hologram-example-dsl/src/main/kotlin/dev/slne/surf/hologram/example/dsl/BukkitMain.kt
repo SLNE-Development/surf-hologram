@@ -66,7 +66,7 @@ class BukkitMain : SuspendingJavaPlugin() {
                 val bukkitPlayer = it.player.bukkitPlayer ?: return@withEventHandler
 
                 bukkitPlayer.sendText {
-                    appendPrefix()
+                    appendSuccessPrefix()
                     success("You clicked the example hologram!")
                 }
             }
@@ -112,7 +112,7 @@ class BukkitMain : SuspendingJavaPlugin() {
                 val bukkitPlayer = it.player.bukkitPlayer ?: return@withEventHandler
 
                 bukkitPlayer.sendText {
-                    appendPrefix()
+                    appendSuccessPrefix()
                     success("You clicked the example updating hologram!")
                 }
             }

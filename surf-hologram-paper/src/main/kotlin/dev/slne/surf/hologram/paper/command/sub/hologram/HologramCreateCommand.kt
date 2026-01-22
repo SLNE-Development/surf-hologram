@@ -83,7 +83,7 @@ fun CommandAPICommand.hologramCreateCommand() = subcommand("create") {
         holo.show()
 
         player.sendText {
-            appendPrefix()
+            appendSuccessPrefix()
             success("Das Hologram ")
             variableValue(name)
             success(" wurde erstellt.")

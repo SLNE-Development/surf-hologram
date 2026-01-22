@@ -10,7 +10,7 @@ class HologramNameArgument(nodeName: String) :
     CustomArgument<String, String>(StringArgument(nodeName), { info ->
         if (info.input.contains(" ")) {
             throw CustomArgumentException.fromAdventureComponent(buildText {
-                appendPrefix()
+                appendErrorPrefix()
                 error("Der Name darf keine Leerzeichen enthalten.")
             })
         } else {

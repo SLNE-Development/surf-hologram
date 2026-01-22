@@ -19,7 +19,7 @@ fun CommandAPICommand.hologramTeleportThereCommand() = subcommand("teleport-ther
         hologram.teleportHere(player.holoPlayer)
 
         player.sendText {
-            appendPrefix()
+            appendSuccessPrefix()
             success("Du wurdest zum Hologramm ")
             variableValue(hologram.metaData.name)
             success(" teleportiert.")

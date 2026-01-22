@@ -19,7 +19,7 @@ fun CommandAPICommand.hologramDeleteCommand() = subcommand("delete") {
         val hologram: Hologram by args
 
         player.sendText {
-            appendPrefix()
+            appendInfoPrefix()
             info("Möchtest du das Hologramm ")
             variableValue(hologram.metaData.name)
             info(" wirklich löschen? ")
@@ -30,7 +30,7 @@ fun CommandAPICommand.hologramDeleteCommand() = subcommand("delete") {
                 clickEvent(ClickEvent.callback {
                     hologramService.deleteHologram(hologram)
                     player.sendText {
-                        appendPrefix()
+                        appendSuccessPrefix()
                         success("Das Hologramm ")
                         variableValue(hologram.metaData.name)
                         success(" wurde gelöscht.")

@@ -22,7 +22,7 @@ fun CommandAPICommand.hologramListCommand() = subcommand("list") {
 
         if (holograms.isEmpty()) {
             player.sendText {
-                appendPrefix()
+                appendErrorPrefix()
                 error("Es wurden keine Hologramme gefunden.")
             }
             return@playerExecutor
