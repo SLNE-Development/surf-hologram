@@ -59,7 +59,7 @@ class FadingHologramImpl(
     companion object {
         private lateinit var tickTask: ScheduledTask
 
-        /** Interval between animation ticks: 2 Minecraft ticks = 100 ms. */
+        /** Interval between animation ticks: 100 ms (≈2 Minecraft ticks at 20 TPS). */
         private const val TICK_INTERVAL_MS = 100L
 
         fun startTicking() {

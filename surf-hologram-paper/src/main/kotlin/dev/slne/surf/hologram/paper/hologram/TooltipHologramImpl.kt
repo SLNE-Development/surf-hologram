@@ -59,7 +59,7 @@ class TooltipHologramImpl(
     companion object {
         private lateinit var tickTask: ScheduledTask
 
-        /** Tick interval: 100 ms = 2 Minecraft ticks. */
+        /** Tick interval: 100 ms (≈2 Minecraft ticks at 20 TPS). */
         private const val TICK_INTERVAL_MS = 100L
 
         /** Eye height offset added to player foot position. */
