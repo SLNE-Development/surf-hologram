@@ -35,7 +35,7 @@ abstract class BaseHologram : Hologram {
 
     override fun show(player: HoloPlayer) {
         val bukkitPlayer = player.bukkitPlayer ?: return
-        val packetPlayer = PacketEvents.getAPI().playerManager.getUser(bukkitPlayer)
+        val packetPlayer = PacketEvents.getAPI().playerManager.getUser(bukkitPlayer) ?: return
 
         packetPlayer.sendPacket(PaperPackets.buildHoloSpawnPacket(this))
         packetPlayer.sendPacket(PaperPackets.buildHoloMetaPacket(this, bukkitPlayer))

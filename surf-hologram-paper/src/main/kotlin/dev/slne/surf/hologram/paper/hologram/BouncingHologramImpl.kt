@@ -69,6 +69,9 @@ class BouncingHologramImpl(
     companion object {
         private lateinit var tickTask: ScheduledTask
 
+        /** Tick interval: 50 ms (one Minecraft tick at 20 TPS). */
+        private const val TICK_INTERVAL_MS = 50L
+
         fun startTicking() {
             if (::tickTask.isInitialized && !tickTask.isCancelled) {
                 return
@@ -76,7 +79,7 @@ class BouncingHologramImpl(
 
             tickTask = Bukkit.getAsyncScheduler().runAtFixedRate(plugin, {
                 hologramRegistry.holograms().forEach { (it as? BouncingHologram)?.tick() }
-            }, 0L, (1000L / 20L) * 10, TimeUnit.MILLISECONDS)
+            }, 0L, TICK_INTERVAL_MS, TimeUnit.MILLISECONDS)
         }
 
         fun stopTicking() {
