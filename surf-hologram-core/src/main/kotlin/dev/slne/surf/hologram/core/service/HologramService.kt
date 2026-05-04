@@ -33,8 +33,6 @@ interface HologramService {
         deleteHologram(it)
     }
 
-    fun editHologramSaving(hologram: Hologram, block: Hologram.() -> Unit): Hologram
-
     companion object {
         val INSTANCE = requiredService<HologramService>()
     }

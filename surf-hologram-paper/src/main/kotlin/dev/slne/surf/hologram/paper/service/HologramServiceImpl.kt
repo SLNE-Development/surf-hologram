@@ -50,25 +50,6 @@ class HologramServiceImpl : HologramService, Services.Fallback {
         hologramRegistry.unregisterHologram(hologram)
     }
 
-    override fun editHologramSaving(
-        hologram: Hologram,
-        block: Hologram.() -> Unit
-    ): Hologram {
-        hologram.forEachViewer {
-            it.hideHologram(hologram)
-        }
-        hologramRegistry.unregisterHologram(hologram)
-
-        hologram.block()
-
-        hologramRegistry.registerHologram(hologram)
-        hologram.forEachViewer {
-            it.showHologram(hologram)
-        }
-
-        return hologram
-    }
-
     override fun refresh(hologram: Hologram?) {
         if (hologram != null) {
             hologram.refresh()

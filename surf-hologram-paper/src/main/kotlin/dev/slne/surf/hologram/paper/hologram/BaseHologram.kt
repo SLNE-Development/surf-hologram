@@ -12,7 +12,6 @@ import dev.slne.surf.hologram.api.util.forEachPacketViewer
 import dev.slne.surf.hologram.api.util.hide
 import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.core.service.hologramPlayerService
-import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.PaperPackets
 import dev.slne.surf.hologram.paper.util.player
 import dev.slne.surf.hologram.paper.util.toBukkitLocation
@@ -79,9 +78,7 @@ abstract class BaseHologram : Hologram {
 
     override fun teleportTo(newLocation: HologramLocation, save: Boolean) {
         if (save) {
-            hologramService.editHologramSaving(this) {
-                centerLocation = newLocation
-            }
+            centerLocation = newLocation
         }
 
         forEachPacketViewer {

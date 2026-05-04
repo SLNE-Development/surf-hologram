@@ -201,13 +201,13 @@ interface Hologram {
     /**
      * Teleports the hologram to a new location.
      *
-     * Moves the hologram to the specified `HologramLocation`. If `save` is set to `true`,
-     * the operation persists the new location for future reference. This method is typically
-     * used for dynamically repositioning holograms within the game world.
+     * Moves the hologram to the specified `HologramLocation`. If [save] is `true`,
+     * [centerLocation] is updated so that the new position is remembered as the base position
+     * (e.g. for players who join later). Set [save] to `false` for transient animation moves
+     * (bouncing, fading) that must not change the hologram's stored base location.
      *
      * @param newLocation The target location to which the hologram should be teleported.
-     * @param save Indicates whether the new location should be saved persistently.
-     *             Defaults to `true`.
+     * @param save When `true`, updates [centerLocation] to [newLocation]. Defaults to `true`.
      */
     fun teleportTo(newLocation: HologramLocation, save: Boolean = true)
 

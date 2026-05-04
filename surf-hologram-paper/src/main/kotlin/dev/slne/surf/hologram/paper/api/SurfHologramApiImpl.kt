@@ -42,10 +42,6 @@ class SurfHologramApiImpl : SurfHologramApi, Services.Fallback {
     )
 
     override fun deleteHologram(hologram: Hologram) = hologramService.deleteHologram(hologram)
-    override fun editHologramSaving(
-        hologram: Hologram,
-        block: Hologram.() -> Unit
-    ) = hologramService.editHologramSaving(hologram, block)
 
     override fun refreshHologram(hologram: Hologram?) = hologramService.refresh(hologram)
     override fun refreshContent(hologram: Hologram?) = hologramService.refreshContent(hologram)

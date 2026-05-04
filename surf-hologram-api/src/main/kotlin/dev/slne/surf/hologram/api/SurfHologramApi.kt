@@ -51,15 +51,6 @@ interface SurfHologramApi {
     fun deleteHologram(hologram: Hologram)
 
     /**
-     * Updates and saves the provided hologram instance using the specified block of modifications.
-     *
-     * @param hologram The hologram instance to be modified and saved.
-     * @param block A lambda block containing the modifications to apply to the hologram.
-     * @return The updated hologram instance after applying the modifications.
-     */
-    fun editHologramSaving(hologram: Hologram, block: Hologram.() -> Unit): Hologram
-
-    /**
      * Refreshes the state of the specified hologram. This method can be used to update the visual
      * representation of the hologram or reapply its configuration.
      *
