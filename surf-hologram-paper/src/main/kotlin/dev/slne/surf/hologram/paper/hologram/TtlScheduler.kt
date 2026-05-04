@@ -9,6 +9,9 @@ import java.util.concurrent.TimeUnit
 
 /**
  * Periodically checks all registered holograms and removes any that have exceeded their TTL.
+ *
+ * Note: TTL tracking relies on [BaseHologram.createdAt]. Hologram implementations that do not
+ * extend [BaseHologram] will have their TTL silently ignored.
  */
 object TtlScheduler {
     private lateinit var task: ScheduledTask

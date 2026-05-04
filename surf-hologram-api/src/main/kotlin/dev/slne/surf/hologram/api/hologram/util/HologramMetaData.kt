@@ -99,7 +99,7 @@ interface HologramMetaData {
      * The time-to-live (TTL) of the hologram in milliseconds.
      *
      * When non-null the hologram will be automatically deleted once
-     * `createdAt + ttl <= System.currentTimeMillis()`.  A value of `null` means
+     * `System.currentTimeMillis() >= createdAt + ttl`.  A value of `null` means
      * the hologram persists indefinitely.
      */
     var ttl: Long?

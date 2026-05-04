@@ -59,6 +59,9 @@ class FadingHologramImpl(
     companion object {
         private lateinit var tickTask: ScheduledTask
 
+        /** Interval between animation ticks: 2 Minecraft ticks = 100 ms. */
+        private const val TICK_INTERVAL_MS = 100L
+
         fun startTicking() {
             if (::tickTask.isInitialized && !tickTask.isCancelled) {
                 return
@@ -66,7 +69,7 @@ class FadingHologramImpl(
 
             tickTask = Bukkit.getAsyncScheduler().runAtFixedRate(plugin, {
                 hologramRegistry.holograms().forEach { (it as? FadingHologram)?.tick() }
-            }, 0L, (1000L / 20L) * 2, TimeUnit.MILLISECONDS)
+            }, 0L, TICK_INTERVAL_MS, TimeUnit.MILLISECONDS)
         }
 
         fun stopTicking() {
