@@ -54,7 +54,7 @@ class InternalEventPacketListener : PacketListenerAbstract() {
                 val cached = TooltipHologramImpl.playerLookCache[player.uniqueId]
                 TooltipHologramImpl.updatePlayerLook(
                     player.uniqueId,
-                    TooltipHologramImpl.PlayerLookData(
+                    TooltipHologramImpl.Companion.PlayerLookData(
                         footX = packet.position.x,
                         footY = packet.position.y,
                         footZ = packet.position.z,
@@ -70,7 +70,7 @@ class InternalEventPacketListener : PacketListenerAbstract() {
                 val cached = TooltipHologramImpl.playerLookCache[player.uniqueId]
                 TooltipHologramImpl.updatePlayerLook(
                     player.uniqueId,
-                    TooltipHologramImpl.PlayerLookData(
+                    TooltipHologramImpl.Companion.PlayerLookData(
                         footX = cached?.footX ?: player.location.x,
                         footY = cached?.footY ?: player.location.y,
                         footZ = cached?.footZ ?: player.location.z,
@@ -85,7 +85,7 @@ class InternalEventPacketListener : PacketListenerAbstract() {
                 val packet = WrapperPlayClientPlayerPositionAndRotation(event)
                 TooltipHologramImpl.updatePlayerLook(
                     player.uniqueId,
-                    TooltipHologramImpl.PlayerLookData(
+                    TooltipHologramImpl.Companion.PlayerLookData(
                         footX = packet.position.x,
                         footY = packet.position.y,
                         footZ = packet.position.z,

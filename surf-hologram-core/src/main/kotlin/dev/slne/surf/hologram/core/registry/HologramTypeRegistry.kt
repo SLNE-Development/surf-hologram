@@ -1,9 +1,9 @@
 package dev.slne.surf.hologram.core.registry
 
+import dev.slne.surf.api.core.util.requiredService
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.type.HologramOptions
 import dev.slne.surf.hologram.api.hologram.type.HologramType
-import dev.slne.surf.surfapi.core.api.util.requiredService
 import it.unimi.dsi.fastutil.objects.ObjectSet
 
 interface HologramTypeRegistry {

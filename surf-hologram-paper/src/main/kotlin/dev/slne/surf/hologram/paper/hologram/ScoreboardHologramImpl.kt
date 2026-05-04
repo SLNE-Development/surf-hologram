@@ -1,5 +1,8 @@
 package dev.slne.surf.hologram.paper.hologram
 
+import dev.slne.surf.api.core.messages.adventure.buildText
+import dev.slne.surf.api.core.util.mutableObjectSetOf
+import dev.slne.surf.api.core.util.random
 import dev.slne.surf.hologram.api.hologram.ScoreboardHologram
 import dev.slne.surf.hologram.api.hologram.ScoreboardHologramEntry
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
@@ -9,9 +12,6 @@ import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.paper.plugin
-import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
-import dev.slne.surf.surfapi.core.api.util.mutableObjectSetOf
-import dev.slne.surf.surfapi.core.api.util.random
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component

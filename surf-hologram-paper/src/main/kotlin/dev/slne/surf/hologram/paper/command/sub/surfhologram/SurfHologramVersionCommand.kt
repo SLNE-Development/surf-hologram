@@ -4,11 +4,11 @@ import com.github.shynixn.mccoroutine.folia.launch
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.kotlindsl.anyExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
+import dev.slne.surf.api.core.messages.adventure.clickOpensUrl
+import dev.slne.surf.api.core.messages.adventure.sendText
 import dev.slne.surf.hologram.paper.plugin
 import dev.slne.surf.hologram.paper.service.versionService
 import dev.slne.surf.hologram.paper.util.HoloPermissionRegistry
-import dev.slne.surf.surfapi.core.api.messages.adventure.clickOpensUrl
-import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 
 fun CommandAPICommand.surfHologramVersionCommand() = subcommand("version") {
     withPermission(HoloPermissionRegistry.COMMAND_SURFHOLOGRAM_VERSION)

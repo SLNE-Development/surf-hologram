@@ -1,6 +1,6 @@
 package dev.slne.surf.hologram.paper.util
 
-import dev.slne.surf.surfapi.bukkit.api.permission.PermissionRegistry
+import dev.slne.surf.api.paper.permission.PermissionRegistry
 
 object HoloPermissionRegistry : PermissionRegistry() {
     const val PREFIX = "surf.hologram"

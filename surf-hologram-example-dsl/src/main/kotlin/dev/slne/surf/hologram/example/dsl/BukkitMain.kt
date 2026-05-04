@@ -2,6 +2,8 @@ package dev.slne.surf.hologram.example.dsl
 
 import com.github.retrooper.packetevents.util.Vector3d
 import com.github.shynixn.mccoroutine.folia.SuspendingJavaPlugin
+import dev.slne.surf.api.core.messages.adventure.appendNewline
+import dev.slne.surf.api.core.messages.adventure.sendText
 import dev.slne.surf.hologram.api.dsl.hologram
 import dev.slne.surf.hologram.api.event.impl.HologramClickEvent
 import dev.slne.surf.hologram.api.hologram.BouncingHologram
@@ -15,8 +17,6 @@ import dev.slne.surf.hologram.api.hologramConversationUtil
 import dev.slne.surf.hologram.api.hologramWorld
 import dev.slne.surf.hologram.api.util.show
 import dev.slne.surf.hologram.example.dsl.command.exampleHologramSetContentCommand
-import dev.slne.surf.surfapi.core.api.messages.adventure.appendNewline
-import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 import org.bukkit.Bukkit
 import org.bukkit.Location
 

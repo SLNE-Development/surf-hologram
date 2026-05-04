@@ -3,11 +3,11 @@ package dev.slne.surf.hologram.paper.command.sub.surfhologram
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.kotlindsl.playerExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
+import dev.slne.surf.api.core.messages.adventure.buildText
+import dev.slne.surf.api.core.messages.adventure.sendText
 import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.util.HoloPermissionRegistry
-import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
-import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 import net.kyori.adventure.text.event.ClickEvent
 
 fun CommandAPICommand.surfHologramDebugDeleteCommand() = subcommand("delete") {

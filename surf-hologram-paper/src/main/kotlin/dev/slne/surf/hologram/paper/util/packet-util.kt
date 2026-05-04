@@ -5,9 +5,9 @@ import com.github.retrooper.packetevents.protocol.entity.data.EntityDataType
 import com.github.retrooper.packetevents.protocol.player.User
 import com.github.retrooper.packetevents.util.Vector3d
 import com.github.retrooper.packetevents.util.Vector3f
+import dev.slne.surf.api.core.messages.adventure.sendText
+import dev.slne.surf.api.paper.util.forEachPlayer
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
-import dev.slne.surf.surfapi.bukkit.api.util.forEachPlayer
-import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 import io.github.retrooper.packetevents.util.SpigotConversionUtil
 import org.bukkit.Bukkit
 
@@ -43,5 +43,6 @@ fun buildEntityData(block: EntityDataBuilder.() -> Unit): List<EntityData<*>> {
 
 fun Vector3d.toVector3f() = Vector3f(this.x.toFloat(), this.y.toFloat(), this.z.toFloat())
 
-val User.player get() = Bukkit.getPlayer(this.uuid) ?: error("Player with UUID ${this.uuid} is not online")
+val User.player
+    get() = Bukkit.getPlayer(this.uuid) ?: error("Player with UUID ${this.uuid} is not online")
 

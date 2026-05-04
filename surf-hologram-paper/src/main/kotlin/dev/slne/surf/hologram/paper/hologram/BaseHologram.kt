@@ -3,6 +3,9 @@
 package dev.slne.surf.hologram.paper.hologram
 
 import com.github.retrooper.packetevents.PacketEvents
+import dev.slne.surf.api.core.util.mutableObject2ObjectMapOf
+import dev.slne.surf.api.core.util.mutableObjectListOf
+import dev.slne.surf.api.core.util.toObjectSet
 import dev.slne.surf.hologram.api.event.HologramEvent
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.HologramEventHandler
@@ -15,9 +18,6 @@ import dev.slne.surf.hologram.core.service.hologramPlayerService
 import dev.slne.surf.hologram.paper.PaperPackets
 import dev.slne.surf.hologram.paper.util.player
 import dev.slne.surf.hologram.paper.util.toBukkitLocation
-import dev.slne.surf.surfapi.core.api.util.mutableObject2ObjectMapOf
-import dev.slne.surf.surfapi.core.api.util.mutableObjectListOf
-import dev.slne.surf.surfapi.core.api.util.toObjectSet
 import it.unimi.dsi.fastutil.objects.ObjectList
 import org.bukkit.Bukkit
 import kotlin.reflect.KClass

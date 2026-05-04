@@ -7,7 +7,7 @@ import dev.jorel.commandapi.arguments.CustomArgument
 import dev.jorel.commandapi.arguments.StringArgument
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.surfHologramApi
-import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
+import dev.slne.surf.api.core.messages.adventure.buildText
 
 class HologramArgument(nodeName: String) :
     CustomArgument<Hologram, String>(StringArgument(nodeName), { info ->

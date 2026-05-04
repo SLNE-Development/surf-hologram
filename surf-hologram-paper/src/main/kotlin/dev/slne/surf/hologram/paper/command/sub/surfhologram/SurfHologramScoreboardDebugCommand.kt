@@ -3,6 +3,10 @@ package dev.slne.surf.hologram.paper.command.sub.surfhologram
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.kotlindsl.playerExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
+import dev.slne.surf.api.core.messages.adventure.buildText
+import dev.slne.surf.api.core.messages.adventure.sendText
+import dev.slne.surf.api.core.util.objectListOf
+import dev.slne.surf.api.core.util.random
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.hologramConversationUtil
 import dev.slne.surf.hologram.api.util.show
@@ -11,10 +15,6 @@ import dev.slne.surf.hologram.paper.hologram.ScoreboardHologramImpl
 import dev.slne.surf.hologram.paper.hologram.util.HologramHitboxImpl
 import dev.slne.surf.hologram.paper.util.HoloPermissionRegistry
 import dev.slne.surf.hologram.paper.util.toHologramLocation
-import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
-import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
-import dev.slne.surf.surfapi.core.api.util.objectListOf
-import dev.slne.surf.surfapi.core.api.util.random
 
 fun CommandAPICommand.surfHologramScoreboardDebugCommand() = subcommand("scoreboard") {
     withPermission(HoloPermissionRegistry.COMMAND_SURFHOLOGRAM_DEBUG_SCOREBOARD)

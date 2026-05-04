@@ -7,6 +7,8 @@ import dev.jorel.commandapi.kotlindsl.getValue
 import dev.jorel.commandapi.kotlindsl.integerArgument
 import dev.jorel.commandapi.kotlindsl.playerExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
+import dev.slne.surf.api.core.messages.adventure.sendText
+import dev.slne.surf.api.core.util.random
 import dev.slne.surf.hologram.api.command.argument.hologramOrientationTypeArgument
 import dev.slne.surf.hologram.api.hologram.SimpleHologram
 import dev.slne.surf.hologram.api.hologram.type.SimpleHologramOptions
@@ -20,8 +22,6 @@ import dev.slne.surf.hologram.paper.hologram.util.HologramMetaDataImpl
 import dev.slne.surf.hologram.paper.plugin
 import dev.slne.surf.hologram.paper.util.HoloPermissionRegistry
 import dev.slne.surf.hologram.paper.util.toHologramLocation
-import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
-import dev.slne.surf.surfapi.core.api.util.random
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import kotlin.system.measureTimeMillis

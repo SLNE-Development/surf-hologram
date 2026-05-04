@@ -1,14 +1,12 @@
 package dev.slne.surf.hologram.paper.service
 
+import dev.slne.surf.api.core.util.logger
 import dev.slne.surf.hologram.paper.plugin
-import dev.slne.surf.surfapi.core.api.util.logger
-
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection

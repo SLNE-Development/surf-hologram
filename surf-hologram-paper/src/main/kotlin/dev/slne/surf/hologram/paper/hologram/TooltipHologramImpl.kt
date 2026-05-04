@@ -1,6 +1,6 @@
 package dev.slne.surf.hologram.paper.hologram
 
-import com.github.retrooper.packetevents.PacketEvents
+import dev.slne.surf.api.core.util.random
 import dev.slne.surf.hologram.api.hologram.TooltipHologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
@@ -9,8 +9,8 @@ import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.core.service.hologramPlayerService
+import dev.slne.surf.hologram.paper.hologram.TooltipHologramImpl.Companion.updatePlayerLook
 import dev.slne.surf.hologram.paper.plugin
-import dev.slne.surf.surfapi.core.api.util.random
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask
 import it.unimi.dsi.fastutil.objects.ObjectSet
 import net.kyori.adventure.text.Component
@@ -69,7 +69,7 @@ class TooltipHologramImpl(
          * Cache of player look data, updated by [updatePlayerLook] from the packet listener.
          * Key: player UUID. Value: [PlayerLookData].
          */
-        private val playerLookCache: ConcurrentHashMap<UUID, PlayerLookData> = ConcurrentHashMap()
+        val playerLookCache: ConcurrentHashMap<UUID, PlayerLookData> = ConcurrentHashMap()
 
         /** Raw look data captured from movement/rotation packets. */
         data class PlayerLookData(
@@ -141,7 +141,7 @@ class TooltipHologramImpl(
                 // Hide from players that have left the cache (disconnected)
                 tooltips.forEach { tooltip ->
                     tooltip.activeViewers.removeIf { uuid ->
-                        if (uuid in playerLookCache) return@removeIf false
+                        if (playerLookCache.contains(uuid)) return@removeIf false
                         val holoPlayer = hologramPlayerService.getPlayer(uuid)
                         if (holoPlayer != null) tooltip.hide(holoPlayer)
                         true

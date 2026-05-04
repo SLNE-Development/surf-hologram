@@ -2,6 +2,7 @@ package dev.slne.surf.hologram.paper
 
 import com.github.retrooper.packetevents.util.Vector3d
 import com.google.auto.service.AutoService
+import dev.slne.surf.api.core.util.random
 import dev.slne.surf.hologram.api.HologramConversationUtil
 import dev.slne.surf.hologram.api.hologram.location.HologramWorld
 import dev.slne.surf.hologram.api.hologram.util.HologramTextAlignment
@@ -9,7 +10,6 @@ import dev.slne.surf.hologram.paper.hologram.util.HologramHitboxImpl
 import dev.slne.surf.hologram.paper.hologram.util.HologramMetaDataImpl
 import dev.slne.surf.hologram.paper.hologram.util.location.HologramLocationImpl
 import dev.slne.surf.hologram.paper.hologram.util.location.HologramWorldImpl
-import dev.slne.surf.surfapi.core.api.util.random
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.util.Services
 import java.util.*

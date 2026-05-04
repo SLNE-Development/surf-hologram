@@ -1,13 +1,13 @@
 package dev.slne.surf.hologram.paper.registry
 
 import com.google.auto.service.AutoService
+import dev.slne.surf.api.core.util.freeze
+import dev.slne.surf.api.core.util.mutableObject2ObjectMapOf
+import dev.slne.surf.api.core.util.toObjectSet
 import dev.slne.surf.hologram.api.hologram.Hologram
 import dev.slne.surf.hologram.api.hologram.type.HologramOptions
 import dev.slne.surf.hologram.api.hologram.type.HologramType
 import dev.slne.surf.hologram.core.registry.HologramTypeRegistry
-import dev.slne.surf.surfapi.core.api.util.freeze
-import dev.slne.surf.surfapi.core.api.util.mutableObject2ObjectMapOf
-import dev.slne.surf.surfapi.core.api.util.toObjectSet
 import net.kyori.adventure.util.Services
 
 @AutoService(HologramTypeRegistry::class)
