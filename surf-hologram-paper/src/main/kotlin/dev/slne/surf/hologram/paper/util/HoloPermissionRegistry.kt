@@ -23,4 +23,5 @@ object HoloPermissionRegistry : PermissionRegistry() {
     val COMMAND_SURFHOLOGRAM_DEBUG_SCOREBOARD =
         create("$COMMAND_BASE.surfhologram.debug.scoreboard")
     val COMMAND_SURFHOLOGRAM_DEBUG_DELETE = create("$COMMAND_BASE.surfhologram.debug.delete")
+    val COMMAND_SURFHOLOGRAM_DEBUG_TOOLTIP = create("$COMMAND_BASE.surfhologram.debug.tooltip")
 }

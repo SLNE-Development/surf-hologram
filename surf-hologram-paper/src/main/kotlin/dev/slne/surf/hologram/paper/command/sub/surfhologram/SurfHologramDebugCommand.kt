@@ -10,4 +10,5 @@ fun CommandAPICommand.surfHologramDebugCommand() = subcommand("debug") {
     surfHologramCreateDebugCommand()
     surfHologramScoreboardDebugCommand()
     surfHologramDebugDeleteCommand()
+    surfHologramDebugTooltipCommand()
 }
