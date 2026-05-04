@@ -87,7 +87,6 @@ fun CommandAPICommand.surfHologramDebugTooltipCommand() = subcommand("tooltip") 
                 return@playerExecutor
             }
 
-            // Place tooltip above the block face that was hit
             val blockCenter = block.location.clone().add(0.5, 1.3, 0.5)
             val tooltipLocation = blockCenter.toHologramLocation()
             val targetLocation = block.location.clone().add(0.5, 0.5, 0.5).toHologramLocation()

@@ -27,7 +27,6 @@ class TooltipHologramType : HologramType<TooltipHologram, TooltipHologramOptions
         options: TooltipHologramOptions
     ) = TooltipHologramImpl(
         metaData,
-        hologramOrientationType,
         centerLocation,
         displayedText,
         hitbox,

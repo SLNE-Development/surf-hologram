@@ -25,7 +25,6 @@ import kotlin.math.sqrt
 
 class TooltipHologramImpl(
     override val metaData: HologramMetaData,
-    override var hologramOrientationType: HologramOrientationType,
     override var centerLocation: HologramLocation,
     override var displayedText: Component,
     override val hitbox: HologramHitbox?,
@@ -35,8 +34,7 @@ class TooltipHologramImpl(
     override val lookAngleThreshold: Double,
     override val maxDistance: Double
 ) : BaseHologram(), TooltipHologram {
-
-    /** Players currently seeing this tooltip (so we can hide it when they stop looking). */
+    override var hologramOrientationType = HologramOrientationType.ROTATING
     private val activeViewers: MutableSet<UUID> = ConcurrentHashMap.newKeySet()
 
     override fun duplicate(spawnable: Boolean) = TooltipHologramImpl(
@@ -45,7 +43,6 @@ class TooltipHologramImpl(
             holoEntityId = random.nextInt()
             interactionEntityId = random.nextInt()
         } else metaData,
-        hologramOrientationType,
         centerLocation,
         displayedText,
         hitbox,
