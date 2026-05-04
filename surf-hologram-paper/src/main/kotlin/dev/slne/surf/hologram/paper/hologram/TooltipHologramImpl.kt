@@ -116,7 +116,7 @@ class TooltipHologramImpl(
                     tooltips.forEach tooltip@{ tooltip ->
                         // Respect the viewer restriction on this tooltip
                         val isAllowedViewer = tooltip.viewers == null ||
-                                tooltip.viewers!!.any { it.uuid == uuid }
+                                tooltip.viewers.any { it.uuid == uuid }
                         if (!isAllowedViewer) return@tooltip
 
                         // Determine which position to check against
