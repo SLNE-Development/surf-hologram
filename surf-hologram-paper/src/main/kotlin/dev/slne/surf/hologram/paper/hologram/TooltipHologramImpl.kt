@@ -1,6 +1,6 @@
 package dev.slne.surf.hologram.paper.hologram
 
-import dev.slne.surf.api.core.util.random
+import com.github.retrooper.packetevents.PacketEvents
 import dev.slne.surf.hologram.api.hologram.TooltipHologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox
@@ -65,11 +65,14 @@ class TooltipHologramImpl(
         /** Eye height offset added to player foot position. */
         private const val EYE_HEIGHT = 1.62
 
+        /** Minimum distance to a target below which the player is considered "inside" it. */
+        private const val MIN_DISTANCE_THRESHOLD = 0.001
+
         /**
          * Cache of player look data, updated by [updatePlayerLook] from the packet listener.
          * Key: player UUID. Value: [PlayerLookData].
          */
-        val playerLookCache: ConcurrentHashMap<UUID, PlayerLookData> = ConcurrentHashMap()
+        internal val playerLookCache: ConcurrentHashMap<UUID, PlayerLookData> = ConcurrentHashMap()
 
         /** Raw look data captured from movement/rotation packets. */
         data class PlayerLookData(
@@ -167,7 +170,7 @@ class TooltipHologramImpl(
             val dist = sqrt(dx * dx + dy * dy + dz * dz)
 
             if (dist > tooltip.maxDistance) return false
-            if (dist < 0.001) return true   // player is inside the target
+            if (dist < MIN_DISTANCE_THRESHOLD) return true   // player is inside the target
 
             val dot = (dx * look.dirX + dy * look.dirY + dz * look.dirZ) / dist
             val angleDeg = Math.toDegrees(acos(dot.coerceIn(-1.0, 1.0)))
