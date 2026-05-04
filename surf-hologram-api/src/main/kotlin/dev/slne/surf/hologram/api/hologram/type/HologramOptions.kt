@@ -79,3 +79,14 @@ data class UpdatingHologramOptions(
     var updateInterval: @Range(from = 50, to = Long.MAX_VALUE) Long = 60_000L
 ) : HologramOptions
 
+/**
+ * Represents configuration options for a [dev.slne.surf.hologram.api.hologram.FadingHologram].
+ *
+ * @property fadeSpeed The amount of Y-units the hologram moves upward per tick. Defaults to 0.05.
+ * @property fadeMaxOffset The maximum Y-offset before the hologram is removed. Defaults to 2.0.
+ */
+data class FadingHologramOptions(
+    var fadeSpeed: Double = 0.05,
+    var fadeMaxOffset: Double = 2.0
+) : HologramOptions
+

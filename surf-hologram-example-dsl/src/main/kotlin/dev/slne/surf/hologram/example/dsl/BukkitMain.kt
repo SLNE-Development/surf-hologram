@@ -5,8 +5,10 @@ import com.github.shynixn.mccoroutine.folia.SuspendingJavaPlugin
 import dev.slne.surf.hologram.api.dsl.hologram
 import dev.slne.surf.hologram.api.event.impl.HologramClickEvent
 import dev.slne.surf.hologram.api.hologram.BouncingHologram
+import dev.slne.surf.hologram.api.hologram.FadingHologram
 import dev.slne.surf.hologram.api.hologram.UpdatingHologram
 import dev.slne.surf.hologram.api.hologram.type.BouncingHologramOptions
+import dev.slne.surf.hologram.api.hologram.type.FadingHologramOptions
 import dev.slne.surf.hologram.api.hologram.type.UpdatingHologramOptions
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.hologramConversationUtil
@@ -16,6 +18,7 @@ import dev.slne.surf.hologram.example.dsl.command.exampleHologramSetContentComma
 import dev.slne.surf.surfapi.core.api.messages.adventure.appendNewline
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 import org.bukkit.Bukkit
+import org.bukkit.Location
 
 class BukkitMain : SuspendingJavaPlugin() {
     override fun onEnable() {
@@ -26,6 +29,7 @@ class BukkitMain : SuspendingJavaPlugin() {
                     "Example Commands may don't have permissions."
         )
 
+        // --- Bouncing hologram using HologramLocation ---
         val location = hologramConversationUtil.createLocation(
             Bukkit.getWorlds().first().hologramWorld,
             0.0,
@@ -49,13 +53,6 @@ class BukkitMain : SuspendingJavaPlugin() {
                 bounceSpeed = 0.1
             }
 
-            //withViewer(player1) - You can add a specific viewer if you want
-            //    withViewers {
-            //        viewer(player2)
-            //        viewers(listOf(player3, player4))
-            //    } - or add multiple viewers in a block
-
-
             hitbox {
                 width = 1.0f
                 height = 1.0f
@@ -72,13 +69,13 @@ class BukkitMain : SuspendingJavaPlugin() {
             }
         }
 
+        // --- Updating hologram using HologramLocation ---
         val updatingHoloLocation = hologramConversationUtil.createLocation(
             Bukkit.getWorlds().first().hologramWorld,
             5.0,
             100.0,
             5.0
         )
-
         val updatingHolo = hologram<UpdatingHologram, UpdatingHologramOptions>(
             "example_dsl_hologram_updating",
             UpdatingHologram::class.java,
@@ -94,13 +91,6 @@ class BukkitMain : SuspendingJavaPlugin() {
             options {
                 updateInterval = 3000L
             }
-
-            //withViewer(player1) - You can add a specific viewer if you want
-            //    withViewers {
-            //        viewer(player2)
-            //        viewers(listOf(player3, player4))
-            //    } - or add multiple viewers in a block
-
 
             hitbox {
                 width = 1.0f
@@ -118,7 +108,29 @@ class BukkitMain : SuspendingJavaPlugin() {
             }
         }
 
+        // --- Fading hologram with TTL using Bukkit Location directly ---
+        val firstWorld = Bukkit.getWorlds().first()
+        val fadingHolo = hologram<FadingHologram, FadingHologramOptions>(
+            "example_dsl_hologram_fading",
+            FadingHologram::class.java,
+            HologramOrientationType.FIXED,
+            Location(firstWorld, 10.0, 100.0, 10.0)
+        ) {
+            displayedText {
+                success("+100 Points!")
+            }
+
+            options {
+                fadeSpeed = 0.05
+                fadeMaxOffset = 3.0
+            }
+
+            // TTL of 5 seconds as a safety net (the fading animation removes it first)
+            ttl = 5_000L
+        }
+
         updatingHolo.show()
         holo.show()
+        fadingHolo.show()
     }
 }

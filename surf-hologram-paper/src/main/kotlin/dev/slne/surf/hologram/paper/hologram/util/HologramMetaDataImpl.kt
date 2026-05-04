@@ -13,7 +13,8 @@ data class HologramMetaDataImpl(
     override var viewRange: Float,
     override var lineWidth: Int,
     override var textAlignment: HologramTextAlignment,
-    override var backgroundColor: TextColor? = null
+    override var backgroundColor: TextColor? = null,
+    override var ttl: Long? = null
 ) : HologramMetaData {
     override fun duplicate() = HologramMetaDataImpl(
         name,
@@ -23,6 +24,7 @@ data class HologramMetaDataImpl(
         viewRange,
         lineWidth,
         textAlignment,
-        backgroundColor
+        backgroundColor,
+        ttl
     )
 }

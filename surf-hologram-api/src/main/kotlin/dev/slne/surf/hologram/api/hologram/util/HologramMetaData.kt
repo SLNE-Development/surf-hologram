@@ -96,6 +96,15 @@ interface HologramMetaData {
     var backgroundColor: TextColor?
 
     /**
+     * The time-to-live (TTL) of the hologram in milliseconds.
+     *
+     * When non-null the hologram will be automatically deleted once
+     * `createdAt + ttl <= System.currentTimeMillis()`.  A value of `null` means
+     * the hologram persists indefinitely.
+     */
+    var ttl: Long?
+
+    /**
      * Creates and returns a duplicate of the current HologramMetaData instance.
      * The duplicated instance contains the same properties as the original,
      * allowing modifications to be made independently of the original instance.

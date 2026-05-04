@@ -127,6 +127,14 @@ class HologramDslBuilder<O : HologramOptions>(
     var backgroundColor: TextColor? = null
 
     /**
+     * The time-to-live (TTL) for the hologram in milliseconds.
+     *
+     * When set, the hologram will be automatically removed after this duration has elapsed.
+     * A value of `null` (the default) means the hologram persists indefinitely.
+     */
+    var ttl: Long? = null
+
+    /**
      * Represents the configurable options for a hologram. These options are specific to the type of
      * hologram being created or modified.
      *
@@ -425,7 +433,8 @@ fun <H : Hologram, O : HologramOptions> hologram(
         viewRange = builder.viewRange,
         lineWidth = builder.lineWidth,
         textAlignment = builder.textAlignment,
-        backgroundColor = builder.backgroundColor
+        backgroundColor = builder.backgroundColor,
+        ttl = builder.ttl
     )
 
     val options = builder.options ?: error("Options must be provided for hologram type ${type.id}")
@@ -448,3 +457,38 @@ fun <H : Hologram, O : HologramOptions> hologram(
     }
     return hologram
 }
+
+/**
+ * Creates and registers a hologram using a Bukkit [org.bukkit.Location] directly.
+ *
+ * This is a convenience overload of [hologram] that accepts a Bukkit `Location` and
+ * converts it to a [HologramLocation] internally, so callers do not need to perform
+ * the conversion themselves.
+ *
+ * @param name The unique name of the hologram.
+ * @param hologramClazz The class type of the hologram being created.
+ * @param orientationType The orientation type of the hologram.
+ * @param location The Bukkit location where the hologram will be spawned.
+ * @param block A DSL block used to configure the hologram's additional settings.
+ * @return The created hologram object.
+ */
+fun <H : Hologram, O : HologramOptions> hologram(
+    name: String,
+    hologramClazz: Class<H>,
+    orientationType: HologramOrientationType,
+    location: org.bukkit.Location,
+    block: HologramDslBuilder<O>.() -> Unit
+): H = hologram(
+    name,
+    hologramClazz,
+    orientationType,
+    hologramConversationUtil.createLocation(
+        hologramConversationUtil.createWorld(location.world.name, location.world.uid),
+        location.x,
+        location.y,
+        location.z,
+        location.yaw,
+        location.pitch
+    ),
+    block
+)

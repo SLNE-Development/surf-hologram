@@ -7,8 +7,12 @@ import dev.slne.surf.hologram.core.registry.hologramTypeRegistry
 import dev.slne.surf.hologram.paper.command.hologramCommand
 import dev.slne.surf.hologram.paper.command.surfHologramCommand
 import dev.slne.surf.hologram.paper.hologram.BouncingHologramImpl
+import dev.slne.surf.hologram.paper.hologram.FadingHologramImpl
+import dev.slne.surf.hologram.paper.hologram.ScoreboardHologramImpl
+import dev.slne.surf.hologram.paper.hologram.TtlScheduler
 import dev.slne.surf.hologram.paper.hologram.UpdatingHologramImpl
 import dev.slne.surf.hologram.paper.hologram.type.BouncingHologramType
+import dev.slne.surf.hologram.paper.hologram.type.FadingHologramType
 import dev.slne.surf.hologram.paper.hologram.type.ScoreboardHologramType
 import dev.slne.surf.hologram.paper.hologram.type.SimpleHologramType
 import dev.slne.surf.hologram.paper.hologram.type.UpdatingHologramType
@@ -33,11 +37,16 @@ class PaperMain : SuspendingJavaPlugin() {
 
         hologramCommand()
         surfHologramCommand()
+
         BouncingHologramImpl.startTicking()
+        FadingHologramImpl.startTicking()
         UpdatingHologramImpl.startUpdating()
+        ScoreboardHologramImpl.startUpdating()
+        TtlScheduler.start()
 
         hologramTypeRegistry.register(SimpleHologramType())
         hologramTypeRegistry.register(BouncingHologramType())
+        hologramTypeRegistry.register(FadingHologramType())
         hologramTypeRegistry.register(ScoreboardHologramType())
         hologramTypeRegistry.register(UpdatingHologramType())
 
@@ -48,6 +57,9 @@ class PaperMain : SuspendingJavaPlugin() {
 
     override fun onDisable() {
         BouncingHologramImpl.stopTicking()
+        FadingHologramImpl.stopTicking()
         UpdatingHologramImpl.stopUpdating()
+        ScoreboardHologramImpl.stopUpdating()
+        TtlScheduler.stop()
     }
 }

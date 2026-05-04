@@ -81,6 +81,7 @@ interface HologramConversationUtil {
      * @param lineWidth The width of the text outline or border in the hologram. Default is 200.
      * @param textAlignment The alignment of the text content within the hologram. Default is `HologramTextAlignment.CENTER`.
      * @param backgroundColor The optional background color for the hologram text. If null, no background color will be applied. Default is null.
+     * @param ttl Optional time-to-live in milliseconds. The hologram will be removed automatically after this duration. Default is null (no expiry).
      * @return An instance of `HologramMetaData` containing the specified hologram configuration.
      */
     fun createHologramMeta(
@@ -89,7 +90,8 @@ interface HologramConversationUtil {
         viewRange: Float = 32f,
         lineWidth: Int = 200,
         textAlignment: HologramTextAlignment = HologramTextAlignment.CENTER,
-        backgroundColor: TextColor? = null
+        backgroundColor: TextColor? = null,
+        ttl: Long? = null
     ): HologramMetaData
 
     /**

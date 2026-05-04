@@ -56,7 +56,8 @@ class PaperHologramConversationUtil : HologramConversationUtil, Services.Fallbac
         viewRange: Float,
         lineWidth: Int,
         textAlignment: HologramTextAlignment,
-        backgroundColor: TextColor?
+        backgroundColor: TextColor?,
+        ttl: Long?
     ) = HologramMetaDataImpl(
         name,
         random.nextInt(),
@@ -65,6 +66,7 @@ class PaperHologramConversationUtil : HologramConversationUtil, Services.Fallbac
         viewRange,
         lineWidth,
         textAlignment,
-        backgroundColor
+        backgroundColor,
+        ttl
     )
 }

@@ -27,6 +27,9 @@ abstract class BaseHologram : Hologram {
     private val eventHandlers =
         mutableObject2ObjectMapOf<KClass<out HologramEvent>, ObjectList<HologramEventHandler<*>>>()
 
+    /** Timestamp (epoch ms) at which this hologram was created, used for TTL checks. */
+    val createdAt: Long = System.currentTimeMillis()
+
     override fun retrieveViewers() =
         viewers?.mapNotNull { it.player }?.toObjectSet() ?: Bukkit.getOnlinePlayers()
             .mapNotNull { hologramPlayerService.getPlayer(it.uniqueId) }.toObjectSet()
