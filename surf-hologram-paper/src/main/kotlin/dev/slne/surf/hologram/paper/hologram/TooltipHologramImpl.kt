@@ -1,6 +1,6 @@
 package dev.slne.surf.hologram.paper.hologram
 
-import com.github.retrooper.packetevents.PacketEvents
+import dev.slne.surf.api.core.util.random
 import dev.slne.surf.hologram.api.hologram.TooltipHologram
 import dev.slne.surf.hologram.api.hologram.location.HologramLocation
 import dev.slne.surf.hologram.api.hologram.util.HologramHitbox

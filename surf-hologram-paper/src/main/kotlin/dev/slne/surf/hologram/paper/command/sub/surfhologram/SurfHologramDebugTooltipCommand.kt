@@ -4,6 +4,8 @@ import com.github.retrooper.packetevents.util.Vector3d
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.kotlindsl.playerExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
+import dev.slne.surf.api.core.messages.adventure.sendText
+import dev.slne.surf.api.core.util.random
 import dev.slne.surf.hologram.api.hologram.TooltipHologram
 import dev.slne.surf.hologram.api.hologram.type.TooltipHologramOptions
 import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
@@ -13,8 +15,6 @@ import dev.slne.surf.hologram.core.service.hologramService
 import dev.slne.surf.hologram.paper.hologram.util.HologramMetaDataImpl
 import dev.slne.surf.hologram.paper.util.HoloPermissionRegistry
 import dev.slne.surf.hologram.paper.util.toHologramLocation
-import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
-import dev.slne.surf.surfapi.core.api.util.random
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.FluidCollisionMode
@@ -24,7 +24,7 @@ fun CommandAPICommand.surfHologramDebugTooltipCommand() = subcommand("tooltip") 
 
     playerExecutor { player, _ ->
         // Ray-cast up to 10 blocks; detect both blocks and entities.
-        val rayResult = player.rayTraceEntities(10.0)
+        val rayResult = player.rayTraceEntities(10)
         val hitEntity = rayResult?.hitEntity
 
         val name = "debug-tooltip-${random.nextInt(1, 999999)}"
@@ -40,7 +40,6 @@ fun CommandAPICommand.surfHologramDebugTooltipCommand() = subcommand("tooltip") 
         )
 
         if (hitEntity != null) {
-            // Entity target: use raw entity ID; place tooltip slightly above the entity
             val tooltipLocation = hitEntity.location.clone().add(0.0, hitEntity.height + 0.3, 0.0)
                 .toHologramLocation()
 
