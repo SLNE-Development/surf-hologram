@@ -13,7 +13,7 @@ object ConnectionListener : Listener {
     fun onConnect(event: PlayerJoinEvent) {
         hologramRegistry.holograms().filter {
             it !is TooltipHologramImpl &&
-                    (it.viewers == null || it.viewers!!.any { a -> a.uuid == event.player.uniqueId })
+                    (it.viewers?.any { a -> a.uuid == event.player.uniqueId } ?: true)
         }.forEach {
             it.show(event.player.holoPlayer)
         }
