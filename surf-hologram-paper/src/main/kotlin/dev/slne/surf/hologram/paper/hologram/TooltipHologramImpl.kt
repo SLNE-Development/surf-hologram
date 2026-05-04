@@ -9,7 +9,6 @@ import dev.slne.surf.hologram.api.hologram.util.HologramOrientationType
 import dev.slne.surf.hologram.api.player.HoloOfflinePlayer
 import dev.slne.surf.hologram.core.registry.hologramRegistry
 import dev.slne.surf.hologram.core.service.hologramPlayerService
-import dev.slne.surf.hologram.paper.hologram.TooltipHologramImpl.Companion.updatePlayerLook
 import dev.slne.surf.hologram.paper.plugin
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask
 import it.unimi.dsi.fastutil.objects.ObjectSet
@@ -35,7 +34,6 @@ class TooltipHologramImpl(
     override val maxDistance: Double
 ) : BaseHologram(), TooltipHologram {
     override var hologramOrientationType = HologramOrientationType.ROTATING
-    private val activeViewers: MutableSet<UUID> = ConcurrentHashMap.newKeySet()
 
     override fun duplicate(spawnable: Boolean) = TooltipHologramImpl(
         if (spawnable) metaData.duplicate().apply {
@@ -55,39 +53,32 @@ class TooltipHologramImpl(
 
     companion object {
         private lateinit var tickTask: ScheduledTask
-
-        /** Tick interval: 100 ms (≈2 Minecraft ticks at 20 TPS). */
         private const val TICK_INTERVAL_MS = 100L
-
-        /** Eye height offset added to player foot position. */
         private const val EYE_HEIGHT = 1.62
-
-        /** Minimum distance to a target below which the player is considered "inside" it. */
         private const val MIN_DISTANCE_THRESHOLD = 0.001
+        private const val TOGGLE_COOLDOWN_MS = 200L
 
-        /**
-         * Cache of player look data, updated by [updatePlayerLook] from the packet listener.
-         * Key: player UUID. Value: [PlayerLookData].
-         */
         internal val playerLookCache: ConcurrentHashMap<UUID, PlayerLookData> = ConcurrentHashMap()
+        private val activeViewers: ConcurrentHashMap<String, MutableSet<UUID>> = ConcurrentHashMap()
+        private val lastToggle: ConcurrentHashMap<String, Long> = ConcurrentHashMap()
 
-        /** Raw look data captured from movement/rotation packets. */
+        private fun TooltipHologramImpl.viewerKey(): String = metaData.name
+
+        private fun toggleKey(uuid: UUID, tooltip: TooltipHologramImpl): String =
+            "$uuid|${tooltip.viewerKey()}"
+
         data class PlayerLookData(
             val footX: Double,
             val footY: Double,
             val footZ: Double,
-            /** Yaw in degrees (Minecraft convention). */
             val yaw: Float,
-            /** Pitch in degrees (Minecraft convention). */
             val pitch: Float,
-            /** World name – used to avoid cross-world false positives. */
             val worldName: String
         ) {
             val eyeX: Double get() = footX
             val eyeY: Double get() = footY + EYE_HEIGHT
             val eyeZ: Double get() = footZ
 
-            /** Normalised look direction vector. */
             val dirX: Double get() = -sin(Math.toRadians(yaw.toDouble())) * cos(Math.toRadians(pitch.toDouble()))
             val dirY: Double get() = -sin(Math.toRadians(pitch.toDouble()))
             val dirZ: Double get() = cos(Math.toRadians(yaw.toDouble())) * cos(Math.toRadians(pitch.toDouble()))
@@ -99,12 +90,11 @@ class TooltipHologramImpl(
 
         fun removePlayer(uuid: UUID) {
             playerLookCache.remove(uuid)
+            lastToggle.keys.removeIf { it.startsWith("$uuid|") }
         }
 
         fun startTicking() {
-            if (::tickTask.isInitialized && !tickTask.isCancelled) {
-                return
-            }
+            if (::tickTask.isInitialized && !tickTask.isCancelled) return
 
             tickTask = Bukkit.getAsyncScheduler().runAtFixedRate(plugin, {
                 val tooltips = hologramRegistry.holograms().filterIsInstance<TooltipHologramImpl>()
@@ -114,34 +104,42 @@ class TooltipHologramImpl(
                     val holoPlayer = hologramPlayerService.getPlayer(uuid) ?: return@forEach
 
                     tooltips.forEach tooltip@{ tooltip ->
-                        // Respect the viewer restriction on this tooltip
                         val isAllowedViewer = tooltip.viewers == null ||
                                 tooltip.viewers.any { it.uuid == uuid }
                         if (!isAllowedViewer) return@tooltip
 
-                        // Determine which position to check against
                         val checkPos = tooltip.resolveCheckPosition() ?: return@tooltip
-
-                        // Cross-world guard
                         if (lookData.worldName != checkPos.world.worldName) return@tooltip
 
-                        val looking = isLookingAt(lookData, checkPos, tooltip)
-                        val wasShowing = uuid in tooltip.activeViewers
+                        val viewers = activeViewers.getOrPut(tooltip.viewerKey()) {
+                            ConcurrentHashMap.newKeySet()
+                        }
+
+                        val wasShowing = uuid in viewers
+                        val looking = isLookingAt(lookData, checkPos, tooltip, wasShowing)
+
+                        val now = System.currentTimeMillis()
+                        val tKey = toggleKey(uuid, tooltip)
+                        val last = lastToggle[tKey] ?: 0L
+
+                        if (now - last < TOGGLE_COOLDOWN_MS) return@tooltip
 
                         if (looking && !wasShowing) {
                             tooltip.show(holoPlayer)
-                            tooltip.activeViewers.add(uuid)
+                            viewers.add(uuid)
+                            lastToggle[tKey] = now
                         } else if (!looking && wasShowing) {
                             tooltip.hide(holoPlayer)
-                            tooltip.activeViewers.remove(uuid)
+                            viewers.remove(uuid)
+                            lastToggle[tKey] = now
                         }
                     }
                 }
 
-                // Hide from players that have left the cache (disconnected)
                 tooltips.forEach { tooltip ->
-                    tooltip.activeViewers.removeIf { uuid ->
-                        if (playerLookCache.contains(uuid)) return@removeIf false
+                    val viewers = activeViewers[tooltip.viewerKey()] ?: return@forEach
+                    viewers.removeIf { uuid ->
+                        if (playerLookCache.containsKey(uuid)) return@removeIf false
                         val holoPlayer = hologramPlayerService.getPlayer(uuid)
                         if (holoPlayer != null) tooltip.hide(holoPlayer)
                         true
@@ -159,7 +157,8 @@ class TooltipHologramImpl(
         private fun isLookingAt(
             look: PlayerLookData,
             target: HologramLocation,
-            tooltip: TooltipHologramImpl
+            tooltip: TooltipHologramImpl,
+            wasShowing: Boolean
         ): Boolean {
             val dx = target.x - look.eyeX
             val dy = target.y - look.eyeY
@@ -167,20 +166,18 @@ class TooltipHologramImpl(
             val dist = sqrt(dx * dx + dy * dy + dz * dz)
 
             if (dist > tooltip.maxDistance) return false
-            if (dist < MIN_DISTANCE_THRESHOLD) return true   // player is inside the target
+            if (dist < MIN_DISTANCE_THRESHOLD) return true
 
             val dot = (dx * look.dirX + dy * look.dirY + dz * look.dirZ) / dist
             val angleDeg = Math.toDegrees(acos(dot.coerceIn(-1.0, 1.0)))
-            return angleDeg <= tooltip.lookAngleThreshold
+
+            val enter = tooltip.lookAngleThreshold
+            val exit = enter + 3.0
+
+            return if (wasShowing) angleDeg <= exit else angleDeg <= enter
         }
     }
 
-    /**
-     * Returns the position to check against for the look-at detection:
-     * - For block-based tooltips: [targetLocation]
-     * - For entity-based tooltips: [centerLocation] (the caller is expected to keep this
-     *   at the entity's position)
-     */
     private fun resolveCheckPosition(): HologramLocation? =
         targetLocation ?: if (targetEntityId != null) centerLocation else null
 }

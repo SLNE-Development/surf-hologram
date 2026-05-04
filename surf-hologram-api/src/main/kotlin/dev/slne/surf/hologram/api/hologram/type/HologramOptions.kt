@@ -98,11 +98,11 @@ data class FadingHologramOptions(
  * @property targetEntityId The raw entity ID of the target entity. Use for packet-based/fake entities.
  * @property targetLocation The block position of the target block.
  * @property lookAngleThreshold Half-angle (degrees) of the aiming cone. Defaults to 5.0.
- * @property maxDistance Maximum trigger distance in blocks. Defaults to 5.0.
+ * @property maxDistance Maximum trigger distance in blocks. Defaults to 3.0.
  */
 data class TooltipHologramOptions(
     var targetEntityId: Int? = null,
     var targetLocation: dev.slne.surf.hologram.api.hologram.location.HologramLocation? = null,
     var lookAngleThreshold: Double = 5.0,
-    var maxDistance: Double = 5.0
+    var maxDistance: Double = 3.0
 ) : HologramOptions

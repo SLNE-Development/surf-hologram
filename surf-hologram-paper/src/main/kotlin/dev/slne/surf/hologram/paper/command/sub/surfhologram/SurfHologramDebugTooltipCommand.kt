@@ -16,7 +16,6 @@ import dev.slne.surf.hologram.paper.hologram.util.HologramMetaDataImpl
 import dev.slne.surf.hologram.paper.util.HoloPermissionRegistry
 import dev.slne.surf.hologram.paper.util.toHologramLocation
 import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.FluidCollisionMode
 
 fun CommandAPICommand.surfHologramDebugTooltipCommand() = subcommand("tooltip") {
@@ -36,7 +35,7 @@ fun CommandAPICommand.surfHologramDebugTooltipCommand() = subcommand("tooltip") 
             32f,
             200,
             HologramTextAlignment.CENTER,
-            NamedTextColor.YELLOW
+            null
         )
 
         if (hitEntity != null) {
@@ -45,8 +44,6 @@ fun CommandAPICommand.surfHologramDebugTooltipCommand() = subcommand("tooltip") 
 
             val options = TooltipHologramOptions(
                 targetEntityId = hitEntity.entityId,
-                lookAngleThreshold = 15.0,
-                maxDistance = 10.0
             )
 
             val holo = hologramService.createHologram(
@@ -93,8 +90,6 @@ fun CommandAPICommand.surfHologramDebugTooltipCommand() = subcommand("tooltip") 
 
             val options = TooltipHologramOptions(
                 targetLocation = targetLocation,
-                lookAngleThreshold = 15.0,
-                maxDistance = 10.0
             )
 
             val holo = hologramService.createHologram(
