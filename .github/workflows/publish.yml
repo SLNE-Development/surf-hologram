@@ -3,7 +3,7 @@ name: Publish
 on:
   push:
     branches:
-      - versiona/**
+      - version/**
   workflow_dispatch:
 
 jobs:
